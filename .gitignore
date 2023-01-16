@@ -2,7 +2,7 @@
 *.d
 
 # Object files
-*.o
+*/*.o
 *.ko
 *.obj
 *.elf
@@ -29,6 +29,7 @@
 *.dylib
 
 # Executables
+cub3d
 *.exe
 *.out
 *.app
