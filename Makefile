@@ -24,7 +24,10 @@ INC			=	-I ./includes/\
 
 # Sources
 SRC_PATH	=	sources/
-SRC			= main.c
+SRC			= main.c \
+			  init.c \
+			  exit.c \
+			  input/input_handler.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 # Objects
@@ -41,6 +44,7 @@ $(OBJS): $(OBJ_PATH)
 
 $(OBJ_PATH):
 	@mkdir $(OBJ_PATH)
+	@mkdir $(OBJ_PATH)/input
 
 $(MLX):
 	@echo "Making MiniLibX..."
