@@ -45,6 +45,7 @@ void	init_img(t_cub3d *cub3d);
 /* exit.c */
 void	clean_exit(t_cub3d *cub3d, int code);
 int		msg(char *format, char *detail, int errno);
+int		quit_cub3d(t_cub3d *cub3d);
 
 /* input/input_handler.c */
 int		key_event_handler(int keycode, t_cub3d *cub3d);

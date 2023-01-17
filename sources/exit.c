@@ -21,3 +21,8 @@ int	msg(char *format, char *detail, int errno)
 	return (errno);
 }
 
+int	quit_cub3d(t_cub3d *cub3d)
+{
+	clean_exit(cub3d, 0);
+	return (0);
+}
