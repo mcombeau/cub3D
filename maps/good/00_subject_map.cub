@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO textures/greystone.png
+SO textures/eagle.png
+WE textures/bluestone.png
+EA textures/purplestone.png
 
 F 220,100,0
 C 225,30,0
