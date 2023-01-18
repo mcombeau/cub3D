@@ -25,7 +25,7 @@ INC			=	-I ./includes/\
 # Sources
 SRC_PATH	=	sources/
 SRC			= 	main.c 						\
-				init.C						\
+				init.c						\
 			  	exit.c 						\
 				free_data.c					\
 			  	check_args.c				\

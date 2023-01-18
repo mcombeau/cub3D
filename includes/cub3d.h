@@ -55,7 +55,7 @@ typedef struct s_cub3d
 	t_img	img;
 }	t_cub3d;
 
-typedef struct	s_textures
+typedef struct s_textures
 {
 	char	*dir_NO;
 	char	*dir_SO;
@@ -109,7 +109,7 @@ int		key_event_handler(int keycode, t_cub3d *cub3d);
 
 
 int		check_input(char *arg);
-v
+
 void	free_double_tab(char **tab);
 
 int		parse_data(t_data *data, t_textures *graphics, char **map);
@@ -123,7 +123,7 @@ int		check_info_retrieved(t_textures *texture);
 int		check_map(t_map *map, char **map_tab);
 
 int		check_top_or_bottom(char **map_tab, int i, int j);
-int 	check_map_sides(t_map *map, char **map_tab);
+int		check_map_sides(t_map *map, char **map_tab);
 int		check_left_side_is_closed(char **map_tab);
 int		check_right_side_is_closed(char **map_tab);
 

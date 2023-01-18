@@ -7,6 +7,7 @@ void	init_img(t_cub3d *cub3d)
 		clean_exit(cub3d, msg("cub3d: %s\n", "image creation error.", 1));
 	cub3d->img.addr = mlx_get_data_addr(cub3d->img.img, &cub3d->img.size_line,
 			&cub3d->img.size_line, &cub3d->img.endian);
+	return ;
 }
 
 void	init_mlx(t_cub3d *cub3d)
