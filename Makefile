@@ -24,10 +24,20 @@ INC			=	-I ./includes/\
 
 # Sources
 SRC_PATH	=	sources/
-SRC			= main.c \
-			  init.c \
-			  exit.c \
-			  input/input_handler.c
+SRC			= 	main.c 						\
+				init.C						\
+			  	exit.c 						\
+				free_data.c					\
+			  	check_args.c				\
+				parsing_data.c				\
+				parsing_data_2.c			\
+				parsing_map.c				\
+				check_textures.c			\
+				check_map.c 				\
+				check_map_borders.c			\
+				utils.c						\
+				init_data.c					\
+			  	input/input_handler.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 # Objects

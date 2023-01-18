@@ -49,7 +49,9 @@ SRC = ft_isalpha \
 	ft_putchar_fd \
 	ft_putstr_fd \
 	ft_putendl_fd \
-	ft_putnbr_fd
+	ft_putnbr_fd \
+	get_next_line \
+	gnl_utils 
 BONUS_SRC = ft_lstnew \
 	ft_lstadd_front \
 	ft_lstsize \

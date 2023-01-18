@@ -17,6 +17,10 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
+
 /* ---------------	LISTS		--------------- */
 typedef struct s_list
 {
@@ -79,5 +83,13 @@ void	*ft_calloc(size_t count, size_t size);
 /* ---------------	NUMBERS		--------------- */
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
+
+/* ---------------	GNL	--------------- */
+
+char	*get_next_line(int fd);
+
+char	*f_strchr(char *s, int c);
+char	*f_strdup(char *s1);
+char	*f_strjoin(char *s1, char *s2);
 
 #endif
