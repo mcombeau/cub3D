@@ -19,3 +19,36 @@ int	print_error(char *str)
 	}
 	return (FAILURE);
 }
+
+size_t	find_biggest_len(t_map *map, int i)
+{
+	size_t	biggest_len;
+
+	biggest_len = ft_strlen(map->file[i]);
+	while (map->file[i])
+	{
+		if (ft_strlen(map->file[i]) > biggest_len)
+			biggest_len = ft_strlen(map->file[i]);
+		i++;
+	}
+	return (biggest_len);
+}
+
+int	skip_walls(char **map_tab)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map_tab[i])
+	{
+		j = 0;
+		while (map_tab[i][j] && (is_a_white_space(map_tab[i][j]) == SUCCESS
+			|| map_tab[i][j] == '1'))
+			j++;
+		if (map_tab[i][j] == '0')
+			break ;
+		i++;
+	}
+	return (i);
+}

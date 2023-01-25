@@ -8,16 +8,19 @@ int main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		ft_putendl_fd("Bad arguments.", 2);
+		ft_putendl_fd(ERR_WRONG_NB_ARG, 2);
 		return (1);
 	}
 	init_data(&data);
-	if (check_input(av[1]) == FAILURE)
-		return (print_error("Must be a .cub file"));
-	create_map(av[1], &data);
-	if (parse_data(&data, &data.textures, data.map.map_infos) == FAILURE)
-		return (print_error("The infos on this map are invalid"));
-	check_map(&data.map, data.map.map);
+	if (check_args(av[1]) == FAILURE)
+		return (print_error(ERR_WRONG_FILE));
+	parse_data(av[1], &data);
+	if (get_file_data(&data, data.map.file) == FAILURE)
+		return (free_data(&data));
+	if (check_textures_validity(&data.textures) == FAILURE)
+		return (print_error(ERR_INVALID_INFO) && free_data(&data));
+	if (check_map_validity(&data.map, data.map.map) == FAILURE)
+		return (print_error(ERR_INVALID_INFO) && free_data(&data));
 	init_mlx(&cub3d);
 	mlx_hook(cub3d.win, EVENT_CLOSE_BTN, 0, quit_cub3d, &cub3d);
 	mlx_key_hook(cub3d.win, key_event_handler, &cub3d);

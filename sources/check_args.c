@@ -5,7 +5,7 @@
 **	 it exists and isn't a folder instead of a file.
 */
 
-int	check_input(char *arg)
+int	check_args(char *arg)
 {
 	size_t	len;
 	int		fd;
@@ -21,9 +21,9 @@ int	check_input(char *arg)
 	{
 		fd = open(arg, O_RDONLY);
 		close(fd);
-		if ((arg[len - 3] != 'c' && arg[len - 2] != 'u'
-				&& arg[len - 1] != 'b'
-				&& arg[len - 4] != '.') || fd < 0)
+		if ((arg[len - 3] != 'c' || arg[len - 2] != 'u'
+				|| arg[len - 1] != 'b'
+				|| arg[len - 4] != '.') || fd < 0)
 			return (FAILURE);
 		else
 			return (SUCCESS);

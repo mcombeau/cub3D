@@ -29,9 +29,9 @@ SRC			= 	main.c 						\
 			  	exit.c 						\
 				free_data.c					\
 			  	check_args.c				\
-				parsing_data.c				\
-				parsing_data_2.c			\
-				parsing_map.c				\
+				parse_data.c				\
+				get_file_data.c				\
+				create_game_map.c			\
 				check_textures.c			\
 				check_map.c 				\
 				check_map_borders.c			\
