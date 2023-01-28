@@ -25,11 +25,11 @@ int main(int ac, char **av)
 	if (check_args(av[1]) == FAILURE)
 		return (print_error(ERR_WRONG_FILE));
 	parse_data(av[1], &data);
-	if (get_file_data(&data, data.map.file) == FAILURE)
+	if (get_file_data(&data, data.mapinfo.file) == FAILURE)
 		return (free_data(&data));
 	if (check_textures_validity(&data.textures) == FAILURE)
 		return (print_error(ERR_INVALID_INFO) && free_data(&data));
-	if (check_map_validity(&data.map, data.map.map) == FAILURE)
+	if (check_map_validity(&data, data.map) == FAILURE)
 		return (print_error(ERR_INVALID_INFO) && free_data(&data));
 	debug_display_data(&data);
 	init_mlx(&data);

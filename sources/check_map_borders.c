@@ -15,7 +15,7 @@ int	check_top_or_bottom(char **map_tab, int i, int j)
 	return (SUCCESS);
 }
 
-int	check_map_sides(t_map *map, char **map_tab)
+int	check_map_sides(t_mapinfo *map, char **map_tab)
 {
 	int	i;
 	int	j;

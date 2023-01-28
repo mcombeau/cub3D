@@ -70,7 +70,7 @@ typedef struct s_textures
 	unsigned long		hex_ceiling;
 } 						t_textures;
 
-typedef struct s_map
+typedef struct s_mapinfo
 {
 	int			fd;
 	int			line_count;
@@ -82,7 +82,14 @@ typedef struct s_map
 	char		p_direction;
 	int			p_x;
 	int			p_y;
-}				t_map;
+}				t_mapinfo;
+
+typedef struct s_player
+{
+	char	direction;
+	int		x;
+	int		y;
+}			t_player;
 
 typedef struct s_data
 {
@@ -90,8 +97,10 @@ typedef struct s_data
 	void		*win;
 	int			win_height;
 	int			win_width;
+	t_player	player;
 	t_textures	textures;
-	t_map		map;
+	char		**map;
+	t_mapinfo	mapinfo;
 	t_img		img;
 	int			pixel;
 }				t_data;
@@ -132,11 +141,11 @@ t_ulong	convert_rgb_to_hex(int *rgb_tab);
 int		check_textures_validity(t_textures *textures);
 
 
-int		check_map_validity(t_map *map, char **map_tab);
+int		check_map_validity(t_data *data, char **map_tab);
 
 
 int		check_top_or_bottom(char **map_tab, int i, int j);
-int		check_map_sides(t_map *map, char **map_tab);
+int		check_map_sides(t_mapinfo *map, char **map_tab);
 int		check_left_side_is_closed(char **map_tab);
 int		check_right_side_is_closed(char **map_tab);
 
@@ -150,7 +159,7 @@ void	init_data(t_data *data);
 
 int		is_a_white_space(char c);
 int		print_error(char *str);
-size_t	find_biggest_len(t_map *map, int i);
+size_t	find_biggest_len(t_mapinfo *map, int i);
 int		skip_walls(char **map_tab);
 
 /* debug.c */

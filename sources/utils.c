@@ -20,7 +20,7 @@ int	print_error(char *str)
 	return (FAILURE);
 }
 
-size_t	find_biggest_len(t_map *map, int i)
+size_t	find_biggest_len(t_mapinfo *map, int i)
 {
 	size_t	biggest_len;
 

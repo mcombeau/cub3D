@@ -33,19 +33,19 @@ static void	free_textures(t_textures *textures)
 		free(textures->ceiling);
 }
 
-static void	free_map(t_map *map)
+static void	free_map(t_data *data)
 {
-	if (map->fd > 0)
-		close(map->fd);
-	if (map->file)
-		free_tab(map->file);
-	if (map->map)
-		free_tab(map->map);
+	if (data->mapinfo.fd > 0)
+		close(data->mapinfo.fd);
+	if (data->mapinfo.file)
+		free_tab(data->mapinfo.file);
+	if (data->map)
+		free_tab(data->map);
 }
 
 int	free_data(t_data *data)
 {
 	free_textures(&data->textures);
-	free_map(&data->map);
+	free_map(data);
 	return (FAILURE);
 }
