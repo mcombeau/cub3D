@@ -98,7 +98,7 @@ static int	check_map_is_at_the_end(t_mapinfo *map)
 
 int	check_map_validity(t_data *data, char **map_tab)
 {
-	if (data->mapinfo.nb_line < 3)
+	if (data->mapinfo.height < 3)
 		return (print_error("The map should be at least 3 lines long."));
 	if (check_map_elements(data, map_tab) == FAILURE)
 		return (FAILURE);

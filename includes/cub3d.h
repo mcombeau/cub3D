@@ -76,12 +76,9 @@ typedef struct s_mapinfo
 	int			line_count;
 	char		*path;
 	char		**file;
-	int			nb_line;
-	char		**map;
+	int			height;
+	int			width;
 	int			index_end_of_map;
-	char		p_direction;
-	int			p_x;
-	int			p_y;
 }				t_mapinfo;
 
 typedef struct s_player

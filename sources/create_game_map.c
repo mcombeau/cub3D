@@ -24,14 +24,13 @@ int	fill_map_tab(t_mapinfo *mapinfo, char **map_tab, int index)
 {
 	int		i;
 	int		j;
-	size_t	biggest_len;
 
-	biggest_len = find_biggest_len(mapinfo, index);
+	mapinfo->width = find_biggest_len(mapinfo, index);
 	i = 0;
-	while (i < mapinfo->nb_line)
+	while (i < mapinfo->height)
 	{
 		j = 0;
-		map_tab[i] = malloc(sizeof(char) * (biggest_len + 1));
+		map_tab[i] = malloc(sizeof(char) * (mapinfo->width + 1));
 		if (!map_tab[i])
 			return (FAILURE);
 		while (mapinfo->file[index][j] && mapinfo->file[index][j] != '\n')
@@ -39,7 +38,7 @@ int	fill_map_tab(t_mapinfo *mapinfo, char **map_tab, int index)
 			map_tab[i][j] = mapinfo->file[index][j];
 			j++;
 		}	
-		while (j < (int)biggest_len)
+		while (j < mapinfo->width)
 			map_tab[i][j++] = '\0';
 		i++;
 		index++;
@@ -50,8 +49,8 @@ int	fill_map_tab(t_mapinfo *mapinfo, char **map_tab, int index)
 
 int	get_map_info(t_data *data, char **file, int i)
 {
-	data->mapinfo.nb_line = count_map_lines(data, file, i);
-	data->map = malloc(sizeof(char *) * (data->mapinfo.nb_line + 1));
+	data->mapinfo.height = count_map_lines(data, file, i);
+	data->map = malloc(sizeof(char *) * (data->mapinfo.height + 1));
 	if (!data->map)
 		return (FAILURE);
 	if (fill_map_tab(&data->mapinfo, data->map, i) == FAILURE)
