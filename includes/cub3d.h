@@ -153,5 +153,7 @@ int		print_error(char *str);
 size_t	find_biggest_len(t_map *map, int i);
 int		skip_walls(char **map_tab);
 
+/* debug.c */
+void	debug_display_data(t_data *data);
 #endif
 

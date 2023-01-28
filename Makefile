@@ -37,7 +37,8 @@ SRC			= 	main.c 						\
 				utils.c						\
 			  	input/input_handler.c		\
 			  	exit.c 						\
-				free_data.c
+				free_data.c					\
+				debug/debug.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 # Objects
@@ -55,6 +56,7 @@ $(OBJS): $(OBJ_PATH)
 $(OBJ_PATH):
 	@mkdir $(OBJ_PATH)
 	@mkdir $(OBJ_PATH)/input
+	@mkdir $(OBJ_PATH)/debug
 
 $(MLX):
 	@echo "Making MiniLibX..."

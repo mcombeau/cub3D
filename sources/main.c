@@ -31,6 +31,7 @@ int main(int ac, char **av)
 		return (print_error(ERR_INVALID_INFO) && free_data(&data));
 	if (check_map_validity(&data.map, data.map.map) == FAILURE)
 		return (print_error(ERR_INVALID_INFO) && free_data(&data));
+	debug_display_data(&data);
 	init_mlx(&data);
 	mlx_hook(data.win, EVENT_CLOSE_BTN, 0, quit_cub3d, &data);
 	mlx_key_hook(data.win, key_event_handler, &data);
