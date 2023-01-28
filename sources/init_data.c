@@ -21,6 +21,7 @@ void	init_map(t_map *map)
 void	init_data(t_data *data)
 {
 	ft_memset(&data->map, 0, sizeof(t_map));
+	ft_memset(&data->img, 0, sizeof(t_img));
 	init_textures(&data->textures);
 	init_map(&data->map);
 	data->win_height = WIN_HEIGHT;

@@ -5,7 +5,7 @@ NAME	= cub3d
 
 # Compiler
 CC		= gcc
-CFLAGS	= -Werror -Wextra -Wall
+CFLAGS	= -Werror -Wextra -Wall -MMD -g3 -fsanitize=address
 
 # Minilibx
 MLX_PATH	= minilibx-linux/
@@ -25,9 +25,8 @@ INC			=	-I ./includes/\
 # Sources
 SRC_PATH	=	sources/
 SRC			= 	main.c 						\
-				init.c						\
-			  	exit.c 						\
-				free_data.c					\
+				init_data.c					\
+				init_mlx.c					\
 			  	check_args.c				\
 				parse_data.c				\
 				get_file_data.c				\
@@ -36,8 +35,9 @@ SRC			= 	main.c 						\
 				check_map.c 				\
 				check_map_borders.c			\
 				utils.c						\
-				init_data.c					\
-			  	input/input_handler.c
+			  	input/input_handler.c		\
+			  	exit.c 						\
+				free_data.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 # Objects

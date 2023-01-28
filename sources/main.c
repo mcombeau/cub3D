@@ -1,9 +1,19 @@
 #include "cub3d.h"
 #include "keys_linux.h"
 
+/* int main (void) */
+/* { */
+/* 	void *mlx; */
+/* 	void *win; */
+
+/* 	mlx = mlx_init(); */
+/* 	win = mlx_new_window(mlx, WIN_WIDTH, WIN_HEIGHT, "YO"); */
+/* 	(void)win; */
+/* 	mlx_loop(mlx); */
+/* } */
+
 int main(int ac, char **av)
 {
-	t_cub3d	cub3d;
 	t_data data;
 
 	if (ac != 2)
@@ -21,9 +31,9 @@ int main(int ac, char **av)
 		return (print_error(ERR_INVALID_INFO) && free_data(&data));
 	if (check_map_validity(&data.map, data.map.map) == FAILURE)
 		return (print_error(ERR_INVALID_INFO) && free_data(&data));
-	init_mlx(&cub3d);
-	mlx_hook(cub3d.win, EVENT_CLOSE_BTN, 0, quit_cub3d, &cub3d);
-	mlx_key_hook(cub3d.win, key_event_handler, &cub3d);
-	mlx_loop(cub3d.mlx);
+	init_mlx(&data);
+	mlx_hook(data.win, EVENT_CLOSE_BTN, 0, quit_cub3d, &data);
+	mlx_key_hook(data.win, key_event_handler, &data);
+	mlx_loop(data.mlx);
 	return (0);
 }

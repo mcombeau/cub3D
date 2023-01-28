@@ -1,17 +1,18 @@
 #include "cub3d.h"
 
-void	clean_exit(t_cub3d *cub3d, int code)
+void	clean_exit(t_data *data, int code)
 {
-	if (!cub3d)
+	if (!data)
 		exit(code);
-	if (cub3d->win && cub3d->mlx)
-		mlx_destroy_window(cub3d->mlx, cub3d->win);
-	if (cub3d->mlx)
+	if (data->win && data->mlx)
+		mlx_destroy_window(data->mlx, data->win);
+	if (data->mlx)
 	{
-		mlx_loop_end(cub3d->mlx);
-		mlx_destroy_display(cub3d->mlx);
-		free(cub3d->mlx);
+		mlx_destroy_display(data->mlx);
+		mlx_loop_end(data->mlx);
+		free(data->mlx);
 	}
+	free_data(data);
 	exit(code);
 }
 
@@ -21,8 +22,8 @@ int	msg(char *format, char *detail, int errno)
 	return (errno);
 }
 
-int	quit_cub3d(t_cub3d *cub3d)
+int	quit_cub3d(t_data *data)
 {
-	clean_exit(cub3d, 0);
+	clean_exit(data, 0);
 	return (0);
 }

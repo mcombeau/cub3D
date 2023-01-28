@@ -58,13 +58,6 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_cub3d
-{
-	void	*mlx;
-	void	*win;
-	t_img	img;
-}	t_cub3d;
-
 typedef struct s_textures
 {
 	char				*north;
@@ -108,16 +101,16 @@ typedef struct s_data
  --------------------------------------------------------------------------- */
 
 /* init.c */
-void	init_mlx(t_cub3d *cub3d);
-void	init_img(t_cub3d *cub3d);
+void	init_mlx(t_data *data);
+void	init_img(t_data *data);
 
 /* exit.c */
-void	clean_exit(t_cub3d *cub3d, int code);
+void	clean_exit(t_data *data, int code);
 int		msg(char *format, char *detail, int errno);
-int		quit_cub3d(t_cub3d *cub3d);
+int		quit_cub3d(t_data *data);
 
 /* input/input_handler.c */
-int		key_event_handler(int keycode, t_cub3d *cub3d);
+int		key_event_handler(int keycode, t_data *data);
 
 /* check_args.c */
 int		check_args(char *arg);
