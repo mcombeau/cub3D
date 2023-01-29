@@ -5,7 +5,7 @@ NAME	= cub3d
 
 # Compiler
 CC		= gcc
-CFLAGS	= -Werror -Wextra -Wall -MMD -g3 -fsanitize=address
+CFLAGS	= -Werror -Wextra -Wall -MMD -g3 #-fsanitize=address
 
 # Minilibx
 MLX_PATH	= minilibx-linux/
@@ -35,6 +35,10 @@ SRC			= 	main.c 						\
 				check_map.c 				\
 				check_map_borders.c			\
 				utils.c						\
+				render/render.c				\
+				render/image_utils.c		\
+				render/minimap_render.c		\
+				render/minimap_image.c		\
 			  	input/input_handler.c		\
 			  	exit.c 						\
 				free_data.c					\
@@ -57,6 +61,7 @@ $(OBJ_PATH):
 	@mkdir $(OBJ_PATH)
 	@mkdir $(OBJ_PATH)/input
 	@mkdir $(OBJ_PATH)/debug
+	@mkdir $(OBJ_PATH)/render
 
 $(MLX):
 	@echo "Making MiniLibX..."

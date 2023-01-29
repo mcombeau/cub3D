@@ -1,16 +1,20 @@
 #include "cub3d.h"
 #include "keys_linux.h"
 
-/* int main (void) */
-/* { */
-/* 	void *mlx; */
-/* 	void *win; */
-
-/* 	mlx = mlx_init(); */
-/* 	win = mlx_new_window(mlx, WIN_WIDTH, WIN_HEIGHT, "YO"); */
-/* 	(void)win; */
-/* 	mlx_loop(mlx); */
-/* } */
+int	parse_args(t_data *data, char **av)
+{
+	if (check_args(av[1]) == FAILURE)
+		return (print_error(ERR_WRONG_FILE));
+	parse_data(av[1], data);
+	if (get_file_data(data, data->mapinfo.file) == FAILURE)
+		return (free_data(data));
+	if (check_textures_validity(&data->textures) == FAILURE)
+		return (print_error(ERR_INVALID_INFO) && free_data(data));
+	if (check_map_validity(data, data->map) == FAILURE)
+		return (print_error(ERR_INVALID_INFO) && free_data(data));
+	debug_display_data(data);
+	return (0);
+}
 
 int main(int ac, char **av)
 {
@@ -22,17 +26,10 @@ int main(int ac, char **av)
 		return (1);
 	}
 	init_data(&data);
-	if (check_args(av[1]) == FAILURE)
-		return (print_error(ERR_WRONG_FILE));
-	parse_data(av[1], &data);
-	if (get_file_data(&data, data.mapinfo.file) == FAILURE)
-		return (free_data(&data));
-	if (check_textures_validity(&data.textures) == FAILURE)
-		return (print_error(ERR_INVALID_INFO) && free_data(&data));
-	if (check_map_validity(&data, data.map) == FAILURE)
-		return (print_error(ERR_INVALID_INFO) && free_data(&data));
-	debug_display_data(&data);
+	if (parse_args(&data, av) != 0)
+		return (1);
 	init_mlx(&data);
+	render(&data);
 	mlx_hook(data.win, EVENT_CLOSE_BTN, 0, quit_cub3d, &data);
 	mlx_key_hook(data.win, key_event_handler, &data);
 	mlx_loop(data.mlx);
