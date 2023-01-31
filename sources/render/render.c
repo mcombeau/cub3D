@@ -14,6 +14,8 @@ void	render(t_data *data)
 	set_background_color(data);
 	render_minimap(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img,
+			MMAP_TILE_SIZE,
+			WIN_HEIGHT - (MMAP_PIXEL_SIZE + MMAP_TILE_SIZE * 2));
 }
 
