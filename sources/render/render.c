@@ -8,8 +8,24 @@ void	set_background_color(t_data *data)
 			set_image_pixel(&data->img, x, y, 0x00FF00);
 }
 
-void	render(t_data *data)
+static bool	has_player_moved(t_data *data)
 {
+	if (data->player.has_moved == true)
+	{
+		data->player.has_moved = false;
+		return (true);
+	}
+	return (false);
+}
+
+int	render(t_data *data)
+{
+	bool	moved;
+
+	moved = false;
+	moved = has_player_moved(data);
+	if (!moved)
+		return (0);
 	mlx_clear_window(data->mlx, data->win);
 	set_background_color(data);
 	render_minimap(data);
@@ -17,5 +33,6 @@ void	render(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img,
 			MMAP_TILE_SIZE,
 			WIN_HEIGHT - (MMAP_PIXEL_SIZE + MMAP_TILE_SIZE * 2));
+	return (0);
 }
 

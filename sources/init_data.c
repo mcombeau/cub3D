@@ -32,6 +32,7 @@ void	init_player(t_player *player)
 	player->direction = '\0';
 	player->x = 0;
 	player->y = 0;
+	player->has_moved = true;
 }
 
 void	init_data(t_data *data)

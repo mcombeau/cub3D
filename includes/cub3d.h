@@ -120,6 +120,7 @@ typedef struct s_player
 	char	direction;
 	int		x;
 	int		y;
+	bool	has_moved;
 }			t_player;
 
 typedef struct s_data
@@ -196,7 +197,7 @@ size_t	find_biggest_len(t_mapinfo *map, int i);
 int		skip_walls(char **map_tab);
 
 /* render/render.c */
-void	render(t_data *data);
+int		render(t_data *data);
 
 /* render/image_utils.c */
 void	set_image_pixel(t_img *image, int x, int y, int color);

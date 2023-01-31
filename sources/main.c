@@ -37,6 +37,7 @@ int main(int ac, char **av)
 	init_mlx(&data);
 	render(&data);
 	listen_for_input(&data);
+	mlx_loop_hook(data.mlx, render, &data);
 	mlx_loop(data.mlx);
 	return (0);
 }
