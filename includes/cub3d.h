@@ -1,7 +1,6 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "keys_linux.h"
 # include "libft.h"
 # include "mlx.h"
 # include <math.h>
@@ -12,6 +11,8 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 /* ---------------------------------------------------------------------------*
 							MACROS
@@ -150,7 +151,8 @@ int		msg(char *format, char *detail, int errno);
 int		quit_cub3d(t_data *data);
 
 /* input/input_handler.c */
-int		key_event_handler(int keycode, t_data *data);
+int		key_press_handler(int key, t_data *data);
+int		key_release_handler(int key, t_data *data);
 
 /* check_args.c */
 int		check_args(char *arg);
