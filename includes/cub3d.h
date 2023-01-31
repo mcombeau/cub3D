@@ -30,7 +30,7 @@
 # endif
 
 # ifndef MMAP_VIEW_DIST
-#  define MMAP_VIEW_DIST 6
+#  define MMAP_VIEW_DIST 4
 # endif
 
 # ifndef MMAP_TILE_SIZE
