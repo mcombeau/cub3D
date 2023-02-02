@@ -16,30 +16,29 @@ int	count_map_lines(t_data *data, char **file, int i)
 			break ;
 		i++;
 	}
-	data->map.index_end_of_map = i;
+	data->mapinfo.index_end_of_map = i;
 	return (i - index_value);
 }
 
-int	fill_map_tab(t_map *map, char **map_tab, int index)
+int	fill_map_tab(t_mapinfo *mapinfo, char **map_tab, int index)
 {
 	int		i;
 	int		j;
-	size_t	biggest_len;
 
-	biggest_len = find_biggest_len(map, index);
+	mapinfo->width = find_biggest_len(mapinfo, index);
 	i = 0;
-	while (i < map->nb_line)
+	while (i < mapinfo->height)
 	{
 		j = 0;
-		map_tab[i] = malloc(sizeof(char) * (biggest_len + 1));
+		map_tab[i] = malloc(sizeof(char) * (mapinfo->width + 1));
 		if (!map_tab[i])
 			return (FAILURE);
-		while (map->file[index][j] && map->file[index][j] != '\n')
+		while (mapinfo->file[index][j] && mapinfo->file[index][j] != '\n')
 		{
-			map_tab[i][j] = map->file[index][j];
+			map_tab[i][j] = mapinfo->file[index][j];
 			j++;
 		}	
-		while (j < (int)biggest_len)
+		while (j < mapinfo->width)
 			map_tab[i][j++] = '\0';
 		i++;
 		index++;
@@ -50,33 +49,33 @@ int	fill_map_tab(t_map *map, char **map_tab, int index)
 
 int	get_map_info(t_data *data, char **file, int i)
 {
-	data->map.nb_line = count_map_lines(data, file, i);
-	data->map.map = malloc(sizeof(char *) * (data->map.nb_line + 1));
-	if (!data->map.map)
+	data->mapinfo.height = count_map_lines(data, file, i);
+	data->map = malloc(sizeof(char *) * (data->mapinfo.height + 1));
+	if (!data->map)
 		return (FAILURE);
-	if (fill_map_tab(&data->map, data->map.map, i) == FAILURE)
+	if (fill_map_tab(&data->mapinfo, data->map, i) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);
 }
 
-void	change_space_into_wall(t_map *map)
+void	change_space_into_wall(t_data *data)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (map->map[i])
+	while (data->map[i])
 	{
 		j = 0;
-		while (map->map[i][j] == ' ' || map->map[i][j] == '\t'
-		|| map->map[i][j] == '\r'
-		|| map->map[i][j] == '\v' || map->map[i][j] == '\f')
+		while (data->map[i][j] == ' ' || data->map[i][j] == '\t'
+		|| data->map[i][j] == '\r'
+		|| data->map[i][j] == '\v' || data->map[i][j] == '\f')
 			j++;
-		while (map->map[i][++j])
+		while (data->map[i][++j])
 		{
-			if (map->map[i][j] == ' '
-				&& j != map->map[i][ft_strlen(map->map[i]) - 1])
-				map->map[i][j] = '1';
+			if (data->map[i][j] == ' '
+				&& j != data->map[i][ft_strlen(data->map[i]) - 1])
+				data->map[i][j] = '1';
 		}
 		i++;
 	}
@@ -86,6 +85,6 @@ int	create_map(t_data *data, char **file, int i)
 {
 	if (get_map_info(data, file, i) == FAILURE)
 		return (FAILURE);
-	change_space_into_wall(&data->map);
+	change_space_into_wall(data);
 	return (SUCCESS);
 }
