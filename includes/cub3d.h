@@ -17,6 +17,8 @@
 							MACROS
  --------------------------------------------------------------------------- */
 
+# define PI 3.1415926535 
+
 # define WIN_WIDTH 640
 # define WIN_HEIGHT 480
 
@@ -205,7 +207,12 @@ void	render_minimap(t_data *data);
 /* render/minimap_image.c */
 void	render_minimap_image(t_data *data, char **minimap);
 
-/* debug/debug.c */
+/*  raycasting_utils.c  */
+double	degrees_to_rad_converter(float degree);
+double	calculate_distance(double deltaX, double deltaY);
+void	draw_line(void *mlx, void *window, int beginX, int beginY, int endX, int endY, int color);
+
+/* debug.c */
 void	debug_display_data(t_data *data);
 void	debug_print_char_tab(char **tab);
 #endif
