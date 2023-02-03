@@ -1,12 +1,15 @@
 #include "cub3d.h"
 
-void	init_img(t_data *data)
+void	init_img(t_data *data, t_img *image, int width, int height)
 {
-	data->img.img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!data->img.img)
+	printf("Creating new image: WIDTH = %d, HEIGHT = %d\n", width, height);
+	if (image->img)
+		mlx_destroy_image(data->mlx, data->win);
+	image->img = mlx_new_image(data->mlx, width, height);
+	if (!image->img)
 		clean_exit(data, msg("cub3d: %s\n", "image creation error.", 1));
-	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.size_line,
-			&data->img.size_line, &data->img.endian);
+	image->addr = mlx_get_data_addr(image->img, &image->pixel_bits,
+			&image->size_line, &image->endian);
 	return ;
 }
 

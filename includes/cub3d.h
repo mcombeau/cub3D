@@ -24,6 +24,39 @@
 #  define O_DIRECTORY 00200000
 # endif
 
+/* MINIMAP MACROS */
+# ifndef MMAP_PIXEL_SIZE
+#  define MMAP_PIXEL_SIZE 128
+# endif
+
+# ifndef MMAP_VIEW_DIST
+#  define MMAP_VIEW_DIST 4
+# endif
+
+# ifndef MMAP_TILE_SIZE
+#  define MMAP_TILE_SIZE (MMAP_PIXEL_SIZE / (2 * MMAP_VIEW_DIST))
+# endif
+
+# ifndef MMAP_SIZE
+#  define MMAP_SIZE (2 * MMAP_VIEW_DIST) + 1
+# endif
+
+# ifndef MMAP_COLOR_PLAYER
+#  define MMAP_COLOR_PLAYER 0x00FF00
+# endif
+
+# ifndef MMAP_COLOR_WALL
+#  define MMAP_COLOR_WALL 0xFFFFFF
+# endif
+
+# ifndef MMAP_COLOR_FLOOR
+#  define MMAP_COLOR_FLOOR 0x000000
+# endif
+
+# ifndef MMAP_COLOR_SPACE
+#  define MMAP_COLOR_SPACE 0xFF0000
+# endif
+
 // ERROR MESSAGES
 # define ERR_WRONG_FILE "Is not an existing .cub file\n"
 # define ERR_MISSING_INFO "The .cub file is missing some info.\n"
@@ -99,6 +132,7 @@ typedef struct s_data
 	char		**map;
 	t_mapinfo	mapinfo;
 	t_img		img;
+	t_img		minimap;
 	int			pixel;
 }				t_data;
 
@@ -108,7 +142,7 @@ typedef struct s_data
 
 /* init.c */
 void	init_mlx(t_data *data);
-void	init_img(t_data *data);
+void	init_img(t_data *data, t_img *image, int width, int height);
 
 /* exit.c */
 void	clean_exit(t_data *data, int code);
@@ -159,7 +193,20 @@ int		print_error(char *str);
 size_t	find_biggest_len(t_mapinfo *map, int i);
 int		skip_walls(char **map_tab);
 
-/* debug.c */
+/* render/render.c */
+void	render(t_data *data);
+
+/* render/image_utils.c */
+void	set_image_pixel(t_img *image, int x, int y, int color);
+
+/* render/minimap_render.c */
+void	render_minimap(t_data *data);
+
+/* render/minimap_image.c */
+void	render_minimap_image(t_data *data, char **minimap);
+
+/* debug/debug.c */
 void	debug_display_data(t_data *data);
+void	debug_print_char_tab(char **tab);
 #endif
 

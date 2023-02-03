@@ -1,20 +1,20 @@
 #include "cub3d.h"
 
-void	debug_display_map(t_data *data)
+void	debug_print_char_tab(char **tab)
 {
 	int	i;
 
 	i = 0;
-	while (data->map[i])
+	while (tab[i])
 	{
-		printf("%s\n", data->map[i]);
+		printf("%s\n", tab[i]);
 		i++;
 	}
 }
 
 void	debug_display_data(t_data *data)
 {
-	debug_display_map(data);
+	debug_print_char_tab(data->map);
 	printf("\nMap height: %d\n", data->mapinfo.height);
 	printf("Map width: %d\n", data->mapinfo.width);
 	printf("\nPlayer position: x = %d, y = %d\n", data->player.x, data->player.y);
