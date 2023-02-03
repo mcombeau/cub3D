@@ -1,5 +1,6 @@
 #include "cub3d.h"
 
+/* FIXME: This is a placeholder function for the raycasting image */
 void	set_background_color(t_data *data)
 {
 	init_img(data, &data->img, WIN_WIDTH, WIN_HEIGHT);
@@ -15,7 +16,7 @@ void	render(t_data *data)
 	render_minimap(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img,
-			MMAP_TILE_SIZE,
-			WIN_HEIGHT - (MMAP_PIXEL_SIZE + MMAP_TILE_SIZE * 2));
+		MMAP_TILE_SIZE,
+		WIN_HEIGHT - (MMAP_PIXEL_SIZE + MMAP_TILE_SIZE * 2));
 }
 
