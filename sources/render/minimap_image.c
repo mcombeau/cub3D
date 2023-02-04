@@ -1,61 +1,61 @@
 #include "cub3d.h"
 
-static void	set_minimap_pixel(t_data *data, int x, int y, int color)
+static void	set_minimap_pixel(t_minimap *minimap, int x, int y, int color)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < MMAP_TILE_SIZE)
+	while (i < minimap->tile_size)
 	{
 		j = 0;
-		while (j < MMAP_TILE_SIZE)
+		while (j < minimap->tile_size)
 		{
-			set_image_pixel(&data->minimap, x + j, y + i, color);
+			set_image_pixel(minimap->img, x + j, y + i, color);
 			j++;
 		}
 		i++;
 	}
 }
 
-static void	set_minimap_image_pixels(t_data *data, char **minimap)
+static void	set_minimap_image_pixels(t_minimap *minimap)
 {
 	int	x;
 	int	y;
 
 	y = 0;
-	while (y < MMAP_SIZE)
+	while (y < minimap->size)
 	{
 		x = 0;
-		while (x < MMAP_SIZE)
+		while (x < minimap->size)
 		{
-			if (minimap[y][x] == '\0')
+			if (minimap->map[y][x] == '\0')
 				break ;
-			if (minimap[y][x] == 'P')
-				set_minimap_pixel(data, x * MMAP_TILE_SIZE, y * MMAP_TILE_SIZE,
-					MMAP_COLOR_PLAYER);
-			else if (minimap[y][x] == '1')
-				set_minimap_pixel(data, x * MMAP_TILE_SIZE, y * MMAP_TILE_SIZE,
-					MMAP_COLOR_WALL);
-			else if (minimap[y][x] == '0')
-				set_minimap_pixel(data, x * MMAP_TILE_SIZE, y * MMAP_TILE_SIZE,
-					MMAP_COLOR_FLOOR);
-			else if (minimap[y][x] == ' ')
-				set_minimap_pixel(data, x * MMAP_TILE_SIZE, y * MMAP_TILE_SIZE,
-					MMAP_COLOR_SPACE);
+			if (minimap->map[y][x] == 'P')
+				set_minimap_pixel(minimap, x * minimap->tile_size,
+					y * minimap->tile_size, MMAP_COLOR_PLAYER);
+			else if (minimap->map[y][x] == '1')
+				set_minimap_pixel(minimap, x * minimap->tile_size,
+					y * minimap->tile_size, MMAP_COLOR_WALL);
+			else if (minimap->map[y][x] == '0')
+				set_minimap_pixel(minimap, x * minimap->tile_size,
+					y * minimap->tile_size, MMAP_COLOR_FLOOR);
+			else if (minimap->map[y][x] == ' ')
+				set_minimap_pixel(minimap, x * minimap->tile_size,
+					y * minimap->tile_size, MMAP_COLOR_SPACE);
 			x++;
 		}
 		y++;
 	}
 }
 
-static void	set_minimap_border_image_pixels(t_data *data, int color)
+static void	set_minimap_border_image_pixels(t_minimap *minimap, int color)
 {
 	int	size;
 	int	x;
 	int	y;
 
-	size = MMAP_PIXEL_SIZE + MMAP_TILE_SIZE;
+	size = MMAP_PIXEL_SIZE + minimap->tile_size;
 	y = 0;
 	while (y < size)
 	{
@@ -63,19 +63,19 @@ static void	set_minimap_border_image_pixels(t_data *data, int color)
 		while (x <= size)
 		{
 			if (x < 5 || x > size - 5 || y < 5 || y > size - 5)
-				set_image_pixel(&data->minimap, x, y, color);
+				set_image_pixel(minimap->img, x, y, color);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	render_minimap_image(t_data *data, char **minimap)
+void	render_minimap_image(t_data *data, t_minimap *minimap)
 {
 	int	img_size;
 
-	img_size = MMAP_PIXEL_SIZE + MMAP_TILE_SIZE;
+	img_size = MMAP_PIXEL_SIZE + minimap->tile_size;
 	init_img(data, &data->minimap, img_size, img_size);
-	set_minimap_image_pixels(data, minimap);
-	set_minimap_border_image_pixels(data, MMAP_COLOR_SPACE);
+	set_minimap_image_pixels(minimap);
+	set_minimap_border_image_pixels(minimap, MMAP_COLOR_SPACE);
 }
