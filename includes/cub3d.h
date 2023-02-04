@@ -88,7 +88,6 @@ typedef unsigned long	t_ulong;
 							STRUCTURES
  --------------------------------------------------------------------------- */
 
-
 typedef struct s_img
 {
 	void	*img;
@@ -108,7 +107,7 @@ typedef struct s_textures
 	int					*ceiling;
 	unsigned long		hex_floor;
 	unsigned long		hex_ceiling;
-} 						t_textures;
+}	t_textures;
 
 typedef struct s_mapinfo
 {
@@ -135,7 +134,7 @@ typedef struct s_player
 	double	view_angle;
 	double	dir_x;
 	double	dir_y;
-}			t_player;
+}	t_player;
 
 typedef struct s_data
 {
@@ -150,63 +149,46 @@ typedef struct s_data
 	t_img		img;
 	t_img		minimap;
 	int			pixel;
-}				t_data;
+}	t_data;
 
 /* ---------------------------------------------------------------------------*
 							FUNCTIONS
  --------------------------------------------------------------------------- */
 
-/* init.c */
+/* init/init_data.c */
+void	init_data(t_data *data);
+
+/* init/init_mlx.c */
 void	init_mlx(t_data *data);
 void	init_img(t_data *data, t_img *image, int width, int height);
 
-/* player.c */
-void	init_player_direction(t_data *data);
-
-/* exit.c */
-void	clean_exit(t_data *data, int code);
-int		msg(char *format, char *detail, int errno);
-int		quit_cub3d(t_data *data);
-
-/* input/input_handler.c */
-int		key_event_handler(int keycode, t_data *data);
-
-/* check_args.c */
+/* parsing/check_args.c */
 int		check_args(char *arg);
 
-
+/* parsing/parse_data.c */
 void	parse_data(char *path, t_data *data);
 
-
+/* parsing/get_file_data.c */
 int		get_file_data(t_data *data, char **map);
-
-
 int		fill_color_textures(t_textures *textures, char *line, int j);
 
-
+/* parsing/create_game_map.c */
 int		create_map(t_data *data, char **map, int i);
 
-
+/* parsing/check_textures.c */
 t_ulong	convert_rgb_to_hex(int *rgb_tab);
 int		check_textures_validity(t_textures *textures);
 
-
+/* parsing/check_gap.c */
 int		check_map_validity(t_data *data, char **map_tab);
 
-
+/* parsing/check_map_borders.c */
 int		check_top_or_bottom(char **map_tab, int i, int j);
 int		check_map_sides(t_mapinfo *map, char **map_tab);
 int		check_left_side_is_closed(char **map_tab);
 int		check_right_side_is_closed(char **map_tab);
 
-
-
-
-void	free_tab(char **tab);
-int		free_data(t_data *data);
-
-void	init_data(t_data *data);
-
+/* parsing/parsing_utils.c */
 int		is_a_white_space(char c);
 int		print_error(char *str);
 size_t	find_biggest_len(t_mapinfo *map, int i);
@@ -229,8 +211,24 @@ double	degrees_to_rad_converter(float degree);
 double	calculate_distance(double deltaX, double deltaY);
 void	draw_line(void *mlx, void *window, int beginX, int beginY, int endX, int endY, int color);
 
+/* input/input_handler.c */
+int		key_event_handler(int keycode, t_data *data);
+
+/* movement/player.c */
+void	init_player_direction(t_data *data);
+
+/* exit/exit.c */
+void	clean_exit(t_data *data, int code);
+int		msg(char *format, char *detail, int errno);
+int		quit_cub3d(t_data *data);
+
+/* exit/free_data.c */
+void	free_tab(char **tab);
+int		free_data(t_data *data);
+
 /* debug.c */
 void	debug_display_data(t_data *data);
 void	debug_print_char_tab(char **tab);
+
 #endif
 
