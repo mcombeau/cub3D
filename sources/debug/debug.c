@@ -17,6 +17,11 @@ void	debug_display_data(t_data *data)
 	debug_print_char_tab(data->map);
 	printf("\nMap height: %d\n", data->mapinfo.height);
 	printf("Map width: %d\n", data->mapinfo.width);
+	printf("\tNorth: %f\n", data->mapinfo.north);
+	printf("\tEast: %f\n", data->mapinfo.east);
+	printf("\tSouth: %f\n", data->mapinfo.south);
+	printf("\tWest: %f\n", data->mapinfo.west);
+
 	printf("\nPlayer position: x = %d, y = %d\n", data->player.x, data->player.y);
 	printf("Player direction: %c\n", data->player.direction);
 	printf("Index end of map: %d\n", data->mapinfo.index_end_of_map);

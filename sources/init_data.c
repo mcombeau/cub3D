@@ -24,6 +24,10 @@ void	init_mapinfo(t_mapinfo *mapinfo)
 	mapinfo->file = NULL;
 	mapinfo->height = 0;
 	mapinfo->width = 0;
+	mapinfo->north = degrees_to_rad_converter(ANGLE_NORTH);
+	mapinfo->east = degrees_to_rad_converter(ANGLE_EAST);
+	mapinfo->south = degrees_to_rad_converter(ANGLE_SOUTH);
+	mapinfo->west = degrees_to_rad_converter(ANGLE_WEST);
 	mapinfo->index_end_of_map = 0;
 }
 

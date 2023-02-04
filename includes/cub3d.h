@@ -19,6 +19,11 @@
 
 # define PI 3.1415926535 
 
+# define ANGLE_EAST 0
+# define ANGLE_SOUTH 90
+# define ANGLE_WEST 180
+# define ANGLE_NORTH 270
+
 # define WIN_WIDTH 640
 # define WIN_HEIGHT 480
 
@@ -113,6 +118,10 @@ typedef struct s_mapinfo
 	char		**file;
 	int			height;
 	int			width;
+	double		north;
+	double		east;
+	double		south;
+	double		west;
 	int			index_end_of_map;
 }				t_mapinfo;
 

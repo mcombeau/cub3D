@@ -61,6 +61,7 @@ $(OBJS): $(OBJ_PATH)
 $(OBJ_PATH):
 	@mkdir $(OBJ_PATH)
 	@mkdir $(OBJ_PATH)/input
+	@mkdir $(OBJ_PATH)/parsing
 	@mkdir $(OBJ_PATH)/debug
 	@mkdir $(OBJ_PATH)/render
 
