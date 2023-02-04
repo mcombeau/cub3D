@@ -25,8 +25,8 @@ INC			=	-I ./includes/\
 # Sources
 SRC_PATH	=	sources/
 SRC			= 	main.c 						\
-				init_data.c					\
-				init_mlx.c					\
+				init/init_data.c			\
+				init/init_mlx.c				\
 			  	parsing/check_args.c		\
 				parsing/parse_data.c		\
 				parsing/get_file_data.c		\
@@ -34,16 +34,16 @@ SRC			= 	main.c 						\
 				parsing/check_textures.c	\
 				parsing/check_map.c 		\
 				parsing/check_map_borders.c	\
-				player.c					\
+				movement/player.c			\
 				raycasting_utils.c          \
-				utils.c						\
+				parsing/parsing_utils.c		\
 				render/render.c				\
 				render/image_utils.c		\
 				render/minimap_render.c		\
 				render/minimap_image.c		\
 			  	input/input_handler.c		\
-			  	exit.c 						\
-				free_data.c					\
+			  	exit/exit.c 				\
+				exit/free_data.c			\
 				debug/debug.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
@@ -61,10 +61,13 @@ $(OBJS): $(OBJ_PATH)
 
 $(OBJ_PATH):
 	@mkdir $(OBJ_PATH)
+	@mkdir $(OBJ_PATH)/init
 	@mkdir $(OBJ_PATH)/input
 	@mkdir $(OBJ_PATH)/parsing
-	@mkdir $(OBJ_PATH)/debug
 	@mkdir $(OBJ_PATH)/render
+	@mkdir $(OBJ_PATH)/movement
+	@mkdir $(OBJ_PATH)/debug
+	@mkdir $(OBJ_PATH)/exit
 
 $(MLX):
 	@echo "Making MiniLibX..."
