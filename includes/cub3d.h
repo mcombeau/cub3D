@@ -128,8 +128,13 @@ typedef struct s_mapinfo
 typedef struct s_player
 {
 	char	direction;
-	int		x;
-	int		y;
+	int		tile_x;
+	int		tile_y;
+	double	pos_x;
+	double	pos_y;
+	double	view_angle;
+	double	dir_x;
+	double	dir_y;
 }			t_player;
 
 typedef struct s_data
@@ -154,6 +159,9 @@ typedef struct s_data
 /* init.c */
 void	init_mlx(t_data *data);
 void	init_img(t_data *data, t_img *image, int width, int height);
+
+/* player.c */
+void	init_player_direction(t_data *data);
 
 /* exit.c */
 void	clean_exit(t_data *data, int code);

@@ -12,13 +12,14 @@ int	parse_args(t_data *data, char **av)
 		return (print_error(ERR_INVALID_INFO) && free_data(data));
 	if (check_map_validity(data, data->map) == FAILURE)
 		return (print_error(ERR_INVALID_INFO) && free_data(data));
+	init_player_direction(data);
 	debug_display_data(data);
 	return (0);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_data data;
+	t_data	data;
 
 	if (ac != 2)
 	{

@@ -30,8 +30,8 @@ static char	*add_minimap_line(t_data *data, int offset_x, int offset_y, int y)
 		if (!is_valid_map_coord(y + offset_y, data->mapinfo.height)
 			|| !is_valid_map_coord(x + offset_x, data->mapinfo.width))
 			line[x] = ' ';
-		else if (data->player.x == (x + offset_x)
-			&& data->player.y == (y + offset_y))
+		else if (data->player.tile_x == (x + offset_x)
+			&& data->player.tile_y == (y + offset_y))
 			line[x] = 'P';
 		else if (data->map[y + offset_y][x + offset_x] == '1')
 			line[x] = '1';
@@ -72,8 +72,8 @@ void	render_minimap(t_data *data)
 	int		offset_x;
 	int		offset_y;
 
-	offset_x = get_minimap_offset(data->mapinfo.width, data->player.x);
-	offset_y = get_minimap_offset(data->mapinfo.height, data->player.y);
+	offset_x = get_minimap_offset(data->mapinfo.width, data->player.tile_x);
+	offset_y = get_minimap_offset(data->mapinfo.height, data->player.tile_y);
 	minimap = generate_minimap(data, offset_x, offset_y);
 	if (!minimap)
 		return ;

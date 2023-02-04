@@ -34,8 +34,13 @@ void	init_mapinfo(t_mapinfo *mapinfo)
 void	init_player(t_player *player)
 {
 	player->direction = '\0';
-	player->x = 0;
-	player->y = 0;
+	player->tile_x = 0;
+	player->tile_y = 0;
+	player->pos_x = 0.0;
+	player->pos_y = 0.0;
+	player->view_angle = 0.0;
+	player->dir_x = 0.0;
+	player->dir_y = 0.0;
 }
 
 void	init_data(t_data *data)
