@@ -27,13 +27,13 @@ SRC_PATH	=	sources/
 SRC			= 	main.c 						\
 				init_data.c					\
 				init_mlx.c					\
-			  	check_args.c				\
-				parse_data.c				\
-				get_file_data.c				\
-				create_game_map.c			\
-				check_textures.c			\
-				check_map.c 				\
-				check_map_borders.c			\
+			  	parsing/check_args.c		\
+				parsing/parse_data.c		\
+				parsing/get_file_data.c		\
+				parsing/create_game_map.c	\
+				parsing/check_textures.c	\
+				parsing/check_map.c 		\
+				parsing/check_map_borders.c	\
 				raycasting_utils.c          \
 				utils.c						\
 				render/render.c				\
