@@ -1,5 +1,4 @@
 #include "cub3d.h"
-#include "keys_linux.h"
 
 int	parse_args(t_data *data, char **av)
 {
@@ -17,6 +16,13 @@ int	parse_args(t_data *data, char **av)
 	return (0);
 }
 
+static void	listen_for_input(t_data *data)
+{
+	mlx_hook(data->win, ClientMessage, NoEventMask, quit_cub3d, data);
+	mlx_hook(data->win, KeyPress, KeyPressMask, key_press_handler, data);
+	mlx_hook(data->win, KeyRelease, KeyReleaseMask, key_release_handler, data);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -31,8 +37,8 @@ int	main(int ac, char **av)
 		return (1);
 	init_mlx(&data);
 	render(&data);
-	mlx_hook(data.win, EVENT_CLOSE_BTN, 0, quit_cub3d, &data);
-	mlx_key_hook(data.win, key_event_handler, &data);
+	listen_for_input(&data);
+	mlx_loop_hook(data.mlx, render, &data);
 	mlx_loop(data.mlx);
 	return (0);
 }

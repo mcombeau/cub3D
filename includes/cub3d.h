@@ -1,7 +1,6 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "keys_linux.h"
 # include "libft.h"
 # include "mlx.h"
 # include <math.h>
@@ -12,6 +11,8 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 /* ---------------------------------------------------------------------------*
 							MACROS
@@ -120,6 +121,7 @@ typedef struct s_player
 	double	view_angle;
 	double	dir_x;
 	double	dir_y;
+	bool	has_moved;
 }	t_player;
 
 typedef struct s_data
@@ -147,6 +149,15 @@ void	init_data(t_data *data);
 /* init/init_mlx.c */
 void	init_mlx(t_data *data);
 void	init_img(t_data *data, t_img *image, int width, int height);
+
+/* exit.c */
+void	clean_exit(t_data *data, int code);
+int		msg(char *format, char *detail, int errno);
+int		quit_cub3d(t_data *data);
+
+/* input/input_handler.c */
+int		key_press_handler(int key, t_data *data);
+int		key_release_handler(int key, t_data *data);
 
 /* parsing/check_args.c */
 int		check_args(char *arg);
@@ -181,7 +192,7 @@ size_t	find_biggest_len(t_mapinfo *map, int i);
 int		skip_walls(char **map_tab);
 
 /* render/render.c */
-void	render(t_data *data);
+int		render(t_data *data);
 
 /* render/image_utils.c */
 void	set_image_pixel(t_img *image, int x, int y, int color);

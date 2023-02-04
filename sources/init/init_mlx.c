@@ -3,10 +3,10 @@
 void	init_img(t_data *data, t_img *image, int width, int height)
 {
 	printf("Creating new image: WIDTH = %d, HEIGHT = %d\n", width, height);
-	if (image->img)
-		mlx_destroy_image(data->mlx, data->win);
+	if (image->img != NULL)
+		mlx_destroy_image(data->mlx, image->img);
 	image->img = mlx_new_image(data->mlx, width, height);
-	if (!image->img)
+	if (image->img == NULL)
 		clean_exit(data, msg("cub3d: %s\n", "image creation error.", 1));
 	image->addr = mlx_get_data_addr(image->img, &image->pixel_bits,
 			&image->size_line, &image->endian);

@@ -41,6 +41,7 @@ void	init_player(t_player *player)
 	player->view_angle = 0.0;
 	player->dir_x = 0.0;
 	player->dir_y = 0.0;
+	player->has_moved = true;
 }
 
 void	init_data(t_data *data)
