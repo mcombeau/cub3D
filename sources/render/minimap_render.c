@@ -82,7 +82,8 @@ void	render_minimap(t_data *data)
 	minimap.map = generate_minimap(data, &minimap);
 	if (!minimap.map)
 		return ;
-	debug_print_char_tab(minimap.map);
+	if (DEBUG_MSG)
+		debug_display_minimap(&minimap);
 	render_minimap_image(data, &minimap);
 	free_tab(minimap.map);
 }

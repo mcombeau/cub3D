@@ -2,7 +2,9 @@
 
 void	init_img(t_data *data, t_img *image, int width, int height)
 {
-	printf("Creating new image: WIDTH = %d, HEIGHT = %d\n", width, height);
+	if (DEBUG_MSG)
+		printf(GREEN "Creating new image: WIDTH = %d, HEIGHT = %d\n" RESET,
+			width, height);
 	if (image->img != NULL)
 		mlx_destroy_image(data->mlx, image->img);
 	image->img = mlx_new_image(data->mlx, width, height);

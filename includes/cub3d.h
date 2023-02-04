@@ -1,22 +1,27 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "colors.h"
 # include "libft.h"
 # include "mlx.h"
+# include <fcntl.h>
 # include <math.h>
+# include <stdbool.h>
 # include <stdio.h>
-# include <unistd.h>
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include <fcntl.h>
-# include <stdbool.h>
-# include <X11/X.h>
+# include <unistd.h>
 # include <X11/keysym.h>
+# include <X11/X.h>
 
 /* ---------------------------------------------------------------------------*
 							MACROS
  --------------------------------------------------------------------------- */
+
+# ifndef DEBUG_MSG
+#  define DEBUG_MSG 1
+# endif
 
 # define PI 3.1415926535 
 
@@ -225,6 +230,7 @@ int		free_data(t_data *data);
 
 /* debug.c */
 void	debug_display_data(t_data *data);
+void	debug_display_minimap(t_minimap *minimap);
 void	debug_print_char_tab(char **tab);
 
 #endif

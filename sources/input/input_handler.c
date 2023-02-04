@@ -2,7 +2,7 @@
 
 int	key_press_handler(int key, t_data *data)
 {
-	printf("Key was pressed.\n");
+	/* printf("Key was pressed.\n"); */
 	if (key == XK_Escape)
 		quit_cub3d(data);
 	else
@@ -12,7 +12,7 @@ int	key_press_handler(int key, t_data *data)
 
 int	key_release_handler(int key, t_data *data)
 {
-	printf("Key was released.\n");
+	/* printf("Key was released.\n"); */
 	(void)data;
 	(void)key;
 	return (0);
