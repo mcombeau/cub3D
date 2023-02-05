@@ -8,7 +8,7 @@ We initialize the set up for the rays
 - deltadist_x/y = distance to go to the next x or y.
 */
 
-void	init_raycasting_info(int x, t_ray *ray, t_player *player)
+static void	init_raycasting_info(int x, t_ray *ray, t_player *player)
 {
 	ray->camera_x = 2 * x / (double)WIN_WIDTH - 1;
 	ray->raydir_x = player->dir_x + player->plane_x * ray->camera_x;
@@ -17,7 +17,6 @@ void	init_raycasting_info(int x, t_ray *ray, t_player *player)
 	ray->mapy = (int)player->pos_y;
 	ray->deltadist_x = fabs(1 / ray->raydir_x);
 	ray->deltadist_y = fabs(1 / ray->raydir_y);
-	ray->hit = 0;
 }
 
 /*
@@ -29,7 +28,7 @@ void	init_raycasting_info(int x, t_ray *ray, t_player *player)
 - if x or y > 0 go the next x or y to the right
 */
 
-void	set_dda(t_ray *ray, t_player *player)
+static void	set_dda(t_ray *ray, t_player *player)
 {
 	if (ray->raydir_x < 0)
 	{
@@ -53,6 +52,40 @@ void	set_dda(t_ray *ray, t_player *player)
 	}
 }
 
+/*
+- We implement the DDA algorithm -> the loop will increment 1 square until we hit a wall
+- If the sidedistx < sidedisty, x is the closest point from the ray
+*/
+
+static void	perform_dda(t_ray *ray, t_player *player, char **map)
+{
+	int	hit;
+
+	hit = 0;
+	while (hit == 0)
+	{
+		if (ray->sidedist_x < ray->sidedist_y)
+		{
+			ray->sidedist_x += ray->deltadist_x;
+			ray->mapx += ray->step_x;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->sidedist_y += ray->deltadist_y;
+			ray->mapy += ray->step_y;
+			ray->side = 1;
+		}
+		if (map[ray->mapy][ray->mapx] == '1')
+			hit = 1;
+	}
+	if (ray->side == 0)
+		ray->wall_dist = (ray->mapx - player->pos_x + (1 - ray->step_x) / 2) / ray->raydir_x;
+	else
+		ray->wall_dist = (ray->mapy - player->pos_y + (1 - ray->step_y) / 2) / ray->raydir_y;
+	}
+
+
 int	raycasting(t_player *player, t_data *data)
 {
 	t_ray	ray;
@@ -64,7 +97,7 @@ int	raycasting(t_player *player, t_data *data)
 	{
 		init_raycasting_info(x, &ray, player);
 		set_dda(&ray, player);
-		//perform_dda
+		perform_dda(&ray, player, data->map);
 	}
 	return (SUCCESS);
 }
