@@ -144,6 +144,8 @@ typedef struct s_player
 	double	view_angle;
 	double	dir_x;
 	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 	bool	has_moved;
 }	t_player;
 

@@ -8,9 +8,9 @@ We initialize the set up for the rays
 - deltadist_x/y = distance to go to the next x or y.
 */
 
-void	init_raycasting_info(t_data *data, t_ray *ray, t_player *player, int x)
+void	init_raycasting_info(int x, t_ray *ray, t_player *player)
 {
-	ray->camera_x = 2 * x / (double)data->win_width - 1;
+	ray->camera_x = 2 * x / (double)WIN_WIDTH - 1;
 	ray->raydir_x = player->dir_x + player->plane_x * ray->camera_x;
 	ray->raydir_y = player->dir_y + player->plane_y * ray->camera_x;
 	ray->mapx = (int)player->pos_x;
@@ -62,8 +62,8 @@ int	raycasting(t_player *player, t_data *data)
 	ray = data->ray;
 	while (x++ < WIN_WIDTH)
 	{
-		create_ray(x, &ray, player);
-		set_dda(&ray, &player);
+		init_raycasting_info(x, &ray, player);
+		set_dda(&ray, player);
 		//perform_dda
 	}
 	return (SUCCESS);
