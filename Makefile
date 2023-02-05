@@ -35,6 +35,7 @@ SRC			= 	main.c 						\
 				parsing/check_map.c 		\
 				parsing/check_map_borders.c	\
 				raycasting_utils.c          \
+				raycasting.c				\
 				utils.c						\
 				render/render.c				\
 				render/image_utils.c		\

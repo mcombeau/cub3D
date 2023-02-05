@@ -116,11 +116,34 @@ typedef struct s_mapinfo
 	int			index_end_of_map;
 }				t_mapinfo;
 
+typedef struct s_ray
+{
+	double	camera_x;
+	double	raydir_x;
+	double	raydir_y;
+	int		mapx;
+	int		mapy;
+	int		step_x;
+	int		step_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	double	wall_dist;
+	int		hit;
+}				t_ray;
+
 typedef struct s_player
 {
-	char	direction;
-	int		x;
-	int		y;
+	char		direction;
+	int			x;
+	int			y;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
 }			t_player;
 
 typedef struct s_data
@@ -131,6 +154,7 @@ typedef struct s_data
 	int			win_width;
 	t_player	player;
 	t_textures	textures;
+	t_ray		ray;
 	char		**map;
 	t_mapinfo	mapinfo;
 	t_img		img;
