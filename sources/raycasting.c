@@ -83,7 +83,22 @@ static void	perform_dda(t_ray *ray, t_player *player, char **map)
 		ray->wall_dist = (ray->mapx - player->pos_x + (1 - ray->step_x) / 2) / ray->raydir_x;
 	else
 		ray->wall_dist = (ray->mapy - player->pos_y + (1 - ray->step_y) / 2) / ray->raydir_y;
-	}
+}
+
+
+static void	calculate_line_height(t_ray *ray, t_data *data, t_player *player)
+{
+	ray->line_height = (int)(data->win_height / ray->wall_dist);
+	ray->draw_start = -(ray->line_height) / 2 + data->win_height / 2;
+	ray->draw_end = ray->line_height / 2 + data->win_height / 2;
+	if (ray->draw_end >= data->win_height)
+		ray->draw_end = data->win_height - 1;
+	if (ray->side == 0)
+		ray->wall_x = player->pos_y + ray->wall_dist * ray->raydir_y;
+	else
+		ray->wall_x = player->pos_x + ray->wall_dist * ray->raydir_x;
+	ray->wall_x -= floor(ray->wall_x);
+}
 
 
 int	raycasting(t_player *player, t_data *data)
@@ -98,6 +113,7 @@ int	raycasting(t_player *player, t_data *data)
 		init_raycasting_info(x, &ray, player);
 		set_dda(&ray, player);
 		perform_dda(&ray, player, data->map);
+		calculate_line_height(&ray, data, player);
 	}
 	return (SUCCESS);
 }

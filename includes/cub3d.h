@@ -133,7 +133,11 @@ typedef struct s_ray
 	double	deltadist_x;
 	double	deltadist_y;
 	double	wall_dist;
+	double	wall_x;
 	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 }				t_ray;
 
 typedef struct s_player
