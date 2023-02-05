@@ -1,15 +1,29 @@
 #include "cub3d.h"
 
+void	update_player_dir(t_player *player, double angle,
+							double dir_x, double dir_y)
+{
+	player->view_angle = angle;
+	player->dir_x = dir_x;
+	player->dir_y = dir_y;
+}
+
 void	init_player_direction(t_data *data)
 {
 	if (data->player.direction == 'N')
-		data->player.view_angle = data->mapinfo.north;
+		update_player_dir(&data->player, data->mapinfo.north, 0, -1);
 	else if (data->player.direction == 'E')
-		data->player.view_angle = data->mapinfo.east;
+		update_player_dir(&data->player, data->mapinfo.east, 1, 0);
 	else if (data->player.direction == 'S')
-		data->player.view_angle = data->mapinfo.south;
+		update_player_dir(&data->player, data->mapinfo.south, 0, 1);
 	else if (data->player.direction == 'W')
-		data->player.view_angle = data->mapinfo.west;
+		update_player_dir(&data->player, data->mapinfo.west, -1, 0);
 	data->player.pos_x = data->player.tile_x;
 	data->player.pos_y = data->player.tile_y;
+}
+
+void	update_player_tile(t_player *player)
+{
+	player->tile_x = (int)player->pos_x;
+	player->tile_y = (int)player->pos_y;
 }
