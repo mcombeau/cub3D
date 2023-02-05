@@ -59,9 +59,23 @@ void	handle_player_move(t_data *data, int key)
 
 void	handle_player_rotate(t_data *data, int key)
 {
-	if (key == XK_Left)
-		printf("Rotate player left\n");
-	else if (key == XK_Right)
+	t_player	*p;
+	double		tmp_x;
+	double		rotspeed;
+
+	p = &data->player;
+	rotspeed = ROTSPEED;
+	if (key == XK_Right)
+	{
 		printf("Rotate player right\n");
-	(void)data;
+		rotspeed *= -1;
+	}
+	else
+		printf("Rotate player left\n");
+	tmp_x = p->dir_x;
+	p->dir_x = p->dir_x * cos(rotspeed) - p->dir_y * sin(rotspeed);
+	p->dir_y = tmp_x * sin(rotspeed) + p->dir_y * cos(rotspeed);
+	tmp_x = p->plane_x;
+	p->plane_x = p->plane_x * cos(rotspeed) - p->plane_y * sin(rotspeed);
+	p->plane_y = tmp_x * sin(rotspeed) + p->plane_y * cos(rotspeed);
 }
