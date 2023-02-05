@@ -36,6 +36,7 @@ SRC			= 	main.c 						\
 				parsing/check_map_borders.c	\
 				parsing/parsing_utils.c		\
 				movement/player.c			\
+				movement/player_move.c		\
 				raycasting_utils.c          \
 				raycasting.c				\
 				render/render.c				\

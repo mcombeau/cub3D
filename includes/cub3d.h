@@ -37,6 +37,9 @@
 #  define O_DIRECTORY 00200000
 # endif
 
+# define MOVESPEED 0.2
+# define ROTSPEED 0.2
+
 /* MINIMAP MACROS */
 # define MMAP_PIXEL_SIZE 128
 # define MMAP_VIEW_DIST 4
@@ -239,6 +242,11 @@ int		key_event_handler(int keycode, t_data *data);
 
 /* movement/player.c */
 void	init_player_direction(t_data *data);
+void	update_player_tile(t_player *player);
+
+/* movement/player_move.c */
+void	handle_player_move(t_data *data, int key);
+void	handle_player_rotate(t_data *data, int key);
 
 /* exit/exit.c */
 void	clean_exit(t_data *data, int code);
