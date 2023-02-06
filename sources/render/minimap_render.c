@@ -58,7 +58,7 @@ static char	**generate_minimap(t_data *data, t_minimap *minimap)
 		mmap[y] = add_minimap_line(data, minimap, y);
 		if (!mmap[y])
 		{
-			free_tab(mmap);
+			free_tab((void **)mmap);
 			return (NULL);
 		}
 		y++;
@@ -85,6 +85,6 @@ void	render_minimap(t_data *data)
 	if (DEBUG_MSG)
 		debug_display_minimap(&minimap);
 	render_minimap_image(data, &minimap);
-	free_tab(minimap.map);
+	free_tab((void **)minimap.map);
 }
 

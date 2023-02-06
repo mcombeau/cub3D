@@ -68,6 +68,14 @@ enum e_output
 	CONTINUE = 4
 };
 
+enum e_texture_index
+{
+	NORTH = 0,
+	SOUTH = 1,
+	EAST = 2,
+	WEST = 3
+};
+
 typedef unsigned long	t_ulong;
 
 /* ---------------------------------------------------------------------------*
@@ -93,7 +101,6 @@ typedef struct s_texinfo
 	int				*ceiling;
 	unsigned long	hex_floor;
 	unsigned long	hex_ceiling;
-	int				**buffer;
 	int				size;
 	double			step;
 	double			pos;
@@ -175,10 +182,10 @@ typedef struct s_data
 	t_player	player;
 	t_ray		ray;
 	t_img		img;
+	int			**pixels;
 	int			**textures;
 	t_texinfo	texinfo;
 	t_img		minimap;
-	int			pixel;
 }	t_data;
 
 /* ---------------------------------------------------------------------------*
@@ -240,6 +247,7 @@ int		skip_walls(char **map_tab);
 
 /* render/render.c */
 int		render(t_data *data);
+void	init_frame_pixels(t_data *data);
 
 /* render/image_utils.c */
 void	set_image_pixel(t_img *image, int x, int y, int color);
@@ -275,7 +283,7 @@ int		msg(char *format, char *detail, int errno);
 int		quit_cub3d(t_data *data);
 
 /* exit/free_data.c */
-void	free_tab(char **tab);
+void	free_tab(void **tab);
 int		free_data(t_data *data);
 
 /* debug.c */

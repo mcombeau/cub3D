@@ -78,4 +78,8 @@ void	render_minimap_image(t_data *data, t_minimap *minimap)
 	init_img(data, &data->minimap, img_size, img_size);
 	set_minimap_image_pixels(minimap);
 	set_minimap_border_image_pixels(minimap, MMAP_COLOR_SPACE);
+	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img,
+		minimap->tile_size, data->win_height
+						- (MMAP_PIXEL_SIZE + (minimap->tile_size * 2)));
+	mlx_destroy_image(data->mlx, data->minimap.img);
 }

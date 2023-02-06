@@ -33,8 +33,8 @@ void	init_textures(t_data *data)
 	data->textures = ft_calloc(5, sizeof * data->textures);
 	if (!data->textures)
 		clean_exit(data, msg("cub3d: %s\n", "malloc error.", 1));
-	data->textures[0] = xpm_to_img(data, data->texinfo.south);
-	data->textures[1] = xpm_to_img(data, data->texinfo.north);
-	data->textures[2] = xpm_to_img(data, data->texinfo.west);
-	data->textures[3] = xpm_to_img(data, data->texinfo.east);
+	data->textures[NORTH] = xpm_to_img(data, data->texinfo.north);
+	data->textures[SOUTH] = xpm_to_img(data, data->texinfo.south);
+	data->textures[EAST] = xpm_to_img(data, data->texinfo.east);
+	data->textures[WEST] = xpm_to_img(data, data->texinfo.west);
 }

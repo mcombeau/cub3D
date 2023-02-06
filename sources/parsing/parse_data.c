@@ -33,7 +33,7 @@ static void	fill_tab(int row, int column, int i, t_data *data)
 	{
 		data->mapinfo.file[row] = ft_calloc(ft_strlen(line) + 1, sizeof(char));
 		if (!data->mapinfo.file[row])
-			return (free_tab(data->mapinfo.file));
+			return (free_tab((void **)data->mapinfo.file));
 		while (line[i] != '\0')
 			data->mapinfo.file[row][column++] = line[i++];
 		data->mapinfo.file[row++][column] = '\0';

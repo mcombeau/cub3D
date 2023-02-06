@@ -20,7 +20,6 @@ void	init_texinfo(t_texinfo *textures)
 	textures->hex_floor = 0x0;
 	textures->hex_ceiling = 0x0;
 	textures->size = TEX_SIZE;
-	textures->buffer = NULL;
 	textures->step = 0.0;
 	textures->pos = 0.0;
 	textures->x = 0;
@@ -69,4 +68,5 @@ void	init_data(t_data *data)
 	init_mapinfo(&data->mapinfo);
 	init_img_clean(&data->img);
 	init_img_clean(&data->minimap);
+	data->pixels = NULL;
 }
