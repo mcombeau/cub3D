@@ -17,7 +17,7 @@ void	free_tab(char **tab)
 	}
 }
 
-static void	free_textures(t_textures *textures)
+static void	free_texinfo(t_texinfo *textures)
 {
 	if (textures->north)
 		free(textures->north);
@@ -45,7 +45,9 @@ static void	free_map(t_data *data)
 
 int	free_data(t_data *data)
 {
-	free_textures(&data->textures);
+	if (data->textures)
+		free(data->textures);
+	free_texinfo(&data->texinfo);
 	free_map(data);
 	return (FAILURE);
 }

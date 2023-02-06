@@ -33,6 +33,8 @@
 # define WIN_WIDTH 640
 # define WIN_HEIGHT 480
 
+# define TEX_SIZE 64
+
 # ifndef O_DIRECTORY
 #  define O_DIRECTORY 00200000
 # endif
@@ -81,17 +83,23 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_textures
+typedef struct s_texinfo
 {
-	char				*north;
-	char				*south;
-	char				*west;
-	char				*east;
-	int					*floor;
-	int					*ceiling;
-	unsigned long		hex_floor;
-	unsigned long		hex_ceiling;
-}	t_textures;
+	char			*north;
+	char			*south;
+	char			*west;
+	char			*east;
+	int				*floor;
+	int				*ceiling;
+	unsigned long	hex_floor;
+	unsigned long	hex_ceiling;
+	int				**buffer;
+	int				size;
+	double			step;
+	double			pos;
+	int				x;
+	int				y;
+}	t_texinfo;
 
 typedef struct s_minimap
 {
@@ -162,12 +170,13 @@ typedef struct s_data
 	void		*win;
 	int			win_height;
 	int			win_width;
-	t_player	player;
-	t_textures	textures;
-	t_ray		ray;
-	char		**map;
 	t_mapinfo	mapinfo;
+	char		**map;
+	t_player	player;
+	t_ray		ray;
 	t_img		img;
+	int			**textures;
+	t_texinfo	texinfo;
 	t_img		minimap;
 	int			pixel;
 }	t_data;
@@ -178,10 +187,15 @@ typedef struct s_data
 
 /* init/init_data.c */
 void	init_data(t_data *data);
+void	init_img_clean(t_img *img);
 
 /* init/init_mlx.c */
 void	init_mlx(t_data *data);
 void	init_img(t_data *data, t_img *image, int width, int height);
+void	init_texture_img(t_data *data, t_img *image, char *path);
+
+/* init/init_textures.c */
+void	init_textures(t_data *data);
 
 /* exit.c */
 void	clean_exit(t_data *data, int code);
@@ -200,14 +214,14 @@ void	parse_data(char *path, t_data *data);
 
 /* parsing/get_file_data.c */
 int		get_file_data(t_data *data, char **map);
-int		fill_color_textures(t_textures *textures, char *line, int j);
+int		fill_color_textures(t_texinfo *textures, char *line, int j);
 
 /* parsing/create_game_map.c */
 int		create_map(t_data *data, char **map, int i);
 
 /* parsing/check_textures.c */
 t_ulong	convert_rgb_to_hex(int *rgb_tab);
-int		check_textures_validity(t_textures *textures);
+int		check_textures_validity(t_texinfo *textures);
 
 /* parsing/check_gap.c */
 int		check_map_validity(t_data *data, char **map_tab);

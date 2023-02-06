@@ -4,9 +4,12 @@ void	init_img_clean(t_img *img)
 {
 	img->img = NULL;
 	img->addr = NULL;
+	img->pixel_bits = 0;
+	img->size_line = 0;
+	img->endian = 0;
 }
 
-void	init_textures(t_textures *textures)
+void	init_texinfo(t_texinfo *textures)
 {
 	textures->north = NULL;
 	textures->south = NULL;
@@ -14,6 +17,14 @@ void	init_textures(t_textures *textures)
 	textures->east = NULL;
 	textures->floor = 0;
 	textures->ceiling = 0;
+	textures->hex_floor = 0x0;
+	textures->hex_ceiling = 0x0;
+	textures->size = TEX_SIZE;
+	textures->buffer = NULL;
+	textures->step = 0.0;
+	textures->pos = 0.0;
+	textures->x = 0;
+	textures->y = 0;
 }
 
 void	init_mapinfo(t_mapinfo *mapinfo)
@@ -53,7 +64,7 @@ void	init_data(t_data *data)
 	data->win_height = WIN_HEIGHT;
 	data->win_width = WIN_WIDTH;
 	init_player(&data->player);
-	init_textures(&data->textures);
+	init_texinfo(&data->texinfo);
 	data->map = NULL;
 	init_mapinfo(&data->mapinfo);
 	init_img_clean(&data->img);

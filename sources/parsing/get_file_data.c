@@ -29,7 +29,7 @@ static char	*get_texture_path(char *line, int j)
 }
 
 
-static int	fill_direction_textures(t_textures *textures, char *line, int j)
+static int	fill_direction_textures(t_texinfo *textures, char *line, int j)
 {
 	if (line[j + 2] && ft_isprint(line[j + 2]))
 		return (ERR);
@@ -55,13 +55,13 @@ int	ignore_whitespaces_and_get_info(t_data *data, char **map, int i, int j)
 		if (map[i][j + 1] && ft_isprint(map[i][j + 1])
 			&& !ft_isdigit(map[i][j]))
 		{
-			if (fill_direction_textures(&data->textures, map[i], j) == ERR)
+			if (fill_direction_textures(&data->texinfo, map[i], j) == ERR)
 				return (print_error(ERR_DIRECTION));
 			return (BREAK);
 		}	
 		else
 		{
-			if (fill_color_textures(&data->textures, map[i], j) == ERR)
+			if (fill_color_textures(&data->texinfo, map[i], j) == ERR)
 				return (print_error(ERR_FLOOR_CEILING));
 			return (BREAK);
 		}	
@@ -157,7 +157,7 @@ static int	*set_rgb_colors(char *line)
 	return (copy_into_rgb_array(rgb_to_convert, rgb));
 }
 
-int	fill_color_textures(t_textures *textures, char *line, int j)
+int	fill_color_textures(t_texinfo *textures, char *line, int j)
 {
 	if (line[j + 1] && ft_isprint(line[j + 1]))
 		return (ERR);

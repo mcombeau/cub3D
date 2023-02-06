@@ -7,7 +7,7 @@ int	parse_args(t_data *data, char **av)
 	parse_data(av[1], data);
 	if (get_file_data(data, data->mapinfo.file) == FAILURE)
 		return (free_data(data));
-	if (check_textures_validity(&data->textures) == FAILURE)
+	if (check_textures_validity(&data->texinfo) == FAILURE)
 		return (print_error(ERR_INVALID_INFO) && free_data(data));
 	if (check_map_validity(data, data->map) == FAILURE)
 		return (print_error(ERR_INVALID_INFO) && free_data(data));
@@ -37,6 +37,7 @@ int	main(int ac, char **av)
 	if (parse_args(&data, av) != 0)
 		return (1);
 	init_mlx(&data);
+	init_textures(&data);
 	render(&data);
 	listen_for_input(&data);
 	mlx_loop_hook(data.mlx, render, &data);

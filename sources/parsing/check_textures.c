@@ -58,7 +58,7 @@ unsigned long	convert_rgb_to_hex(int *rgb_tab)
 	return (result);
 }
 
-int	check_textures_validity(t_textures *textures)
+int	check_textures_validity(t_texinfo *textures)
 {
 	if (!textures->north || !textures->south || !textures->west
 		|| !textures->east || !textures->floor || !textures->ceiling)

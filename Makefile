@@ -27,6 +27,7 @@ SRC_PATH	=	sources/
 SRC			= 	main.c 						\
 				init/init_data.c			\
 				init/init_mlx.c				\
+				init/init_textures.c		\
 			  	parsing/check_args.c		\
 				parsing/parse_data.c		\
 				parsing/get_file_data.c		\
