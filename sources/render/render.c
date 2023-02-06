@@ -1,52 +1,52 @@
 #include "cub3d.h"
 
-/* void	init_frame_pixels(t_data *data) */
-/* { */
-/* 	int	i; */
+void	init_frame_pixels(t_data *data)
+{
+	int	i;
 
-/* 	if (data->pixels) */
-/* 		free_tab((void **)data->pixels); */
-/* 	data->pixels = ft_calloc(data->win_height + 1, */
-/* 			sizeof * data->pixels); */
-/* 	if (!data->pixels) */
-/* 		clean_exit(data, msg("cub3d: %s\n", "malloc error.", 1)); */
-/* 	i = 0; */
-/* 	while (i < data->win_width) */
-/* 	{ */
-/* 		data->pixels[i] = ft_calloc(data->win_width + 1, */
-/* 				sizeof * data->pixels); */
-/* 		if (!data->pixels[i]) */
-/* 			clean_exit(data, msg("cub3d: %s\n", "malloc error.", 1)); */
-/* 		i++; */
-/* 	} */
-/* } */
+	if (data->pixels)
+		free_tab((void **)data->pixels);
+	data->pixels = ft_calloc(data->win_height + 1,
+			sizeof * data->pixels);
+	if (!data->pixels)
+		clean_exit(data, msg("cub3d: %s\n", "malloc error.", 1));
+	i = 0;
+	while (i < data->win_width)
+	{
+		data->pixels[i] = ft_calloc(data->win_width + 1,
+				sizeof * data->pixels);
+		if (!data->pixels[i])
+			clean_exit(data, msg("cub3d: %s\n", "malloc error.", 1));
+		i++;
+	}
+}
 
-/* void	render_frame(t_data *data) */
-/* { */
-/* 	t_img	image; */
-/* 	int		x; */
-/* 	int		y; */
+void	render_frame(t_data *data)
+{
+	t_img	image;
+	int		x;
+	int		y;
 
-/* 	init_img(data, &image, data->win_width, data->win_height); */
-/* 	y = 0; */
-/* 	while (y < data->win_height) */
-/* 	{ */
-/* 		x = 0; */
-/* 		while (x < data->win_width) */
-/* 		{ */
-/* 			if (data->pixels[y][x] > 0) */
-/* 				set_image_pixel(&image, x, y, data->pixels[y][x]); */
-/* 			else if (y < data->win_height / 2) */
-/* 				set_image_pixel(&image, x, y, data->texinfo.hex_ceilling); */
-/* 			else */
-/* 				set_image_pixel(&image, x, y, data->texinfo.hex_floor); */
-/* 			x++; */
-/* 		} */
-/* 		y++; */
-/* 	} */
-/* 	mlx_put_image_to_window(data->mlx, data->win, image.img, 0, 0); */
-/* 	mlx_destroy_image(data->mlx, image.img); */
-/* } */
+	init_img(data, &image, data->win_width, data->win_height);
+	y = 0;
+	while (y < data->win_height)
+	{
+		x = 0;
+		while (x < data->win_width)
+		{
+			if (data->pixels[y][x] > 0)
+				set_image_pixel(&image, x, y, data->pixels[y][x]);
+			else if (y < data->win_height / 2)
+				set_image_pixel(&image, x, y, data->texinfo.hex_ceiling);
+			else
+				set_image_pixel(&image, x, y, data->texinfo.hex_floor);
+			x++;
+		}
+		y++;
+	}
+	mlx_put_image_to_window(data->mlx, data->win, image.img, 0, 0);
+	mlx_destroy_image(data->mlx, image.img);
+}
 
 /* FIXME: This is a placeholder function for the raycasting image */
 void	set_background_color(t_data *data)
