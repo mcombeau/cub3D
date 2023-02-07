@@ -30,11 +30,11 @@ static void	move_player(t_data *data, int key)
 
 static bool	is_valid_move(t_data *data)
 {
-	if ((int)data->player.pos_x > data->mapinfo.width)
-		return (false);
-	if ((int)data->player.pos_y > data->mapinfo.height)
-		return (false);
-	if (data->map[(int)data->player.pos_y][(int)data->player.pos_x] != '0')
+	/* if ((int)data->player.pos_x > data->mapinfo.width) */
+	/* 	return (false); */
+	/* if ((int)data->player.pos_y > data->mapinfo.height) */
+	/* 	return (false); */
+	if (data->map[(int)data->player.pos_x][(int)data->player.pos_y] != '0')
 		return (false);
 	return (true);
 }
@@ -47,6 +47,7 @@ void	handle_player_move(t_data *data, int key)
 	tmp_x = data->player.pos_x;
 	tmp_y = data->player.pos_y;
 	move_player(data, key);
+	debug_display_player(data);
 	if (is_valid_move(data) == false)
 	{
 		data->player.pos_x = tmp_x;
@@ -67,11 +68,11 @@ void	handle_player_rotate(t_data *data, int key)
 	rotspeed = ROTSPEED;
 	if (key == XK_Right)
 	{
-		printf("Rotate player right\n");
 		rotspeed *= -1;
+		printf("Rotate player right: rotspeed: %f\n", rotspeed);
 	}
 	else
-		printf("Rotate player left\n");
+		printf("Rotate player left: rotseed: %f\n", rotspeed);
 	tmp_x = p->dir_x;
 	p->dir_x = p->dir_x * cos(rotspeed) - p->dir_y * sin(rotspeed);
 	p->dir_y = tmp_x * sin(rotspeed) + p->dir_y * cos(rotspeed);

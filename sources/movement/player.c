@@ -1,25 +1,57 @@
 #include "cub3d.h"
 
-void	update_player_dir(t_player *player, double angle,
-					double dir_x, double dir_y, double plane_x, double plane_y)
+void	init_player_north_south(t_player *player)
 {
-	player->view_angle = angle;
-	player->dir_x = dir_x;
-	player->dir_y = dir_y;
-	player->plane_x = plane_x;
-	player->plane_y = plane_y;
+	if (player->direction == 'N')
+	{
+		player->dir_x = -1;
+		player->dir_y = 0;
+		/* player->dir_x = 0; */
+		/* player->dir_y = -1; */
+		player->plane_x = 0;
+		player->plane_y = 0.66;
+	}
+	else if (player->direction == 'S')
+	{
+		player->dir_x = 1;
+		player->dir_y = 0;
+		/* player->dir_x = 0; */
+		/* player->dir_y = 1; */
+		player->plane_x = 0;
+		player->plane_y = -0.66;
+	}
+	else
+		return ;
+}
+
+void	init_player_east_west(t_player *player)
+{
+	if (player->direction == 'E')
+	{
+		player->dir_x = 0;
+		player->dir_y = 1;
+		/* player->dir_x = 1; */
+		/* player->dir_y = 0; */
+		player->plane_x = 0.66;
+		player->plane_y = 0;
+	}
+	else if (player->direction == 'W')
+	{
+		player->dir_x = 0;
+		player->dir_y = -1;
+		/* player->dir_x = -1; */
+		/* player->dir_y = 0; */
+		player->plane_x = -0.66;
+		player->plane_y = 0;
+	}
+	else
+		return;
 }
 
 void	init_player_direction(t_data *data)
 {
-	if (data->player.direction == 'N')
-		update_player_dir(&data->player, data->mapinfo.north, 0, -1, 0, 0.66);
-	else if (data->player.direction == 'E')
-		update_player_dir(&data->player, data->mapinfo.east, 1, 0, 0.66, 0);
-	else if (data->player.direction == 'S')
-		update_player_dir(&data->player, data->mapinfo.south, 0, 1, 0, -0.66);
-	else if (data->player.direction == 'W')
-		update_player_dir(&data->player, data->mapinfo.west, -1, 0, -0.66, 0);
+	init_player_north_south(&data->player);
+	init_player_east_west(&data->player);
 	data->player.pos_x = data->player.tile_x;
 	data->player.pos_y = data->player.tile_y;
 }
