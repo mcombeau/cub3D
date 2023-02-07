@@ -1,5 +1,9 @@
 #include "cub3d.h"
 
+#define DEBUG_COLOR_WALL	0xFF0000
+#define DEBUG_COLOR_CEILING 0xAAAAAA
+#define DEBUG_COLOR_FLOOR	0x666666
+
 void	render_frame(t_data *data)
 {
 	t_img	image;
@@ -15,28 +19,18 @@ void	render_frame(t_data *data)
 		while (x < data->win_width)
 		{
 			if (data->texture_pixels[y][x] > 0)
-				set_image_pixel(&image, x, y, data->texture_pixels[y][x]);
+				set_image_pixel(&image, x, y, DEBUG_COLOR_WALL); 
+				/* set_image_pixel(&image, x, y, data->texture_pixels[y][x]); */
 			else if (y < data->win_height / 2)
-				set_image_pixel(&image, x, y, data->texinfo.hex_ceiling);
-			else
-				set_image_pixel(&image, x, y, data->texinfo.hex_floor);
+				set_image_pixel(&image, x, y, DEBUG_COLOR_CEILING); 
+				/* set_image_pixel(&image, x, y, (int)data->texinfo.hex_ceiling); */
+			else if (y < data->win_height -1)
+				set_image_pixel(&image, x, y, DEBUG_COLOR_FLOOR);
+				/* set_image_pixel(&image, x, y, (int)data->texinfo.hex_floor); */
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, image.img, 0, 0);
-	mlx_destroy_image(data->mlx, image.img);
-}
-
-/* FIXME: This is a placeholder function for the raycasting image above */
-void	set_background_color(t_data *data)
-{
-	t_img	image;
-
-	init_img(data, &image, WIN_WIDTH, WIN_HEIGHT);
-	for (int y = 0; y < WIN_HEIGHT; y++)
-		for (int x = 0; x < WIN_WIDTH; x++)
-			set_image_pixel(&image, x, y, 0x00FF00);
 	mlx_put_image_to_window(data->mlx, data->win, image.img, 0, 0);
 	mlx_destroy_image(data->mlx, image.img);
 }
@@ -68,7 +62,6 @@ int	render(t_data *data)
 	if (!moved)
 		return (0);
 	mlx_clear_window(data->mlx, data->win);
-	/* set_background_color(data); */
 	render_raycast(data);
 	render_minimap(data);
 	return (0);

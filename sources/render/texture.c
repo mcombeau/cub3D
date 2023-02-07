@@ -43,6 +43,6 @@ void	update_texture_pixels(t_data *data, t_texinfo *tex, t_ray *ray, int x)
 			color = (color >> 1) & 8355711;
 		if (color > 0)
 			data->texture_pixels[y][x] = color;
-		y++;
+		++y;
 	}
 }

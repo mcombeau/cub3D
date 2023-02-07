@@ -6,6 +6,7 @@ static int	*xpm_to_img(t_data *data, char *path)
 	int		*buffer;
 	int		x;
 	int		y;
+	/* static int i = 0; */
 
 	init_texture_img(data, &tmp, path);
 	buffer = ft_calloc(1,
@@ -24,6 +25,8 @@ static int	*xpm_to_img(t_data *data, char *path)
 		}
 		y++;
 	}
+	/* mlx_put_image_to_window(data->mlx, data->win, tmp.img, i, 0); */
+	/* i += 100; */
 	mlx_destroy_image(data->mlx, tmp.img);
 	return (buffer);
 }

@@ -10,6 +10,7 @@ We initialize the set up for the rays
 
 static void	init_raycasting_info(int x, t_ray *ray, t_player *player)
 {
+	init_ray(ray);
 	ray->camera_x = 2 * x / (double)WIN_WIDTH - 1;
 	ray->raydir_x = player->dir_x + player->plane_x * ray->camera_x;
 	ray->raydir_y = player->dir_y + player->plane_y * ray->camera_x;
@@ -76,20 +77,25 @@ static void	perform_dda(t_ray *ray, t_player *player, char **map)
 			ray->mapy += ray->step_y;
 			ray->side = 1;
 		}
-		if (map[ray->mapy][ray->mapx] == '1')
+		/* if (map[ray->mapy][ray->mapx] == '1') */
+		if (map[ray->mapx][ray->mapy] == '1')
 			hit = 1;
 	}
 	if (ray->side == 0)
+		/* ray->wall_dist = (ray->sidedist_x - ray->deltadist_x); */
 		ray->wall_dist = (ray->mapx - player->pos_x + (1 - ray->step_x) / 2) / ray->raydir_x;
 	else
+		/* ray->wall_dist = (ray->sidedist_y - ray->deltadist_y); */
 		ray->wall_dist = (ray->mapy - player->pos_y + (1 - ray->step_y) / 2) / ray->raydir_y;
+	(void)player;
 }
-
 
 static void	calculate_line_height(t_ray *ray, t_data *data, t_player *player)
 {
 	ray->line_height = (int)(data->win_height / ray->wall_dist);
 	ray->draw_start = -(ray->line_height) / 2 + data->win_height / 2;
+	if (ray->draw_start < 0)
+		ray->draw_start = 0;
 	ray->draw_end = ray->line_height / 2 + data->win_height / 2;
 	if (ray->draw_end >= data->win_height)
 		ray->draw_end = data->win_height - 1;
@@ -119,9 +125,8 @@ int	raycasting(t_player *player, t_data *data)
 
 	x = 0;
 	ray = data->ray;
-	while (x++ < WIN_WIDTH)
+	while (x++ < data->win_width)
 	{
-		init_ray(&ray);
 		init_raycasting_info(x, &ray, player);
 		set_dda(&ray, player);
 		perform_dda(&ray, player, data->map);

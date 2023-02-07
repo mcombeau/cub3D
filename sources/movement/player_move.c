@@ -78,4 +78,5 @@ void	handle_player_rotate(t_data *data, int key)
 	tmp_x = p->plane_x;
 	p->plane_x = p->plane_x * cos(rotspeed) - p->plane_y * sin(rotspeed);
 	p->plane_y = tmp_x * sin(rotspeed) + p->plane_y * cos(rotspeed);
+	data->player.has_moved = true;
 }

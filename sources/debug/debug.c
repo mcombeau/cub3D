@@ -34,7 +34,7 @@ void	debug_display_mapinfo(t_data *data)
 	printf("- West: %f\n", data->mapinfo.west);
 	printf(YELLOW "\n---- TEXTURES & COLORS\n" RESET);
 	printf("Color ceiling: #%lx\n", data->texinfo.hex_ceiling);
-	printf("Color floor: %lx\n", data->texinfo.hex_floor);
+	printf("Color floor: #%lx\n", data->texinfo.hex_floor);
 	printf("Texture north: %s\n", data->texinfo.north);
 	printf("Texture south: %s\n", data->texinfo.south);
 	printf("Texture east: %s\n", data->texinfo.east);
