@@ -22,7 +22,7 @@ void	debug_display_minimap(t_minimap *minimap)
 	debug_print_char_tab(minimap->map);
 }
 
-void	debug_display_data(t_data *data)
+void	debug_display_mapinfo(t_data *data)
 {
 	printf(YELLOW "\n---- MAP\n" RESET);
 	printf("Map height: %d\n", data->mapinfo.height);
@@ -32,7 +32,17 @@ void	debug_display_data(t_data *data)
 	printf("- East: %f\n", data->mapinfo.east);
 	printf("- South: %f\n", data->mapinfo.south);
 	printf("- West: %f\n", data->mapinfo.west);
+	printf(YELLOW "\n---- TEXTURES & COLORS\n" RESET);
+	printf("Color ceiling: #%lx\n", data->texinfo.hex_ceiling);
+	printf("Color floor: %lx\n", data->texinfo.hex_floor);
+	printf("Texture north: %s\n", data->texinfo.north);
+	printf("Texture south: %s\n", data->texinfo.south);
+	printf("Texture east: %s\n", data->texinfo.east);
+	printf("Texture west: %s\n", data->texinfo.west);
+}
 
+void	debug_display_player(t_data *data)
+{
 	printf(YELLOW "\n---- PLAYER\n" RESET);
 	printf("Player tile: ");
 	printf("x = %d, y = %d\n", data->player.tile_x, data->player.tile_y);
@@ -41,5 +51,11 @@ void	debug_display_data(t_data *data)
 	printf("Player direction: %c ", data->player.direction);
 	printf("(x = %f, y = %f)\n", data->player.dir_x, data->player.dir_y);
 	printf("Player view angle: %f\n", data->player.view_angle);
+}
+
+void	debug_display_data(t_data *data)
+{
+	debug_display_mapinfo(data);
+	debug_display_player(data);
 	printf("\n");
 }
