@@ -38,7 +38,8 @@ void	update_texture_pixels(t_data *data, t_texinfo *tex, t_ray *ray, int x)
 	{
 		tex->y = (int)tex->pos & (tex->size - 1);
 		tex->pos += tex->step;
-		color = data->textures[tex->index][tex->size * tex->y + tex->x];
+		/* color = data->textures[tex->index][tex->size * tex->y + tex->x]; */
+		color = 0x00FF00;
 		if (ray->side == 1)
 			color = (color >> 1) & 8355711;
 		if (color > 0)
