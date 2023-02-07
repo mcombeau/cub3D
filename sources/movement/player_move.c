@@ -47,13 +47,13 @@ void	handle_player_move(t_data *data, int key)
 	tmp_x = data->player.pos_x;
 	tmp_y = data->player.pos_y;
 	move_player(data, key);
-	debug_display_player(data);
 	if (is_valid_move(data) == false)
 	{
 		data->player.pos_x = tmp_x;
 		data->player.pos_y = tmp_y;
 		return ;
 	}
+	debug_display_player(data);
 	update_player_tile(&data->player);
 	data->player.has_moved = true;
 }

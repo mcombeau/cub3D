@@ -10,8 +10,11 @@ void	render_frame(t_data *data)
 	int		x;
 	int		y;
 
-	image.img = NULL;
-	init_img(data, &image, data->win_width, data->win_height);
+	image.img = mlx_new_image(data->mlx, data->win_width, data->win_height);
+	image.addr = (int *)mlx_get_data_addr(image.img, &image.pixel_bits,
+					&image.size_line, &image.endian);
+	/* image.img = NULL; */
+	/* init_img(data, &image, data->win_width, data->win_height); */
 	y = 0;
 	while (y < data->win_height)
 	{
@@ -19,13 +22,16 @@ void	render_frame(t_data *data)
 		while (x < data->win_width)
 		{
 			if (data->texture_pixels[y][x] > 0)
-				set_image_pixel(&image, x, y, DEBUG_COLOR_WALL); 
+				image.addr[y * data->win_width + x] = data->texture_pixels[y][x];
+				/* set_image_pixel(&image, x, y, DEBUG_COLOR_WALL); */ 
 				/* set_image_pixel(&image, x, y, data->texture_pixels[y][x]); */
 			else if (y < data->win_height / 2)
-				set_image_pixel(&image, x, y, DEBUG_COLOR_CEILING); 
+				image.addr[y * data->win_width + x] = data->texinfo.hex_ceiling;
+				/* set_image_pixel(&image, x, y, DEBUG_COLOR_CEILING); */ 
 				/* set_image_pixel(&image, x, y, (int)data->texinfo.hex_ceiling); */
 			else if (y < data->win_height -1)
-				set_image_pixel(&image, x, y, DEBUG_COLOR_FLOOR);
+				image.addr[y * data->win_width + x] = data->texinfo.hex_floor;
+				/* set_image_pixel(&image, x, y, DEBUG_COLOR_FLOOR); */
 				/* set_image_pixel(&image, x, y, (int)data->texinfo.hex_floor); */
 			x++;
 		}
@@ -63,6 +69,6 @@ int	render(t_data *data)
 		return (0);
 	mlx_clear_window(data->mlx, data->win);
 	render_raycast(data);
-	render_minimap(data);
+	/* render_minimap(data); */
 	return (0);
 }

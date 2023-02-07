@@ -9,7 +9,7 @@ void	init_img(t_data *data, t_img *image, int width, int height)
 	image->img = mlx_new_image(data->mlx, width, height);
 	if (image->img == NULL)
 		clean_exit(data, msg("cub3d: %s\n", "image creation error.", 1));
-	image->addr = mlx_get_data_addr(image->img, &image->pixel_bits,
+	image->addr = (int *)mlx_get_data_addr(image->img, &image->pixel_bits,
 			&image->size_line, &image->endian);
 	return ;
 }
@@ -27,7 +27,7 @@ void	init_texture_img(t_data *data, t_img *image, char *path)
 			&data->texinfo.size);
 	if (image->img == NULL)
 		clean_exit(data, msg("cub3d: %s\n", "image creation error.", 1));
-	image->addr = mlx_get_data_addr(image->img, &image->pixel_bits,
+	image->addr = (int *)mlx_get_data_addr(image->img, &image->pixel_bits,
 			&image->size_line, &image->endian);
 	return ;
 }

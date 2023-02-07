@@ -39,7 +39,7 @@
 #  define O_DIRECTORY 00200000
 # endif
 
-# define MOVESPEED 0.2
+# define MOVESPEED 0.25
 # define ROTSPEED 0.2
 
 /* MINIMAP MACROS */
@@ -85,7 +85,7 @@ typedef unsigned long	t_ulong;
 typedef struct s_img
 {
 	void	*img;
-	char	*addr;
+	int		*addr;
 	int		pixel_bits;
 	int		size_line;
 	int		endian;
@@ -294,6 +294,7 @@ int		free_data(t_data *data);
 /* debug.c */
 void	debug_display_data(t_data *data);
 void	debug_display_minimap(t_minimap *minimap);
+void	debug_display_player(t_data *data);
 void	debug_print_char_tab(char **tab);
 
 #endif
