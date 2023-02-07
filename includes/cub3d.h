@@ -102,6 +102,7 @@ typedef struct s_texinfo
 	unsigned long	hex_floor;
 	unsigned long	hex_ceiling;
 	int				size;
+	int				index;
 	double			step;
 	double			pos;
 	int				x;
@@ -181,8 +182,7 @@ typedef struct s_data
 	char		**map;
 	t_player	player;
 	t_ray		ray;
-	t_img		img;
-	int			**pixels;
+	int			**texture_pixels;
 	int			**textures;
 	t_texinfo	texinfo;
 	t_img		minimap;
@@ -195,6 +195,7 @@ typedef struct s_data
 /* init/init_data.c */
 void	init_data(t_data *data);
 void	init_img_clean(t_img *img);
+void	init_ray(t_ray *ray);
 
 /* init/init_mlx.c */
 void	init_mlx(t_data *data);
@@ -203,6 +204,7 @@ void	init_texture_img(t_data *data, t_img *image, char *path);
 
 /* init/init_textures.c */
 void	init_textures(t_data *data);
+void	init_texinfo(t_texinfo *textures);
 
 /* exit.c */
 void	clean_exit(t_data *data, int code);
@@ -247,7 +249,10 @@ int		skip_walls(char **map_tab);
 
 /* render/render.c */
 int		render(t_data *data);
-void	init_frame_pixels(t_data *data);
+
+/* render/texture.c */
+void	init_texture_pixels(t_data *data);
+void	update_texture_pixels(t_data *data, t_texinfo *tex, t_ray *ray, int x);
 
 /* render/image_utils.c */
 void	set_image_pixel(t_img *image, int x, int y, int color);

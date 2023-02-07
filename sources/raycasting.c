@@ -94,12 +94,23 @@ static void	calculate_line_height(t_ray *ray, t_data *data, t_player *player)
 	if (ray->draw_end >= data->win_height)
 		ray->draw_end = data->win_height - 1;
 	if (ray->side == 0)
+	{
 		ray->wall_x = player->pos_y + ray->wall_dist * ray->raydir_y;
+		if (ray->raydir_x > 0)
+			data->texinfo.index = NORTH;
+		else
+			data->texinfo.index = SOUTH;
+	}
 	else
+	{
 		ray->wall_x = player->pos_x + ray->wall_dist * ray->raydir_x;
+		if (ray->raydir_y > 0)
+			data->texinfo.index = WEST;
+		else
+			data->texinfo.index = EAST;
+	}
 	ray->wall_x -= floor(ray->wall_x);
 }
-
 
 int	raycasting(t_player *player, t_data *data)
 {
@@ -110,10 +121,12 @@ int	raycasting(t_player *player, t_data *data)
 	ray = data->ray;
 	while (x++ < WIN_WIDTH)
 	{
+		init_ray(&ray);
 		init_raycasting_info(x, &ray, player);
 		set_dda(&ray, player);
 		perform_dda(&ray, player, data->map);
 		calculate_line_height(&ray, data, player);
+		update_texture_pixels(data, &data->texinfo, &ray, x);
 	}
 	return (SUCCESS);
 }

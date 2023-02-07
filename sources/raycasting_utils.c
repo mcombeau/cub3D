@@ -35,5 +35,4 @@ void	draw_line(void *mlx, void *window, int beginX, int beginY, int endX, int en
 		pixelY += deltaY;
 		--pixels;
 	}
-
 }

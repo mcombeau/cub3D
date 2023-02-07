@@ -9,21 +9,25 @@ void	init_img_clean(t_img *img)
 	img->endian = 0;
 }
 
-void	init_texinfo(t_texinfo *textures)
+void	init_ray(t_ray *ray)
 {
-	textures->north = NULL;
-	textures->south = NULL;
-	textures->west = NULL;
-	textures->east = NULL;
-	textures->floor = 0;
-	textures->ceiling = 0;
-	textures->hex_floor = 0x0;
-	textures->hex_ceiling = 0x0;
-	textures->size = TEX_SIZE;
-	textures->step = 0.0;
-	textures->pos = 0.0;
-	textures->x = 0;
-	textures->y = 0;
+	ray->camera_x = 0;
+	ray->raydir_x = 0;
+	ray->raydir_y = 0;
+	ray->mapx = 0;
+	ray->mapy = 0;
+	ray->step_x = 0;
+	ray->step_y = 0;
+	ray->sidedist_x = 0;
+	ray->sidedist_y = 0;
+	ray->deltadist_x = 0;
+	ray->deltadist_y = 0;
+	ray->wall_dist = 0;
+	ray->wall_x = 0;
+	ray->side = 0;
+	ray->line_height = 0;
+	ray->draw_start = 0;
+	ray->draw_end = 0;
 }
 
 void	init_mapinfo(t_mapinfo *mapinfo)
@@ -66,7 +70,6 @@ void	init_data(t_data *data)
 	init_texinfo(&data->texinfo);
 	data->map = NULL;
 	init_mapinfo(&data->mapinfo);
-	init_img_clean(&data->img);
 	init_img_clean(&data->minimap);
-	data->pixels = NULL;
+	data->texture_pixels = NULL;
 }
