@@ -4,35 +4,31 @@
 #define DEBUG_COLOR_CEILING 0xAAAAAA
 #define DEBUG_COLOR_FLOOR	0x666666
 
+void	set_frame_image_pixel(t_data *data, t_img *image, int x, int y)
+{
+	if (data->texture_pixels[y][x] > 0)
+		image->addr[y * data->win_width + x] = data->texture_pixels[y][x];
+	else if (y < data->win_height / 2)
+		image->addr[y * data->win_width + x] = data->texinfo.hex_ceiling;
+	else if (y < data->win_height -1)
+		image->addr[y * data->win_width + x] = data->texinfo.hex_floor;
+}
+
 void	render_frame(t_data *data)
 {
 	t_img	image;
 	int		x;
 	int		y;
 
-	image.img = mlx_new_image(data->mlx, data->win_width, data->win_height);
-	image.addr = (int *)mlx_get_data_addr(image.img, &image.pixel_bits,
-					&image.size_line, &image.endian);
-	/* image.img = NULL; */
-	/* init_img(data, &image, data->win_width, data->win_height); */
+	image.img = NULL;
+	init_img(data, &image, data->win_width, data->win_height);
 	y = 0;
 	while (y < data->win_height)
 	{
 		x = 0;
 		while (x < data->win_width)
 		{
-			if (data->texture_pixels[y][x] > 0)
-				image.addr[y * data->win_width + x] = data->texture_pixels[y][x];
-				/* set_image_pixel(&image, x, y, DEBUG_COLOR_WALL); */ 
-				/* set_image_pixel(&image, x, y, data->texture_pixels[y][x]); */
-			else if (y < data->win_height / 2)
-				image.addr[y * data->win_width + x] = data->texinfo.hex_ceiling;
-				/* set_image_pixel(&image, x, y, DEBUG_COLOR_CEILING); */ 
-				/* set_image_pixel(&image, x, y, (int)data->texinfo.hex_ceiling); */
-			else if (y < data->win_height -1)
-				image.addr[y * data->win_width + x] = data->texinfo.hex_floor;
-				/* set_image_pixel(&image, x, y, DEBUG_COLOR_FLOOR); */
-				/* set_image_pixel(&image, x, y, (int)data->texinfo.hex_floor); */
+			set_frame_image_pixel(data, &image, x, y);
 			x++;
 		}
 		y++;

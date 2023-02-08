@@ -34,7 +34,7 @@ static bool	is_valid_move(t_data *data)
 	/* 	return (false); */
 	/* if ((int)data->player.pos_y > data->mapinfo.height) */
 	/* 	return (false); */
-	if (data->map[(int)data->player.pos_x][(int)data->player.pos_y] != '0')
+	if (data->map[(int)data->player.pos_y][(int)data->player.pos_x] != '0')
 		return (false);
 	return (true);
 }

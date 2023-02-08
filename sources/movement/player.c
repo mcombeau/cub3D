@@ -2,19 +2,19 @@
 
 void	init_player_north_south(t_player *player)
 {
-	if (player->direction == 'N')
+	if (player->direction == 'S')
 	{
-		player->dir_x = -1;
-		player->dir_y = 0;
-		player->plane_x = 0;
-		player->plane_y = 0.66;
+		player->dir_x = 0;
+		player->dir_y = 1;
+		player->plane_x = 0.66;
+		player->plane_y = 0;
 	}
-	else if (player->direction == 'S')
+	else if (player->direction == 'N')
 	{
-		player->dir_x = 1;
-		player->dir_y = 0;
-		player->plane_x = 0;
-		player->plane_y = -0.66;
+		player->dir_x = 0;
+		player->dir_y = -1;
+		player->plane_x = -0.66;
+		player->plane_y = 0;
 	}
 	else
 		return ;
@@ -22,19 +22,19 @@ void	init_player_north_south(t_player *player)
 
 void	init_player_east_west(t_player *player)
 {
-	if (player->direction == 'E')
+	if (player->direction == 'W')
 	{
-		player->dir_x = 0;
-		player->dir_y = 1;
-		player->plane_x = 0.66;
-		player->plane_y = 0;
+		player->dir_x = -1;
+		player->dir_y = 0;
+		player->plane_x = 0;
+		player->plane_y = 0.66;
 	}
-	else if (player->direction == 'W')
+	else if (player->direction == 'E')
 	{
-		player->dir_x = 0;
-		player->dir_y = -1;
-		player->plane_x = -0.66;
-		player->plane_y = 0;
+		player->dir_x = 1;
+		player->dir_y = 0;
+		player->plane_x = 0;
+		player->plane_y = -0.66;
 	}
 	else
 		return ;
