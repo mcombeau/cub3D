@@ -34,8 +34,8 @@
 #  define O_DIRECTORY 00200000
 # endif
 
-# define MOVESPEED 0.25
-# define ROTSPEED 0.2
+# define MOVESPEED 0.025
+# define ROTSPEED 0.02
 
 /* MINIMAP MACROS */
 # define MMAP_PIXEL_SIZE 128
@@ -69,6 +69,14 @@ enum e_texture_index
 	SOUTH = 1,
 	EAST = 2,
 	WEST = 3
+};
+
+enum e_movement_dir
+{
+	FORWARD = 0,
+	BACKWARD = 1,
+	LEFT = 2,
+	RIGHT = 3
 };
 
 typedef unsigned long	t_ulong;
@@ -159,6 +167,9 @@ typedef struct s_player
 	double	plane_x;
 	double	plane_y;
 	bool	has_moved;
+	int		move_x;
+	int		move_y;
+	int		rotate;
 }	t_player;
 
 typedef struct s_data
@@ -238,6 +249,7 @@ int		skip_walls(char **map_tab);
 
 /* render/render.c */
 int		render(t_data *data);
+void	render_images(t_data *data);
 
 /* render/texture.c */
 void	init_texture_pixels(t_data *data);
@@ -258,18 +270,24 @@ double	calculate_distance(double deltaX, double deltaY);
 void	draw_line(void *mlx, void *window, int beginX, int beginY, int endX, int endY, int color);
 
 /* render/raycasting.c */
-int	raycasting(t_player *player, t_data *data);
+int		raycasting(t_player *player, t_data *data);
 
 /* movement/input_handler.c */
 int		key_event_handler(int keycode, t_data *data);
+int		move_player(t_data *data);
 
 /* movement/player.c */
 void	init_player_direction(t_data *data);
 void	update_player_tile(t_player *player);
 
 /* movement/player_move.c */
-void	handle_player_move(t_data *data, int key);
-void	handle_player_rotate(t_data *data, int key);
+int		move_player_forward(t_data *data);
+int		move_player_backward(t_data *data);
+int		move_player_left(t_data *data);
+int		move_player_right(t_data *data);
+
+/* movement/player_rotate.c */
+int	rotate_left_right(t_data *data);
 
 /* exit/exit.c */
 void	clean_exit(t_data *data, int code);

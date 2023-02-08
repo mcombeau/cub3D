@@ -39,6 +39,7 @@ SRC			= 	main.c 						\
 			  	movement/input_handler.c	\
 				movement/player.c			\
 				movement/player_move.c		\
+				movement/player_rotate.c	\
 				render/raycasting_utils.c	\
 				render/raycasting.c			\
 				render/render.c				\

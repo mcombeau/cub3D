@@ -1,83 +1,59 @@
 #include "cub3d.h"
 
-static void	move_player(t_data *data, int key)
+static int	validate_move(t_data *data, double new_x, double new_y)
 {
-	if (key == XK_w)
+	int	moved;
+
+	moved = 0;
+	if (data->map[(int)data->player.pos_y][(int)new_x] == '0')
 	{
-		printf("Move player forward\n");
-		data->player.pos_x += data->player.dir_x * MOVESPEED;
-		data->player.pos_y += data->player.dir_y * MOVESPEED;
+		data->player.pos_x = new_x;
+		moved = 1;
 	}
-	else if (key == XK_s)
+	if (data->map[(int)new_y][(int)data->player.pos_x] == '0')
 	{
-		printf("Move player backward\n");
-		data->player.pos_x -= data->player.dir_x * MOVESPEED;
-		data->player.pos_y -= data->player.dir_y * MOVESPEED;
+		data->player.pos_y = new_y;
+		moved = 1;
 	}
-	else if (key == XK_a)
-	{
-		printf("Move player left\n");
-		data->player.pos_x -= data->player.dir_y * MOVESPEED;
-		data->player.pos_y += data->player.dir_x * MOVESPEED;
-	}
-	else if (key == XK_d)
-	{
-		printf("Move player right\n");
-		data->player.pos_x += data->player.dir_y * MOVESPEED;
-		data->player.pos_y -= data->player.dir_x * MOVESPEED;
-	}
+	return (moved);
 }
 
-static bool	is_valid_move(t_data *data)
+int	move_player_forward(t_data *data)
 {
-	/* if ((int)data->player.pos_x > data->mapinfo.width) */
-	/* 	return (false); */
-	/* if ((int)data->player.pos_y > data->mapinfo.height) */
-	/* 	return (false); */
-	if (data->map[(int)data->player.pos_y][(int)data->player.pos_x] != '0')
-		return (false);
-	return (true);
+	double	new_x;
+	double	new_y;
+
+	new_x = data->player.pos_x + data->player.dir_x * MOVESPEED;
+	new_y = data->player.pos_y + data->player.dir_y * MOVESPEED;
+	return (validate_move(data, new_x, new_y));
 }
 
-void	handle_player_move(t_data *data, int key)
+int	move_player_backward(t_data *data)
 {
-	double	tmp_x;
-	double	tmp_y;
+	double	new_x;
+	double	new_y;
 
-	tmp_x = data->player.pos_x;
-	tmp_y = data->player.pos_y;
-	move_player(data, key);
-	if (is_valid_move(data) == false)
-	{
-		data->player.pos_x = tmp_x;
-		data->player.pos_y = tmp_y;
-		return ;
-	}
-	debug_display_player(data);
-	update_player_tile(&data->player);
-	data->player.has_moved = true;
+	new_x = data->player.pos_x - data->player.dir_x * MOVESPEED;
+	new_y = data->player.pos_y - data->player.dir_y * MOVESPEED;
+	return (validate_move(data, new_x, new_y));
 }
 
-void	handle_player_rotate(t_data *data, int key)
+int	move_player_left(t_data *data)
 {
-	t_player	*p;
-	double		tmp_x;
-	double		rotspeed;
+	double	new_x;
+	double	new_y;
 
-	p = &data->player;
-	rotspeed = ROTSPEED;
-	if (key == XK_Right)
-	{
-		rotspeed *= -1;
-		printf("Rotate player right: rotspeed: %f\n", rotspeed);
-	}
-	else
-		printf("Rotate player left: rotseed: %f\n", rotspeed);
-	tmp_x = p->dir_x;
-	p->dir_x = p->dir_x * cos(rotspeed) - p->dir_y * sin(rotspeed);
-	p->dir_y = tmp_x * sin(rotspeed) + p->dir_y * cos(rotspeed);
-	tmp_x = p->plane_x;
-	p->plane_x = p->plane_x * cos(rotspeed) - p->plane_y * sin(rotspeed);
-	p->plane_y = tmp_x * sin(rotspeed) + p->plane_y * cos(rotspeed);
-	data->player.has_moved = true;
+	new_x = data->player.pos_x - data->player.dir_y * MOVESPEED;
+	new_y = data->player.pos_y + data->player.dir_x * MOVESPEED;
+	return (validate_move(data, new_x, new_y));
+}
+
+int	move_player_right(t_data *data)
+{
+	double	new_x;
+	double	new_y;
+
+	new_x = data->player.pos_x + data->player.dir_y * MOVESPEED;
+	new_y = data->player.pos_y - data->player.dir_x * MOVESPEED;
+	return (validate_move(data, new_x, new_y));
 }

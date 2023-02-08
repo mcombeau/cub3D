@@ -38,6 +38,7 @@ int	main(int ac, char **av)
 		return (1);
 	init_mlx(&data);
 	init_textures(&data);
+	render_images(&data);
 	listen_for_input(&data);
 	mlx_loop_hook(data.mlx, render, &data);
 	mlx_loop(data.mlx);
