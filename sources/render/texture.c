@@ -27,8 +27,8 @@ void	update_texture_pixels(t_data *data, t_texinfo *tex, t_ray *ray, int x)
 	int			color;
 
 	tex->x = (int)(ray->wall_x * tex->size);
-	if ((ray->side == 0 && ray->raydir_x > 0)
-		|| (ray->side == 1 && ray->raydir_y < 0))
+	if ((ray->side == 0 && ray->dir_x > 0)
+		|| (ray->side == 1 && ray->dir_y < 0))
 		tex->x = tex->size - tex->x - 1;
 	tex->step = 1.0 * tex->size / ray->line_height;
 	tex->pos = (ray->draw_start - data->win_height / 2
@@ -39,11 +39,10 @@ void	update_texture_pixels(t_data *data, t_texinfo *tex, t_ray *ray, int x)
 		tex->y = (int)tex->pos & (tex->size - 1);
 		tex->pos += tex->step;
 		color = data->textures[tex->index][tex->size * tex->y + tex->x];
-		/* color = 0x00FF00; */
 		if (ray->side == 1)
 			color = (color >> 1) & 8355711;
 		if (color > 0)
 			data->texture_pixels[y][x] = color;
-		++y;
+		y++;
 	}
 }

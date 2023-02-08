@@ -28,10 +28,6 @@ void	debug_display_mapinfo(t_data *data)
 	printf("Map height: %d\n", data->mapinfo.height);
 	printf("Map width: %d\n", data->mapinfo.width);
 	debug_print_char_tab(data->map);
-	printf("- North: %f\n", data->mapinfo.north);
-	printf("- East: %f\n", data->mapinfo.east);
-	printf("- South: %f\n", data->mapinfo.south);
-	printf("- West: %f\n", data->mapinfo.west);
 	printf(YELLOW "\n---- TEXTURES & COLORS\n" RESET);
 	printf("Color ceiling: #%lx\n", data->texinfo.hex_ceiling);
 	printf("Color floor: #%lx\n", data->texinfo.hex_floor);
@@ -50,7 +46,6 @@ void	debug_display_player(t_data *data)
 	printf("x = %f, y = %f\n", data->player.pos_x, data->player.pos_y);
 	printf("Player direction: %c ", data->player.direction);
 	printf("(x = %f, y = %f)\n", data->player.dir_x, data->player.dir_y);
-	printf("Player view angle: %f\n", data->player.view_angle);
 }
 
 void	debug_display_data(t_data *data)

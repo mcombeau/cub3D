@@ -12,10 +12,10 @@ void	init_img_clean(t_img *img)
 void	init_ray(t_ray *ray)
 {
 	ray->camera_x = 0;
-	ray->raydir_x = 0;
-	ray->raydir_y = 0;
-	ray->mapx = 0;
-	ray->mapy = 0;
+	ray->dir_x = 0;
+	ray->dir_y = 0;
+	ray->map_x = 0;
+	ray->map_y = 0;
 	ray->step_x = 0;
 	ray->step_y = 0;
 	ray->sidedist_x = 0;
@@ -38,10 +38,6 @@ void	init_mapinfo(t_mapinfo *mapinfo)
 	mapinfo->file = NULL;
 	mapinfo->height = 0;
 	mapinfo->width = 0;
-	mapinfo->north = degrees_to_rad_converter(ANGLE_NORTH);
-	mapinfo->east = degrees_to_rad_converter(ANGLE_EAST);
-	mapinfo->south = degrees_to_rad_converter(ANGLE_SOUTH);
-	mapinfo->west = degrees_to_rad_converter(ANGLE_WEST);
 	mapinfo->index_end_of_map = 0;
 }
 
@@ -52,7 +48,6 @@ void	init_player(t_player *player)
 	player->tile_y = 0;
 	player->pos_x = 0.0;
 	player->pos_y = 0.0;
-	player->view_angle = 0.0;
 	player->dir_x = 0.0;
 	player->dir_y = 0.0;
 	player->plane_x = 0.0;

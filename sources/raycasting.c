@@ -3,8 +3,8 @@
 /*
 We initialize the set up for the rays
 - camera_x -> Where is the camera (-1 = left, 0 = center, 1 = right)
-- raydir_x/y = direction of the ray
-- mapx/y = current square of the ray
+- dir_x/y = direction of the ray
+- map_x/y = current square of the ray
 - deltadist_x/y = distance to go to the next x or y.
 */
 
@@ -12,12 +12,12 @@ static void	init_raycasting_info(int x, t_ray *ray, t_player *player)
 {
 	init_ray(ray);
 	ray->camera_x = 2 * x / (double)WIN_WIDTH - 1;
-	ray->raydir_x = player->dir_x + player->plane_x * ray->camera_x;
-	ray->raydir_y = player->dir_y + player->plane_y * ray->camera_x;
-	ray->mapx = (int)player->pos_x;
-	ray->mapy = (int)player->pos_y;
-	ray->deltadist_x = fabs(1 / ray->raydir_x);
-	ray->deltadist_y = fabs(1 / ray->raydir_y);
+	ray->dir_x = player->dir_x + player->plane_x * ray->camera_x;
+	ray->dir_y = player->dir_y + player->plane_y * ray->camera_x;
+	ray->map_x = (int)player->pos_x;
+	ray->map_y = (int)player->pos_y;
+	ray->deltadist_x = fabs(1 / ray->dir_x);
+	ray->deltadist_y = fabs(1 / ray->dir_y);
 }
 
 /*
@@ -31,25 +31,25 @@ static void	init_raycasting_info(int x, t_ray *ray, t_player *player)
 
 static void	set_dda(t_ray *ray, t_player *player)
 {
-	if (ray->raydir_x < 0)
+	if (ray->dir_x < 0)
 	{
 		ray->step_x = -1;
-		ray->sidedist_x = (player->pos_x - ray->mapx) * ray->deltadist_x;
+		ray->sidedist_x = (player->pos_x - ray->map_x) * ray->deltadist_x;
 	}
 	else
 	{
 		ray->step_x = 1;
-		ray->sidedist_x = (ray->mapx + 1.0 - player->pos_x) * ray->deltadist_x;
+		ray->sidedist_x = (ray->map_x + 1.0 - player->pos_x) * ray->deltadist_x;
 	}
-	if (ray->raydir_y < 0)
+	if (ray->dir_y < 0)
 	{
 		ray->step_y = -1;
-		ray->sidedist_y = (player->pos_y - ray->mapy) * ray->deltadist_y;
+		ray->sidedist_y = (player->pos_y - ray->map_y) * ray->deltadist_y;
 	}
 	else
 	{
 		ray->step_y = 1;
-		ray->sidedist_y = (ray->mapy + 1.0 - player->pos_y) * ray->deltadist_y;
+		ray->sidedist_y = (ray->map_y + 1.0 - player->pos_y) * ray->deltadist_y;
 	}
 }
 
@@ -68,26 +68,22 @@ static void	perform_dda(t_ray *ray, t_player *player, char **map)
 		if (ray->sidedist_x < ray->sidedist_y)
 		{
 			ray->sidedist_x += ray->deltadist_x;
-			ray->mapx += ray->step_x;
+			ray->map_x += ray->step_x;
 			ray->side = 0;
 		}
 		else
 		{
 			ray->sidedist_y += ray->deltadist_y;
-			ray->mapy += ray->step_y;
+			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		/* if (map[ray->mapy][ray->mapx] == '1') */
-		if (map[ray->mapx][ray->mapy] == '1')
+		if (map[ray->map_x][ray->map_y] == '1')
 			hit = 1;
 	}
 	if (ray->side == 0)
-		/* ray->wall_dist = (ray->sidedist_x - ray->deltadist_x); */
-		ray->wall_dist = (ray->mapx - player->pos_x + (1 - ray->step_x) / 2) / ray->raydir_x;
+		ray->wall_dist = (ray->map_x - player->pos_x + (1 - ray->step_x) / 2) / ray->dir_x;
 	else
-		/* ray->wall_dist = (ray->sidedist_y - ray->deltadist_y); */
-		ray->wall_dist = (ray->mapy - player->pos_y + (1 - ray->step_y) / 2) / ray->raydir_y;
-	(void)player;
+		ray->wall_dist = (ray->map_y - player->pos_y + (1 - ray->step_y) / 2) / ray->dir_y;
 }
 
 static void	calculate_line_height(t_ray *ray, t_data *data, t_player *player)
@@ -101,16 +97,16 @@ static void	calculate_line_height(t_ray *ray, t_data *data, t_player *player)
 		ray->draw_end = data->win_height - 1;
 	if (ray->side == 0)
 	{
-		ray->wall_x = player->pos_y + ray->wall_dist * ray->raydir_y;
-		if (ray->raydir_x > 0)
+		ray->wall_x = player->pos_y + ray->wall_dist * ray->dir_y;
+		if (ray->dir_x > 0)
 			data->texinfo.index = NORTH;
 		else
 			data->texinfo.index = SOUTH;
 	}
 	else
 	{
-		ray->wall_x = player->pos_x + ray->wall_dist * ray->raydir_x;
-		if (ray->raydir_y > 0)
+		ray->wall_x = player->pos_x + ray->wall_dist * ray->dir_x;
+		if (ray->dir_y > 0)
 			data->texinfo.index = WEST;
 		else
 			data->texinfo.index = EAST;

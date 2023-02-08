@@ -28,7 +28,6 @@ static char	*get_texture_path(char *line, int j)
 	return (path);
 }
 
-
 static int	fill_direction_textures(t_texinfo *textures, char *line, int j)
 {
 	if (line[j + 2] && ft_isprint(line[j + 2]))

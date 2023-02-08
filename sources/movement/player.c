@@ -6,8 +6,6 @@ void	init_player_north_south(t_player *player)
 	{
 		player->dir_x = -1;
 		player->dir_y = 0;
-		/* player->dir_x = 0; */
-		/* player->dir_y = -1; */
 		player->plane_x = 0;
 		player->plane_y = 0.66;
 	}
@@ -15,8 +13,6 @@ void	init_player_north_south(t_player *player)
 	{
 		player->dir_x = 1;
 		player->dir_y = 0;
-		/* player->dir_x = 0; */
-		/* player->dir_y = 1; */
 		player->plane_x = 0;
 		player->plane_y = -0.66;
 	}
@@ -30,8 +26,6 @@ void	init_player_east_west(t_player *player)
 	{
 		player->dir_x = 0;
 		player->dir_y = 1;
-		/* player->dir_x = 1; */
-		/* player->dir_y = 0; */
 		player->plane_x = 0.66;
 		player->plane_y = 0;
 	}
@@ -39,13 +33,11 @@ void	init_player_east_west(t_player *player)
 	{
 		player->dir_x = 0;
 		player->dir_y = -1;
-		/* player->dir_x = -1; */
-		/* player->dir_y = 0; */
 		player->plane_x = -0.66;
 		player->plane_y = 0;
 	}
 	else
-		return;
+		return ;
 }
 
 void	init_player_direction(t_data *data)

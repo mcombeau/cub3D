@@ -25,11 +25,6 @@
 
 # define PI 3.1415926535 
 
-# define ANGLE_EAST 0
-# define ANGLE_SOUTH 90
-# define ANGLE_WEST 180
-# define ANGLE_NORTH 270
-
 # define WIN_WIDTH 640
 # define WIN_HEIGHT 480
 
@@ -128,20 +123,16 @@ typedef struct s_mapinfo
 	char		**file;
 	int			height;
 	int			width;
-	double		north;
-	double		east;
-	double		south;
-	double		west;
 	int			index_end_of_map;
-}				t_mapinfo;
+}	t_mapinfo;
 
 typedef struct s_ray
 {
 	double	camera_x;
-	double	raydir_x;
-	double	raydir_y;
-	int		mapx;
-	int		mapy;
+	double	dir_x;
+	double	dir_y;
+	int		map_x;
+	int		map_y;
 	int		step_x;
 	int		step_y;
 	double	sidedist_x;
@@ -154,17 +145,15 @@ typedef struct s_ray
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-}				t_ray;
+}	t_ray;
 
 typedef struct s_player
 {
-
 	char	direction;
 	int		tile_x;
 	int		tile_y;
 	double	pos_x;
 	double	pos_y;
-	double	view_angle;
 	double	dir_x;
 	double	dir_y;
 	double	plane_x;
@@ -298,4 +287,3 @@ void	debug_display_player(t_data *data);
 void	debug_print_char_tab(char **tab);
 
 #endif
-
