@@ -252,15 +252,15 @@ void	render_minimap(t_data *data);
 /* render/minimap_image.c */
 void	render_minimap_image(t_data *data, t_minimap *minimap);
 
-/*  raycasting_utils.c  */
+/*  render/raycasting_utils.c  */
 double	degrees_to_rad_converter(float degree);
 double	calculate_distance(double deltaX, double deltaY);
 void	draw_line(void *mlx, void *window, int beginX, int beginY, int endX, int endY, int color);
 
-/* raycasting.c */
+/* render/raycasting.c */
 int	raycasting(t_player *player, t_data *data);
 
-/* input/input_handler.c */
+/* movement/input_handler.c */
 int		key_event_handler(int keycode, t_data *data);
 
 /* movement/player.c */

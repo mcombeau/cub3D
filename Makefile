@@ -36,16 +36,16 @@ SRC			= 	main.c 						\
 				parsing/check_map.c 		\
 				parsing/check_map_borders.c	\
 				parsing/parsing_utils.c		\
+			  	movement/input_handler.c	\
 				movement/player.c			\
 				movement/player_move.c		\
-				raycasting_utils.c          \
-				raycasting.c				\
+				render/raycasting_utils.c	\
+				render/raycasting.c			\
 				render/render.c				\
-				render/texture.c				\
+				render/texture.c			\
 				render/image_utils.c		\
 				render/minimap_render.c		\
 				render/minimap_image.c		\
-			  	input/input_handler.c		\
 			  	exit/exit.c 				\
 				exit/free_data.c			\
 				debug/debug.c
