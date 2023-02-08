@@ -76,9 +76,9 @@ void	render_minimap(t_data *data)
 	minimap.size = (2 * minimap.view_dist) + 1;
 	minimap.tile_size = MMAP_PIXEL_SIZE / (2 * minimap.view_dist);
 	minimap.offset_x = get_mmap_offset(&minimap,
-			data->mapinfo.width, data->player.tile_x);
+			data->mapinfo.width, (int)data->player.pos_x);
 	minimap.offset_y = get_mmap_offset(&minimap,
-			data->mapinfo.height, data->player.tile_y);
+			data->mapinfo.height, (int)data->player.pos_y);
 	minimap.map = generate_minimap(data, &minimap);
 	if (!minimap.map)
 		return ;
