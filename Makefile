@@ -1,7 +1,7 @@
 .PHONY: all re clean fclean
 
 #Program name
-NAME	= cub3d
+NAME	= cub3D
 
 # Compiler
 CC		= gcc
@@ -60,7 +60,7 @@ OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
 all: $(MLX) $(LIBFT) $(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 $(OBJS): $(OBJ_PATH)
 
@@ -84,7 +84,7 @@ $(LIBFT):
 
 $(NAME): $(OBJS)
 	@echo "Compiling cub3d..."
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX) $(LIBFT) $(INC) -lXext -lX11 -lm
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX) $(LIBFT) $(INC) -lXext -lX11 -lm
 	@echo "cub3d ready."
 
 bonus: all
