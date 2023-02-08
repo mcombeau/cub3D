@@ -235,8 +235,6 @@ int		check_map_validity(t_data *data, char **map_tab);
 /* parsing/check_map_borders.c */
 int		check_top_or_bottom(char **map_tab, int i, int j);
 int		check_map_sides(t_mapinfo *map, char **map_tab);
-int		check_left_side_is_closed(char **map_tab);
-int		check_right_side_is_closed(char **map_tab);
 
 /* parsing/parsing_utils.c */
 int		is_a_white_space(char c);

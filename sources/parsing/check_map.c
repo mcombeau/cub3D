@@ -104,10 +104,6 @@ int	check_map_validity(t_data *data, char **map_tab)
 		return (FAILURE);
 	if (check_map_sides(&data->mapinfo, map_tab) == FAILURE)
 		return (print_error("The map must be surrounded by walls"));
-	if (check_left_side_is_closed(map_tab) == FAILURE)
-		return (print_error("The map is not fully closed on the left side"));
-	if (check_right_side_is_closed(map_tab) == FAILURE)
-		return (print_error("The map is not fully closed on the right side"));
 	if (check_player_position(data, map_tab) == FAILURE)
 		return (FAILURE);
 	if (check_map_is_at_the_end(&data->mapinfo) == FAILURE)
