@@ -4,14 +4,16 @@ static void	set_minimap_pixel(t_minimap *minimap, int x, int y, int color)
 {
 	int	i;
 	int	j;
+	int	int_line_size;
 
+	int_line_size = minimap->img->size_line / 4;
 	i = 0;
 	while (i < minimap->tile_size)
 	{
 		j = 0;
 		while (j < minimap->tile_size)
 		{
-			set_image_pixel(minimap->img, x + j, y + i, color);
+			minimap->img->addr[(y + i) * int_line_size + (x + j)] = color;
 			j++;
 		}
 		i++;
@@ -54,7 +56,9 @@ static void	set_minimap_border_image_pixels(t_minimap *minimap, int color)
 	int	size;
 	int	x;
 	int	y;
+	int	int_line_size;
 
+	int_line_size = minimap->img->size_line / 4;
 	size = MMAP_PIXEL_SIZE + minimap->tile_size;
 	y = 0;
 	while (y < size)
@@ -63,7 +67,7 @@ static void	set_minimap_border_image_pixels(t_minimap *minimap, int color)
 		while (x <= size)
 		{
 			if (x < 5 || x > size - 5 || y < 5 || y > size - 5)
-				set_image_pixel(minimap->img, x, y, color);
+				minimap->img->addr[y * int_line_size + x] = color;
 			x++;
 		}
 		y++;

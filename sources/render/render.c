@@ -65,6 +65,6 @@ int	render(t_data *data)
 		return (0);
 	mlx_clear_window(data->mlx, data->win);
 	render_raycast(data);
-	/* render_minimap(data); */
+	render_minimap(data);
 	return (0);
 }
