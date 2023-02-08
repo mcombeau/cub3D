@@ -58,7 +58,7 @@ static void	set_dda(t_ray *ray, t_player *player)
 - If the sidedistx < sidedisty, x is the closest point from the ray
 */
 
-static void	perform_dda(t_data *data, t_ray *ray, t_player *player)
+static void	perform_dda(t_data *data, t_ray *ray)
 {
 	int	hit;
 
@@ -77,20 +77,13 @@ static void	perform_dda(t_data *data, t_ray *ray, t_player *player)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		/* printf("\tmapwidth = %d, height = %d\n\tmap[%d][%d]\n", data->mapinfo.width, data->mapinfo.height, ray->map_x, ray->map_y); */
-		/* debug_print_char_tab(data->map); */
-		printf("\tmap[%d][%d] = [%c]\n", ray->map_y, ray->map_x, data->map[ray->map_y][ray->map_x]);
-		/* printf("\tmap[%d][%d] = [%c]\n", ray->map_x, ray->map_y, data->map[ray->map_x][ray->map_y]); */
-		if (data->map[ray->map_y][ray->map_x] > '0') 
+		if (data->map[ray->map_y][ray->map_x] > '0')
 			hit = 1;
 	}
 	if (ray->side == 0)
-		/* ray->wall_dist = (ray->map_x - player->pos_x + (1 - ray->step_x) / 2) / ray->dir_x; */
 		ray->wall_dist = (ray->sidedist_x - ray->deltadist_x);
 	else
-		/* ray->wall_dist = (ray->map_y - player->pos_y + (1 - ray->step_y) / 2) / ray->dir_y; */
 		ray->wall_dist = (ray->sidedist_y - ray->deltadist_y);
-	(void)player;
 }
 
 static void	calculate_line_height(t_ray *ray, t_data *data, t_player *player)
@@ -132,7 +125,7 @@ int	raycasting(t_player *player, t_data *data)
 	{
 		init_raycasting_info(x, &ray, player);
 		set_dda(&ray, player);
-		perform_dda(data, &ray, player);
+		perform_dda(data, &ray);
 		calculate_line_height(&ray, data, player);
 		update_texture_pixels(data, &data->texinfo, &ray, x);
 		x++;
