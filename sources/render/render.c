@@ -1,9 +1,5 @@
 #include "cub3d.h"
 
-#define DEBUG_COLOR_WALL	0xFF0000
-#define DEBUG_COLOR_CEILING 0xAAAAAA
-#define DEBUG_COLOR_FLOOR	0x666666
-
 void	set_frame_image_pixel(t_data *data, t_img *image, int x, int y)
 {
 	if (data->texture_pixels[y][x] > 0)
@@ -37,16 +33,6 @@ void	render_frame(t_data *data)
 	mlx_destroy_image(data->mlx, image.img);
 }
 
-/* static bool	has_player_moved(t_data *data) */
-/* { */
-/* 	if (data->player.has_moved == true) */
-/* 	{ */
-/* 		data->player.has_moved = false; */
-/* 		return (true); */
-/* 	} */
-/* 	return (false); */
-/* } */
-
 void	render_raycast(t_data *data)
 {
 	init_texture_pixels(data);
@@ -57,7 +43,6 @@ void	render_raycast(t_data *data)
 
 void	render_images(t_data *data)
 {
-	mlx_clear_window(data->mlx, data->win);
 	render_raycast(data);
 	render_minimap(data);
 }
@@ -67,10 +52,6 @@ int	render(t_data *data)
 	int	moved;
 
 	moved = move_player(data);
-	/* bool	moved; */
-
-	/* moved = false; */
-	/* moved = has_player_moved(data); */
 	if (moved == 0)
 		return (0);
 	render_images(data);
