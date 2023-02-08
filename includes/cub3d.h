@@ -20,7 +20,7 @@
  --------------------------------------------------------------------------- */
 
 # ifndef DEBUG_MSG
-#  define DEBUG_MSG 1
+#  define DEBUG_MSG 0
 # endif
 
 # define PI 3.1415926535 
@@ -158,15 +158,12 @@ typedef struct s_ray
 typedef struct s_player
 {
 	char	direction;
-	int		tile_x;
-	int		tile_y;
 	double	pos_x;
 	double	pos_y;
 	double	dir_x;
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
-	bool	has_moved;
 	int		move_x;
 	int		move_y;
 	int		rotate;
@@ -278,7 +275,6 @@ int		move_player(t_data *data);
 
 /* movement/player.c */
 void	init_player_direction(t_data *data);
-void	update_player_tile(t_player *player);
 
 /* movement/player_move.c */
 int		move_player_forward(t_data *data);

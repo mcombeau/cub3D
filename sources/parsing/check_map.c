@@ -34,8 +34,8 @@ static int	check_position_is_valid(t_data *data, char **map_tab)
 	int	i;
 	int	j;
 
-	i = data->player.tile_y;
-	j = data->player.tile_x;
+	i = (int)data->player.pos_y;
+	j = (int)data->player.pos_x;
 	if (ft_strlen(map_tab[i - 1]) < (size_t)j
 		|| ft_strlen(map_tab[i + 1]) < (size_t)j
 		|| is_a_white_space(map_tab[i][j - 1]) == SUCCESS
@@ -61,8 +61,8 @@ static int	check_player_position(t_data *data, char **map_tab)
 		{
 			if (ft_strchr("NSEW", map_tab[i][j]))
 			{
-				data->player.tile_x = j;
-				data->player.tile_y = i;
+				data->player.pos_x = (double)j;
+				data->player.pos_y = (double)i;
 				map_tab[i][j] = '0';
 			}
 			j++;

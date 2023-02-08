@@ -44,15 +44,4 @@ void	init_player_direction(t_data *data)
 {
 	init_player_north_south(&data->player);
 	init_player_east_west(&data->player);
-	data->player.pos_x = data->player.tile_x;
-	data->player.pos_y = data->player.tile_y;
-	data->player.move_x = 0;
-	data->player.move_y = 0;
-	data->player.rotate = 0;
-}
-
-void	update_player_tile(t_player *player)
-{
-	player->tile_x = (int)player->pos_x;
-	player->tile_y = (int)player->pos_y;
 }

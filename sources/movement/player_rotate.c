@@ -14,6 +14,5 @@ int	rotate_left_right(t_data *data)
 	tmp_x = p->plane_x;
 	p->plane_x = p->plane_x * cos(rotspeed) - p->plane_y * sin(rotspeed);
 	p->plane_y = tmp_x * sin(rotspeed) + p->plane_y * cos(rotspeed);
-	data->player.has_moved = true;
 	return (1);
 }

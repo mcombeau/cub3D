@@ -40,8 +40,6 @@ void	debug_display_mapinfo(t_data *data)
 void	debug_display_player(t_data *data)
 {
 	printf(YELLOW "\n---- PLAYER\n" RESET);
-	printf("Player tile: ");
-	printf("x = %d, y = %d\n", data->player.tile_x, data->player.tile_y);
 	printf("Player pos: ");
 	printf("x = %f, y = %f\n", data->player.pos_x, data->player.pos_y);
 	printf("Player direction: %c ", data->player.direction);
