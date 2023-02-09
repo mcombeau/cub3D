@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap_render.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/09 11:29:15 by mcombeau          #+#    #+#             */
+/*   Updated: 2023/02/09 11:29:21 by mcombeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static int	get_mmap_offset(t_minimap *minimap, int mapsize, int pos)
@@ -87,4 +99,3 @@ void	render_minimap(t_data *data)
 	render_minimap_image(data, &minimap);
 	free_tab((void **)minimap.map);
 }
-
