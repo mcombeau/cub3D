@@ -6,7 +6,7 @@
 /*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:31:24 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/09 13:32:59 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:42:32 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static int	move_player_left(t_data *data)
 	double	new_x;
 	double	new_y;
 
-	new_x = data->player.pos_x - data->player.dir_y * MOVESPEED;
-	new_y = data->player.pos_y + data->player.dir_x * MOVESPEED;
+	new_x = data->player.pos_x + data->player.dir_y * MOVESPEED;
+	new_y = data->player.pos_y - data->player.dir_x * MOVESPEED;
 	return (validate_move(data, new_x, new_y));
 }
 
@@ -47,8 +47,8 @@ static int	move_player_right(t_data *data)
 	double	new_x;
 	double	new_y;
 
-	new_x = data->player.pos_x + data->player.dir_y * MOVESPEED;
-	new_y = data->player.pos_y - data->player.dir_x * MOVESPEED;
+	new_x = data->player.pos_x - data->player.dir_y * MOVESPEED;
+	new_y = data->player.pos_y + data->player.dir_x * MOVESPEED;
 	return (validate_move(data, new_x, new_y));
 }
 

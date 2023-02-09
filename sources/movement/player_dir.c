@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   player_dir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:31:14 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/09 12:54:15 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:40:28 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ static void	init_player_north_south(t_player *player)
 	{
 		player->dir_x = 0;
 		player->dir_y = 1;
-		player->plane_x = 0.66;
+		player->plane_x = -0.66;
 		player->plane_y = 0;
 	}
 	else if (player->direction == 'N')
 	{
 		player->dir_x = 0;
 		player->dir_y = -1;
-		player->plane_x = -0.66;
+		player->plane_x = 0.66;
 		player->plane_y = 0;
 	}
 	else
@@ -39,14 +39,14 @@ static void	init_player_east_west(t_player *player)
 		player->dir_x = -1;
 		player->dir_y = 0;
 		player->plane_x = 0;
-		player->plane_y = 0.66;
+		player->plane_y = -0.66;
 	}
 	else if (player->direction == 'E')
 	{
 		player->dir_x = 1;
 		player->dir_y = 0;
 		player->plane_x = 0;
-		player->plane_y = -0.66;
+		player->plane_y = 0.66;
 	}
 	else
 		return ;

@@ -6,7 +6,7 @@
 /*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:31:03 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/09 13:33:37 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:45:37 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	key_press_handler(int key, t_data *data)
 	if (key == XK_Escape)
 		quit_cub3d(data);
 	if (key == XK_Left)
-		data->player.rotate += 1;
-	if (key == XK_Right)
 		data->player.rotate -= 1;
+	if (key == XK_Right)
+		data->player.rotate += 1;
 	if (key == XK_w)
 		data->player.move_y = 1;
 	if (key == XK_a)
@@ -43,9 +43,9 @@ int	key_release_handler(int key, t_data *data)
 		data->player.move_x += 1;
 	if (key == XK_d && data->player.move_x == 1)
 		data->player.move_x -= 1;
-	if (key == XK_Left && data->player.rotate >= 1)
+	if (key == XK_Left && data->player.rotate <= 1)
 		data->player.rotate = 0;
-	if (key == XK_Right && data->player.rotate <= -1)
+	if (key == XK_Right && data->player.rotate >= -1)
 		data->player.rotate = 0;
 	return (0);
 }
