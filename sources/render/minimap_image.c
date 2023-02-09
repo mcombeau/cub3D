@@ -29,7 +29,8 @@ static void	set_minimap_image_pixels(t_minimap *minimap)
 		x = 0;
 		while (x < minimap->size)
 		{
-			if (minimap->map[y][x] == '\0')
+			if (!minimap->map[y] || !minimap->map[y][x]
+				|| minimap->map[y][x] == '\0')
 				break ;
 			if (minimap->map[y][x] == 'P')
 				set_minimap_pixel(minimap, x * minimap->tile_size,
