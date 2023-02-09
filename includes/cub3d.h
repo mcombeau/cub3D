@@ -20,7 +20,11 @@
  --------------------------------------------------------------------------- */
 
 # ifndef DEBUG_MSG
-#  define DEBUG_MSG 0
+#  define DEBUG_MSG 1
+# endif
+
+# ifndef MMAP_DEBUG_MSG
+#  define MMAP_DEBUG_MSG 0
 # endif
 
 # define PI 3.1415926535 
@@ -41,9 +45,9 @@
 # define MMAP_PIXEL_SIZE 128
 # define MMAP_VIEW_DIST 4
 # define MMAP_COLOR_PLAYER 0x00FF00
-# define MMAP_COLOR_WALL 0xFFFFFF
-# define MMAP_COLOR_FLOOR 0x000000
-# define MMAP_COLOR_SPACE 0xFF0000
+# define MMAP_COLOR_WALL 0x808080
+# define MMAP_COLOR_FLOOR 0xE6E6E6
+# define MMAP_COLOR_SPACE 0x404040
 
 // ERROR MESSAGES
 # define ERR_WRONG_FILE "Is not an existing .cub file\n"

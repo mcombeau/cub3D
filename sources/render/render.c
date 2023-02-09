@@ -6,7 +6,7 @@
 /*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:30:04 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/09 11:30:05 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/09 11:45:32 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	render(t_data *data)
 	moved = move_player(data);
 	if (moved == 0)
 		return (0);
+	if (DEBUG_MSG)
+		debug_display_player(data);
 	render_images(data);
 	return (0);
 }
