@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/09 22:40:40 by alexa             #+#    #+#             */
+/*   Updated: 2023/02/09 22:40:41 by alexa            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 /*
@@ -54,7 +66,8 @@ static void	set_dda(t_ray *ray, t_player *player)
 }
 
 /*
-- We implement the DDA algorithm -> the loop will increment 1 square until we hit a wall
+- We implement the DDA algorithm -> the loop will increment 1 square 
+-   until we hit a wall
 - If the sidedistx < sidedisty, x is the closest point from the ray
 */
 

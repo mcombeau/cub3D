@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_data.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/09 22:39:50 by alexa             #+#    #+#             */
+/*   Updated: 2023/02/09 22:39:55 by alexa            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	init_img_clean(t_img *img)
@@ -43,7 +55,7 @@ void	init_mapinfo(t_mapinfo *mapinfo)
 
 void	init_player(t_player *player)
 {
-	player->direction = '\0';
+	player->dir = '\0';
 	player->pos_x = 0.0;
 	player->pos_y = 0.0;
 	player->dir_x = 0.0;

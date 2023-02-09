@@ -1,38 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/09 22:42:51 by alexa             #+#    #+#             */
+/*   Updated: 2023/02/09 22:43:53 by alexa            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 double	degrees_to_rad_converter(float degree)
 {
-	double radian;
+	double	radian;
 
-	radian = degree *  PI / 180;
+	radian = degree * PI / 180;
 	return (radian);
-}
-
-double	calculate_distance(double deltaX, double deltaY)
-{
-	double	distance;
-
-	distance = sqrt((deltaX * deltaX) + (deltaY * deltaY));
-	return (distance);
-}
-
-void	draw_line(void *mlx, void *window, int beginX, int beginY, int endX, int endY, int color)
-{
-	double deltaX = endX - beginX;
-	double deltaY = endY - beginY;
-
-	int pixels = calculate_distance(deltaX, deltaY);
-
-	deltaX /= pixels;
-	deltaY /= pixels;
-
-	double pixelX = beginX;
-	double pixelY = beginY;
-	while (pixels)
-	{
-		mlx_pixel_put(mlx, window, pixelX, pixelY, color);
-		pixelX += deltaX;
-		pixelY += deltaY;
-		--pixels;
-	}
 }

@@ -24,32 +24,33 @@ INC			=	-I ./includes/\
 
 # Sources
 SRC_PATH	=	sources/
-SRC			= 	main.c 						\
-				init/init_data.c			\
-				init/init_mlx.c				\
-				init/init_textures.c		\
-			  	parsing/check_args.c		\
-				parsing/parse_data.c		\
-				parsing/get_file_data.c		\
-				parsing/create_game_map.c	\
-				parsing/check_textures.c	\
-				parsing/check_map.c 		\
-				parsing/check_map_borders.c	\
-				parsing/parsing_utils.c		\
-			  	movement/input_handler.c	\
-				movement/player_dir.c		\
-				movement/player_pos.c		\
-				movement/player_move.c		\
-				movement/player_rotate.c	\
-				render/raycasting_utils.c	\
-				render/raycasting.c			\
-				render/render.c				\
-				render/texture.c			\
-				render/image_utils.c		\
-				render/minimap_render.c		\
-				render/minimap_image.c		\
-			  	exit/exit.c 				\
-				exit/free_data.c			\
+SRC			= 	main.c 							\
+				init/init_data.c				\
+				init/init_mlx.c					\
+				init/init_textures.c			\
+			  	parsing/check_args.c			\
+				parsing/parse_data.c			\
+				parsing/get_file_data.c			\
+				parsing/create_game_map.c		\
+				parsing/check_textures.c		\
+				parsing/check_map.c 			\
+				parsing/check_map_borders.c		\
+				parsing/fill_color_textures.c	\
+				parsing/parsing_utils.c			\
+			  	movement/input_handler.c		\
+				movement/player_dir.c			\
+				movement/player_pos.c			\
+				movement/player_move.c			\
+				movement/player_rotate.c		\
+				render/raycasting_utils.c		\
+				render/raycasting.c				\
+				render/render.c					\
+				render/texture.c				\
+				render/image_utils.c			\
+				render/minimap_render.c			\
+				render/minimap_image.c			\
+			  	exit/exit.c 					\
+				exit/free_data.c				\
 				debug/debug.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 

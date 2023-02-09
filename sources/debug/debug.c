@@ -54,7 +54,7 @@ void	debug_display_player(t_data *data)
 	printf(YELLOW "\n---- PLAYER\n" RESET);
 	printf("Player pos: ");
 	printf("x = %f, y = %f\n", data->player.pos_x, data->player.pos_y);
-	printf("Player direction: %c ", data->player.direction);
+	printf("Player direction: %c ", data->player.dir);
 	printf("(x = %f, y = %f)\n", data->player.dir_x, data->player.dir_y);
 }
 

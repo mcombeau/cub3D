@@ -57,6 +57,8 @@
 # define ERR_DIRECTION "At least one direction is missing or the input is wrong"
 # define ERR_FLOOR_CEILING "The floor or ceiling info is wrong or missing."
 # define ERR_INVALID_MAP "Map description is either wrong or incomplete."
+# define ERR_INV_LETTER "There is an invalid letter in the map."
+# define ERR_NUM_PLAYER "There is more than one player in the map"
 
 enum e_output
 {
@@ -161,7 +163,7 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	char	direction;
+	char	dir;
 	double	pos_x;
 	double	pos_y;
 	double	dir_x;
@@ -265,8 +267,6 @@ void	render_minimap_image(t_data *data, t_minimap *minimap);
 
 /*  render/raycasting_utils.c  */
 double	degrees_to_rad_converter(float degree);
-double	calculate_distance(double deltaX, double deltaY);
-void	draw_line(void *mlx, void *window, int beginX, int beginY, int endX, int endY, int color);
 
 /* render/raycasting.c */
 int		raycasting(t_player *player, t_data *data);

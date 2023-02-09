@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/09 22:18:24 by alexa             #+#    #+#             */
+/*   Updated: 2023/02/09 22:18:28 by alexa            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static int	check_map_elements(t_data *data, char **map_tab)
@@ -6,7 +18,7 @@ static int	check_map_elements(t_data *data, char **map_tab)
 	int	j;
 
 	i = 0;
-	data->player.direction = '0';
+	data->player.dir = '0';
 	while (map_tab[i] != NULL)
 	{
 		j = 0;
@@ -17,11 +29,11 @@ static int	check_map_elements(t_data *data, char **map_tab)
 			|| data->map[i][j] == '\v' || data->map[i][j] == '\f')
 				j++;
 			if (!(ft_strchr("10NSEW", map_tab[i][j])))
-				return (print_error("There is an invalid letter in the map"));
-			if (ft_strchr("NSEW", map_tab[i][j]) && data->player.direction != '0')
-				return (print_error("There is more than one player in the map"));
-			if (ft_strchr("NSEW", map_tab[i][j]) && data->player.direction == '0')
-				data->player.direction = map_tab[i][j];
+				return (print_error(ERR_INV_LETTER));
+			if (ft_strchr("NSEW", map_tab[i][j]) && data->player.dir != '0')
+				return (print_error(ERR_NUM_PLAYER));
+			if (ft_strchr("NSEW", map_tab[i][j]) && data->player.dir == '0')
+				data->player.dir = map_tab[i][j];
 			j++;
 		}
 		i++;
@@ -51,7 +63,7 @@ static int	check_player_position(t_data *data, char **map_tab)
 	int	i;
 	int	j;
 
-	if (data->player.direction == '0')
+	if (data->player.dir == '0')
 		return (print_error("The map should have a player_direction"));
 	i = 0;
 	while (map_tab[i])
