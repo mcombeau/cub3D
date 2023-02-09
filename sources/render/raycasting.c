@@ -98,7 +98,7 @@ static void	calculate_line_height(t_ray *ray, t_data *data, t_player *player)
 	if (ray->side == 0)
 	{
 		ray->wall_x = player->pos_y + ray->wall_dist * ray->dir_y;
-		if (ray->dir_x > 0)
+		if (ray->dir_x < 0)
 			data->texinfo.index = WEST;
 		else
 			data->texinfo.index = EAST;
