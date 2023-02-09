@@ -6,13 +6,13 @@
 /*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:31:34 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/09 11:31:35 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/09 13:34:06 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	rotate_left_right(t_data *data)
+static int	rotate_left_right(t_data *data)
 {
 	t_player	*p;
 	double		tmp_x;
@@ -27,4 +27,13 @@ int	rotate_left_right(t_data *data)
 	p->plane_x = p->plane_x * cos(rotspeed) - p->plane_y * sin(rotspeed);
 	p->plane_y = tmp_x * sin(rotspeed) + p->plane_y * cos(rotspeed);
 	return (1);
+}
+
+int	rotate_player(t_data *data)
+{
+	int	moved;
+
+	moved = 0;
+	moved += rotate_left_right(data);
+	return (moved);
 }

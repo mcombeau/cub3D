@@ -275,17 +275,18 @@ int		raycasting(t_player *player, t_data *data);
 int		key_event_handler(int keycode, t_data *data);
 int		move_player(t_data *data);
 
-/* movement/player.c */
+/* movement/player_dir.c */
 void	init_player_direction(t_data *data);
 
+/* movement/player_pos.c */
+int		validate_move(t_data *data, double new_x, double new_y);
+bool	is_valid_pos(t_data *data, double x, double y);
+
 /* movement/player_move.c */
-int		move_player_forward(t_data *data);
-int		move_player_backward(t_data *data);
-int		move_player_left(t_data *data);
-int		move_player_right(t_data *data);
+int		move_player(t_data *data);
 
 /* movement/player_rotate.c */
-int	rotate_left_right(t_data *data);
+int		rotate_player(t_data *data);
 
 /* exit/exit.c */
 void	clean_exit(t_data *data, int code);

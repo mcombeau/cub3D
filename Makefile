@@ -37,7 +37,8 @@ SRC			= 	main.c 						\
 				parsing/check_map_borders.c	\
 				parsing/parsing_utils.c		\
 			  	movement/input_handler.c	\
-				movement/player.c			\
+				movement/player_dir.c		\
+				movement/player_pos.c		\
 				movement/player_move.c		\
 				movement/player_rotate.c	\
 				render/raycasting_utils.c	\

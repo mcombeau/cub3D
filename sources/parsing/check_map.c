@@ -61,8 +61,8 @@ static int	check_player_position(t_data *data, char **map_tab)
 		{
 			if (ft_strchr("NSEW", map_tab[i][j]))
 			{
-				data->player.pos_x = (double)j;
-				data->player.pos_y = (double)i;
+				data->player.pos_x = (double)j + 0.5;
+				data->player.pos_y = (double)i + 0.5;
 				map_tab[i][j] = '0';
 			}
 			j++;
