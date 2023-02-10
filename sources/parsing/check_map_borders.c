@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	check_top_or_bottom(char **map_tab, int i, int j)
+static int	check_top_or_bottom(char **map_tab, int i, int j)
 {
 	while (map_tab[i][j] == ' ' || map_tab[i][j] == '\t'
 	|| map_tab[i][j] == '\r' || map_tab[i][j] == '\v'

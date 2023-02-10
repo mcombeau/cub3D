@@ -42,7 +42,7 @@ void	init_ray(t_ray *ray)
 	ray->draw_end = 0;
 }
 
-void	init_mapinfo(t_mapinfo *mapinfo)
+static void	init_mapinfo(t_mapinfo *mapinfo)
 {
 	mapinfo->fd = 0;
 	mapinfo->line_count = 0;
@@ -53,7 +53,7 @@ void	init_mapinfo(t_mapinfo *mapinfo)
 	mapinfo->index_end_of_map = 0;
 }
 
-void	init_player(t_player *player)
+static void	init_player(t_player *player)
 {
 	player->dir = '\0';
 	player->pos_x = 0.0;

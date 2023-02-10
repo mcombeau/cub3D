@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	count_map_lines(t_data *data, char **file, int i)
+static int	count_map_lines(t_data *data, char **file, int i)
 {
 	int	index_value;
 	int	j;
@@ -32,7 +32,7 @@ int	count_map_lines(t_data *data, char **file, int i)
 	return (i - index_value);
 }
 
-int	fill_map_tab(t_mapinfo *mapinfo, char **map_tab, int index)
+static int	fill_map_tab(t_mapinfo *mapinfo, char **map_tab, int index)
 {
 	int		i;
 	int		j;
@@ -59,7 +59,7 @@ int	fill_map_tab(t_mapinfo *mapinfo, char **map_tab, int index)
 	return (SUCCESS);
 }
 
-int	get_map_info(t_data *data, char **file, int i)
+static int	get_map_info(t_data *data, char **file, int i)
 {
 	data->mapinfo.height = count_map_lines(data, file, i);
 	data->map = malloc(sizeof(char *) * (data->mapinfo.height + 1));
@@ -70,7 +70,7 @@ int	get_map_info(t_data *data, char **file, int i)
 	return (SUCCESS);
 }
 
-void	change_space_into_wall(t_data *data)
+static void	change_space_into_wall(t_data *data)
 {
 	int	i;
 	int	j;

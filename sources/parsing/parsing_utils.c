@@ -45,22 +45,3 @@ size_t	find_biggest_len(t_mapinfo *map, int i)
 	}
 	return (biggest_len);
 }
-
-int	skip_walls(char **map_tab)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map_tab[i])
-	{
-		j = 0;
-		while (map_tab[i][j] && (is_a_white_space(map_tab[i][j]) == SUCCESS
-			|| map_tab[i][j] == '1'))
-			j++;
-		if (map_tab[i][j] == '0')
-			break ;
-		i++;
-	}
-	return (i);
-}

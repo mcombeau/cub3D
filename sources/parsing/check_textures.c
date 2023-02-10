@@ -57,7 +57,7 @@ static int	check_valid_path(char *path)
 	return (SUCCESS);
 }
 
-unsigned long	convert_rgb_to_hex(int *rgb_tab)
+static unsigned long	convert_rgb_to_hex(int *rgb_tab)
 {
 	unsigned long	result;
 	int				r;

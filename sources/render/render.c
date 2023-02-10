@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	set_frame_image_pixel(t_data *data, t_img *image, int x, int y)
+static void	set_frame_image_pixel(t_data *data, t_img *image, int x, int y)
 {
 	if (data->texture_pixels[y][x] > 0)
 		set_image_pixel(image, x, y, data->texture_pixels[y][x]);
@@ -22,7 +22,7 @@ void	set_frame_image_pixel(t_data *data, t_img *image, int x, int y)
 		set_image_pixel(image, x, y, data->texinfo.hex_floor);
 }
 
-void	render_frame(t_data *data)
+static void	render_frame(t_data *data)
 {
 	t_img	image;
 	int		x;
@@ -45,7 +45,7 @@ void	render_frame(t_data *data)
 	mlx_destroy_image(data->mlx, image.img);
 }
 
-void	render_raycast(t_data *data)
+static void	render_raycast(t_data *data)
 {
 	init_texture_pixels(data);
 	init_ray(&data->ray);

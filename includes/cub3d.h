@@ -6,7 +6,7 @@
 /*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:47:42 by alexa             #+#    #+#             */
-/*   Updated: 2023/02/10 14:06:56 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:26:30 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,12 @@
  --------------------------------------------------------------------------- */
 
 # ifndef DEBUG_MSG
-#  define DEBUG_MSG 1
+#  define DEBUG_MSG 0
 # endif
 
 # ifndef MMAP_DEBUG_MSG
 #  define MMAP_DEBUG_MSG 0
 # endif
-
-# define PI 3.1415926535 
 
 # define WIN_WIDTH 640
 # define WIN_HEIGHT 480
@@ -51,9 +49,9 @@
 # endif
 
 # define MOVESPEED 0.025
-# define ROTSPEED 0.02
+# define ROTSPEED 0.03
 
-# define DIST_EDGE_MOUSE_WRAP 10
+# define DIST_EDGE_MOUSE_WRAP 20
 
 /* MINIMAP MACROS */
 # define MMAP_PIXEL_SIZE 128
@@ -89,14 +87,6 @@ enum e_texture_index
 	SOUTH = 1,
 	EAST = 2,
 	WEST = 3
-};
-
-enum e_movement_dir
-{
-	FORWARD = 0,
-	BACKWARD = 1,
-	LEFT = 2,
-	RIGHT = 3
 };
 
 typedef unsigned long	t_ulong;
@@ -224,11 +214,6 @@ void	init_texture_img(t_data *data, t_img *image, char *path);
 void	init_textures(t_data *data);
 void	init_texinfo(t_texinfo *textures);
 
-/* exit.c */
-void	clean_exit(t_data *data, int code);
-int		msg(char *format, char *detail, int errno);
-int		quit_cub3d(t_data *data);
-
 /* parsing/check_args.c */
 int		check_args(char *arg);
 
@@ -237,31 +222,33 @@ void	parse_data(char *path, t_data *data);
 
 /* parsing/get_file_data.c */
 int		get_file_data(t_data *data, char **map);
+
+/* parsing/fill_color_textures.c */
 int		fill_color_textures(t_texinfo *textures, char *line, int j);
 
 /* parsing/create_game_map.c */
 int		create_map(t_data *data, char **map, int i);
 
 /* parsing/check_textures.c */
-t_ulong	convert_rgb_to_hex(int *rgb_tab);
 int		check_textures_validity(t_texinfo *textures);
 
-/* parsing/check_gap.c */
+/* parsing/check_map.c */
 int		check_map_validity(t_data *data, char **map_tab);
 
 /* parsing/check_map_borders.c */
-int		check_top_or_bottom(char **map_tab, int i, int j);
 int		check_map_sides(t_mapinfo *map, char **map_tab);
 
 /* parsing/parsing_utils.c */
 int		is_a_white_space(char c);
 int		print_error(char *str);
 size_t	find_biggest_len(t_mapinfo *map, int i);
-int		skip_walls(char **map_tab);
 
 /* render/render.c */
 int		render(t_data *data);
 void	render_images(t_data *data);
+
+/* render/raycasting.c */
+int		raycasting(t_player *player, t_data *data);
 
 /* render/texture.c */
 void	init_texture_pixels(t_data *data);
@@ -276,12 +263,6 @@ void	render_minimap(t_data *data);
 /* render/minimap_image.c */
 void	render_minimap_image(t_data *data, t_minimap *minimap);
 
-/*  render/raycasting_utils.c  */
-double	degrees_to_rad_converter(float degree);
-
-/* render/raycasting.c */
-int		raycasting(t_player *player, t_data *data);
-
 /* movement/input_handler.c */
 int		key_press_handler(int key, t_data *data);
 int		key_release_handler(int key, t_data *data);
@@ -292,7 +273,6 @@ void	init_player_direction(t_data *data);
 
 /* movement/player_pos.c */
 int		validate_move(t_data *data, double new_x, double new_y);
-bool	is_valid_pos(t_data *data, double x, double y);
 
 /* movement/player_move.c */
 int		move_player(t_data *data);
@@ -305,11 +285,16 @@ void	clean_exit(t_data *data, int code);
 int		msg(char *format, char *detail, int errno);
 int		quit_cub3d(t_data *data);
 
+/* exit/exit.c */
+void	clean_exit(t_data *data, int code);
+int		msg(char *format, char *detail, int errno);
+int		quit_cub3d(t_data *data);
+
 /* exit/free_data.c */
 void	free_tab(void **tab);
 int		free_data(t_data *data);
 
-/* debug.c */
+/* debug/debug.c */
 void	debug_display_data(t_data *data);
 void	debug_display_minimap(t_minimap *minimap);
 void	debug_display_player(t_data *data);

@@ -57,7 +57,7 @@ static int	fill_direction_textures(t_texinfo *textures, char *line, int j)
 	return (SUCCESS);
 }
 
-int	ignore_whitespaces_and_get_info(t_data *data, char **map, int i, int j)
+static int	ignore_whitespaces_get_info(t_data *data, char **map, int i, int j)
 {
 	while (map[i][j] == ' ' || map[i][j] == '\t' || map[i][j] == '\n')
 		j++;
@@ -98,7 +98,7 @@ int	get_file_data(t_data *data, char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			ret = ignore_whitespaces_and_get_info(data, map, i, j);
+			ret = ignore_whitespaces_get_info(data, map, i, j);
 			if (ret == BREAK)
 				break ;
 			else if (ret == FAILURE)

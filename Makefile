@@ -5,7 +5,7 @@ NAME	= cub3D
 
 # Compiler
 CC		= gcc
-CFLAGS	= -Werror -Wextra -Wall -MMD -g3 #-fsanitize=address
+CFLAGS	= -Werror -Wextra -Wall -MMD -g3 -fsanitize=address
 
 # Minilibx
 MLX_PATH	= minilibx-linux/
@@ -42,7 +42,6 @@ SRC			= 	main.c 							\
 				movement/player_pos.c			\
 				movement/player_move.c			\
 				movement/player_rotate.c		\
-				render/raycasting_utils.c		\
 				render/raycasting.c				\
 				render/render.c					\
 				render/texture.c				\

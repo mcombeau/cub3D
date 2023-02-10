@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-bool	is_valid_pos(t_data *data, double x, double y)
+static bool	is_valid_pos(t_data *data, double x, double y)
 {
 	if (data->map[(int)y][(int)x] == '0')
 		return (true);
