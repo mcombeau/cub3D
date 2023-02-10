@@ -42,6 +42,18 @@ For example:
 
 - `./cub3d maps/bad/wrong_filetype.buc` should print an error and abort.
 
+## Controls
+
+Controls for movement and rotation are:
+
+- `W`: move forward
+- `S`: move backward
+- `A`: strafe left
+- `D`: strafe right
+- `left arrow`: rotate left
+- `right arrow`: rotate right
+- `mouse`: rotate by moving the mouse
+
 ## Useful Resources
 
 Useful resources for this project are:
