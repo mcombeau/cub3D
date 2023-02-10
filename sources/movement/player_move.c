@@ -6,7 +6,7 @@
 /*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:31:24 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/09 16:42:32 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/10 12:34:32 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ int	move_player(t_data *data)
 	if (data->player.move_x == 1)
 		moved += move_player_right(data);
 	if (data->player.rotate != 0)
-		moved += rotate_player(data);
+		moved += rotate_player(data, data->player.rotate);
 	return (moved);
 }

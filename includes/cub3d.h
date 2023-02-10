@@ -6,7 +6,7 @@
 /*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:47:42 by alexa             #+#    #+#             */
-/*   Updated: 2023/02/09 22:47:44 by alexa            ###   ########.fr       */
+/*   Updated: 2023/02/10 12:41:15 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+	int		has_moved;
 	int		move_x;
 	int		move_y;
 	int		rotate;
@@ -225,10 +226,6 @@ void	init_texinfo(t_texinfo *textures);
 void	clean_exit(t_data *data, int code);
 int		msg(char *format, char *detail, int errno);
 int		quit_cub3d(t_data *data);
-
-/* input/input_handler.c */
-int		key_press_handler(int key, t_data *data);
-int		key_release_handler(int key, t_data *data);
 
 /* parsing/check_args.c */
 int		check_args(char *arg);
@@ -284,8 +281,9 @@ double	degrees_to_rad_converter(float degree);
 int		raycasting(t_player *player, t_data *data);
 
 /* movement/input_handler.c */
-int		key_event_handler(int keycode, t_data *data);
-int		move_player(t_data *data);
+int		key_press_handler(int key, t_data *data);
+int		key_release_handler(int key, t_data *data);
+int		mouse_motion_handler(int x, int y, t_data *data);
 
 /* movement/player_dir.c */
 void	init_player_direction(t_data *data);
@@ -298,7 +296,7 @@ bool	is_valid_pos(t_data *data, double x, double y);
 int		move_player(t_data *data);
 
 /* movement/player_rotate.c */
-int		rotate_player(t_data *data);
+int		rotate_player(t_data *data, double rotdir);
 
 /* exit/exit.c */
 void	clean_exit(t_data *data, int code);

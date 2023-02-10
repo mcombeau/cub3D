@@ -6,7 +6,7 @@
 /*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:44:18 by alexa             #+#    #+#             */
-/*   Updated: 2023/02/09 22:44:20 by alexa            ###   ########.fr       */
+/*   Updated: 2023/02/10 12:45:45 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ static void	listen_for_input(t_data *data)
 	mlx_hook(data->win, ClientMessage, NoEventMask, quit_cub3d, data);
 	mlx_hook(data->win, KeyPress, KeyPressMask, key_press_handler, data);
 	mlx_hook(data->win, KeyRelease, KeyReleaseMask, key_release_handler, data);
+	/* mlx_hook(data->win, MotionNotify, PointerMotionMask, mouse_motion_handler, data); */
+	/* mlx_hook(data->win, ButtonPress, KeyPressMask, key_press_handler, data); */
+	/* mlx_hook(data->win, ButtonRelease, KeyReleaseMask, key_release_handler, data); */
 }
 
 int	main(int ac, char **av)

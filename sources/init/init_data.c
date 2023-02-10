@@ -6,7 +6,7 @@
 /*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:39:50 by alexa             #+#    #+#             */
-/*   Updated: 2023/02/09 22:39:55 by alexa            ###   ########.fr       */
+/*   Updated: 2023/02/10 12:44:04 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	init_player(t_player *player)
 	player->dir_y = 0.0;
 	player->plane_x = 0.0;
 	player->plane_y = 0.0;
+	player->has_moved = 0;
 	player->move_x = 0;
 	player->move_y = 0;
 	player->rotate = 0;
