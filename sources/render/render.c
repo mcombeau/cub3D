@@ -6,7 +6,7 @@
 /*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:30:04 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/10 12:45:07 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:17:46 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	render_images(t_data *data)
 
 int	render(t_data *data)
 {
-	data->player.has_moved = move_player(data);
+	data->player.has_moved += move_player(data);
 	if (data->player.has_moved == 0)
 		return (0);
 	render_images(data);

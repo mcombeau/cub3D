@@ -6,7 +6,7 @@
 /*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:47:42 by alexa             #+#    #+#             */
-/*   Updated: 2023/02/10 12:41:15 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:06:56 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@
 
 # define MOVESPEED 0.025
 # define ROTSPEED 0.02
+
+# define DIST_EDGE_MOUSE_WRAP 10
 
 /* MINIMAP MACROS */
 # define MMAP_PIXEL_SIZE 128

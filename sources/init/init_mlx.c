@@ -6,7 +6,7 @@
 /*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:33:53 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/09 11:33:54 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/10 13:55:56 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ void	init_mlx(t_data *data)
 	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
 	if (!data->win)
 		clean_exit(data, msg("cub3D: %s\n", "mlx: error creating window.", 1));
+	mlx_mouse_move(data->mlx, data->win, data->win_width / 2,
+		data->win_height / 2);
 	return ;
 }

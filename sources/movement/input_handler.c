@@ -6,7 +6,7 @@
 /*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:31:03 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/10 12:43:38 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:15:14 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,31 +50,31 @@ int	key_release_handler(int key, t_data *data)
 	return (0);
 }
 
+static void	wrap_mouse_position(t_data *data, int x, int y)
+{
+	if (x > data->win_width - DIST_EDGE_MOUSE_WRAP)
+	{
+		x = DIST_EDGE_MOUSE_WRAP;
+		mlx_mouse_move(data->mlx, data->win, x, y);
+	}
+	if (x < DIST_EDGE_MOUSE_WRAP)
+	{
+		x = data->win_width - DIST_EDGE_MOUSE_WRAP;
+		mlx_mouse_move(data->mlx, data->win, x, y);
+	}
+}
+
 int	mouse_motion_handler(int x, int y, t_data *data)
 {
-	static int	old_x = 0;
+	static int	old_x = WIN_WIDTH / 2;
 
-	printf("old x = %d, x = %d\n", old_x, x);
-	if (old_x == 0)
-		old_x = x;
+	wrap_mouse_position(data, x, y);
 	if (x == old_x)
-	{
-		old_x = x;
 		return (0);
-	}
-	else if (x < old_x && x < data->win_width / 2)
-	{
-		/* data->player.rotate -= 1; */
+	else if (x < old_x)
 		data->player.has_moved += rotate_player(data, -1);
-		old_x = x;
-	}
-	else if (x > old_x && x > data->win_width / 2)
-	{
-		/* data->player.rotate += 1; */
+	else if (x > old_x)
 		data->player.has_moved += rotate_player(data, 1);
-		old_x = x;
-	}
 	old_x = x;
-	(void)y;
 	return (0);
 }
