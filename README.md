@@ -10,7 +10,7 @@ Cub3D is a 42 school team project to create a dynamic view inside a 3D maze. Usi
 
 Work in progress.
 
-## Usage
+## Clone
 
 Clone the repository including the MiniLibX submodule:
 
@@ -25,16 +25,28 @@ git clone https://github.com/mcombeau/cub3D.git
 git submodule update --init --recursive
 ```
 
-To compile:
+## Compile and Run
+
+There are two versions of the program, the mandatory part and the bonus part. The bonus part adds wall collision, a minimap, and the ability to rotate the view by moving the mouse.
+
+To compile the mandatory part, `cd` into the cloned directory and:
 
 ```shell
-cd cub3D && make
+make
 ```
+
+To compile the bonus part, `cd` into the cloned directory and:
+
+```shell
+make bonus
+```
+Note: you may need to `make fclean` to switch between the mandatory and bonus compilations (working on a fix for this!).
+
 
 To run the program:
 
 ```shell
-./cub3d <map.cub>
+./cub3d <path/to/map.cub>
 ```
 
 The program takes a map file as an argument. Maps are available in the `maps` directory. There are good maps which the program should run smoothly with, and bad maps which the program should reject.
