@@ -39,6 +39,10 @@
 #  define MMAP_DEBUG_MSG 0
 # endif
 
+# ifndef BONUS
+#  define BONUS 1
+# endif
+
 # define WIN_WIDTH 640
 # define WIN_HEIGHT 480
 
@@ -264,9 +268,7 @@ void	render_minimap(t_data *data);
 void	render_minimap_image(t_data *data, t_minimap *minimap);
 
 /* movement/input_handler.c */
-int		key_press_handler(int key, t_data *data);
-int		key_release_handler(int key, t_data *data);
-int		mouse_motion_handler(int x, int y, t_data *data);
+void	listen_for_input(t_data *data);
 
 /* movement/player_dir.c */
 void	init_player_direction(t_data *data);

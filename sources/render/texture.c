@@ -33,11 +33,30 @@ void	init_texture_pixels(t_data *data)
 	}
 }
 
+static void	get_texture_index(t_data *data, t_ray *ray)
+{
+	if (ray->side == 0)
+	{
+		if (ray->dir_x < 0)
+			data->texinfo.index = WEST;
+		else
+			data->texinfo.index = EAST;
+	}
+	else
+	{
+		if (ray->dir_y > 0)
+			data->texinfo.index = SOUTH;
+		else
+			data->texinfo.index = NORTH;
+	}
+}
+
 void	update_texture_pixels(t_data *data, t_texinfo *tex, t_ray *ray, int x)
 {
 	int			y;
 	int			color;
 
+	get_texture_index(data, ray);
 	tex->x = (int)(ray->wall_x * tex->size);
 	if ((ray->side == 0 && ray->dir_x < 0)
 		|| (ray->side == 1 && ray->dir_y > 0))

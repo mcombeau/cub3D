@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	key_press_handler(int key, t_data *data)
+static int	key_press_handler(int key, t_data *data)
 {
 	if (key == XK_Escape)
 		quit_cub3d(data);
@@ -31,7 +31,7 @@ int	key_press_handler(int key, t_data *data)
 	return (0);
 }
 
-int	key_release_handler(int key, t_data *data)
+static int	key_release_handler(int key, t_data *data)
 {
 	if (key == XK_Escape)
 		quit_cub3d(data);
@@ -64,7 +64,7 @@ static void	wrap_mouse_position(t_data *data, int x, int y)
 	}
 }
 
-int	mouse_motion_handler(int x, int y, t_data *data)
+static int	mouse_motion_handler(int x, int y, t_data *data)
 {
 	static int	old_x = WIN_WIDTH / 2;
 
@@ -77,4 +77,14 @@ int	mouse_motion_handler(int x, int y, t_data *data)
 		data->player.has_moved += rotate_player(data, 1);
 	old_x = x;
 	return (0);
+}
+
+void	listen_for_input(t_data *data)
+{
+	mlx_hook(data->win, ClientMessage, NoEventMask, quit_cub3d, data);
+	mlx_hook(data->win, KeyPress, KeyPressMask, key_press_handler, data);
+	mlx_hook(data->win, KeyRelease, KeyReleaseMask, key_release_handler, data);
+	if (BONUS)
+		mlx_hook(data->win, MotionNotify, PointerMotionMask,
+			mouse_motion_handler, data);
 }

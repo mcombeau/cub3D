@@ -1,11 +1,15 @@
-.PHONY: all re clean fclean
+.PHONY: all bonus clean fclean re
 
 #Program name
-NAME	= cub3D
+NAME	:= cub3D
+
+# Mode
+BONUS = 0
 
 # Compiler
-CC		= gcc
-CFLAGS	= -Werror -Wextra -Wall -MMD -g3 -fsanitize=address
+CC		:= gcc
+CFLAGS	:= -Werror -Wextra -Wall
+CFLAGS	+= -MMD -g3 #-fsanitize=address
 
 # Minilibx
 MLX_PATH	= minilibx-linux/
@@ -61,7 +65,7 @@ OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
 all: $(MLX) $(LIBFT) $(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+	$(CC) $(CFLAGS) -DBONUS=$(BONUS) -c $< -o $@ $(INC)
 
 $(OBJS): $(OBJ_PATH)
 
@@ -85,10 +89,11 @@ $(LIBFT):
 
 $(NAME): $(OBJS)
 	@echo "Compiling cub3d..."
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX) $(LIBFT) $(INC) -lXext -lX11 -lm
+	$(CC) $(CFLAGS) -DBONUS=$(BONUS) -o $(NAME) $(OBJS) $(MLX) $(LIBFT) $(INC)  -lXext -lX11 -lm
 	@echo "cub3d ready."
 
-bonus: all
+bonus:
+	make all BONUS=1
 
 clean:
 	@echo "Removing .o object files..."

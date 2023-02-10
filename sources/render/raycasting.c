@@ -90,17 +90,22 @@ static void	perform_dda(t_data *data, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (data->map[ray->map_y][ray->map_x] > '0')
+		if (ray->map_y < 0.25
+			|| ray->map_x < 0.25
+			|| ray->map_y > data->mapinfo.height - 0.25
+			|| ray->map_x > data->mapinfo.width - 1.25)
+			break ;
+		else if (data->map[ray->map_y][ray->map_x] > '0')
 			hit = 1;
 	}
-	if (ray->side == 0)
-		ray->wall_dist = (ray->sidedist_x - ray->deltadist_x);
-	else
-		ray->wall_dist = (ray->sidedist_y - ray->deltadist_y);
 }
 
 static void	calculate_line_height(t_ray *ray, t_data *data, t_player *player)
 {
+	if (ray->side == 0)
+		ray->wall_dist = (ray->sidedist_x - ray->deltadist_x);
+	else
+		ray->wall_dist = (ray->sidedist_y - ray->deltadist_y);
 	ray->line_height = (int)(data->win_height / ray->wall_dist);
 	ray->draw_start = -(ray->line_height) / 2 + data->win_height / 2;
 	if (ray->draw_start < 0)
@@ -109,21 +114,9 @@ static void	calculate_line_height(t_ray *ray, t_data *data, t_player *player)
 	if (ray->draw_end >= data->win_height)
 		ray->draw_end = data->win_height - 1;
 	if (ray->side == 0)
-	{
 		ray->wall_x = player->pos_y + ray->wall_dist * ray->dir_y;
-		if (ray->dir_x < 0)
-			data->texinfo.index = WEST;
-		else
-			data->texinfo.index = EAST;
-	}
 	else
-	{
 		ray->wall_x = player->pos_x + ray->wall_dist * ray->dir_x;
-		if (ray->dir_y > 0)
-			data->texinfo.index = SOUTH;
-		else
-			data->texinfo.index = NORTH;
-	}
 	ray->wall_x -= floor(ray->wall_x);
 }
 

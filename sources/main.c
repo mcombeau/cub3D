@@ -45,15 +45,6 @@ static int	parse_args(t_data *data, char **av)
 	return (0);
 }
 
-static void	listen_for_input(t_data *data)
-{
-	mlx_hook(data->win, ClientMessage, NoEventMask, quit_cub3d, data);
-	mlx_hook(data->win, KeyPress, KeyPressMask, key_press_handler, data);
-	mlx_hook(data->win, KeyRelease, KeyReleaseMask, key_release_handler, data);
-	mlx_hook(data->win, MotionNotify, PointerMotionMask,
-		mouse_motion_handler, data);
-}
-
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -63,6 +54,7 @@ int	main(int ac, char **av)
 		ft_putendl_fd(ERR_WRONG_NB_ARG, 2);
 		return (1);
 	}
+	printf("BONUS is %d\n", BONUS);
 	init_data(&data);
 	if (parse_args(&data, av) != 0)
 		return (1);
