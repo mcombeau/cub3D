@@ -53,6 +53,7 @@ static int	check_valid_path(char *path)
 		ft_putchar_fd('\n', 2);
 		return (FAILURE);
 	}
+	close(fd);
 	return (SUCCESS);
 }
 
