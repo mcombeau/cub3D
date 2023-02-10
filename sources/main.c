@@ -6,13 +6,29 @@
 /*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:44:18 by alexa             #+#    #+#             */
-/*   Updated: 2023/02/10 14:19:53 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/10 15:28:18 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	parse_args(t_data *data, char **av)
+static void	print_controls(void)
+{
+	printf(CYAN "\n");
+	printf("░█▀▀░█░█░█▀▄░▀▀█░█▀▄░░░█▀▀░█▀█░█▀█░▀█▀░█▀▄░█▀█░█░░░█▀▀\n");
+	printf("░█░░░█░█░█▀▄░░▀▄░█░█░░░█░░░█░█░█░█░░█░░█▀▄░█░█░█░░░▀▀█\n");
+	printf("░▀▀▀░▀▀▀░▀▀░░▀▀░░▀▀░░░░▀▀▀░▀▀▀░▀░▀░░▀░░▀░▀░▀▀▀░▀▀▀░▀▀▀\n");
+	printf(RESET "\n");
+	printf(CYAN "\tW" RESET ": move forward\t");
+	printf(CYAN "\tS" RESET ": move backward\n");
+	printf(CYAN "\tA" RESET ": strafe left\t");
+	printf(CYAN "\tD" RESET ": strafe right\n");
+	printf(CYAN "\t<" RESET ": rotate left\t");
+	printf(CYAN "\t>" RESET ": rotate right\n");
+	printf("\n");
+}
+
+static int	parse_args(t_data *data, char **av)
 {
 	if (check_args(av[1]) == FAILURE)
 		return (print_error(ERR_WRONG_FILE));
@@ -52,6 +68,7 @@ int	main(int ac, char **av)
 		return (1);
 	init_mlx(&data);
 	init_textures(&data);
+	print_controls();
 	render_images(&data);
 	listen_for_input(&data);
 	mlx_loop_hook(data.mlx, render, &data);
