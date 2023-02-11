@@ -44,7 +44,7 @@ static int	fill_map_tab(t_mapinfo *mapinfo, char **map_tab, int index)
 		j = 0;
 		map_tab[i] = malloc(sizeof(char) * (mapinfo->width + 1));
 		if (!map_tab[i])
-			return (FAILURE);
+			return (err_msg(NULL, ERR_MALLOC, FAILURE));
 		while (mapinfo->file[index][j] && mapinfo->file[index][j] != '\n')
 		{
 			map_tab[i][j] = mapinfo->file[index][j];
@@ -64,7 +64,7 @@ static int	get_map_info(t_data *data, char **file, int i)
 	data->mapinfo.height = count_map_lines(data, file, i);
 	data->map = malloc(sizeof(char *) * (data->mapinfo.height + 1));
 	if (!data->map)
-		return (FAILURE);
+		return (err_msg(NULL, ERR_MALLOC, FAILURE));
 	if (fill_map_tab(&data->mapinfo, data->map, i) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);

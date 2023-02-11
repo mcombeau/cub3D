@@ -93,7 +93,10 @@ void	render_minimap(t_data *data)
 			data->mapinfo.height, (int)data->player.pos_y);
 	minimap.map = generate_minimap(data, &minimap);
 	if (!minimap.map)
+	{
+		err_msg(NULL, ERR_MALLOC, 0);
 		return ;
+	}
 	if (MMAP_DEBUG_MSG)
 		debug_display_minimap(&minimap);
 	render_minimap_image(data, &minimap);

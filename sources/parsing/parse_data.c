@@ -45,7 +45,10 @@ static void	fill_tab(int row, int column, int i, t_data *data)
 	{
 		data->mapinfo.file[row] = ft_calloc(ft_strlen(line) + 1, sizeof(char));
 		if (!data->mapinfo.file[row])
+		{
+			err_msg(NULL, ERR_MALLOC, 0);
 			return (free_tab((void **)data->mapinfo.file));
+		}
 		while (line[i] != '\0')
 			data->mapinfo.file[row][column++] = line[i++];
 		data->mapinfo.file[row++][column] = '\0';
@@ -71,7 +74,10 @@ void	parse_data(char *path, t_data *data)
 	data->mapinfo.file = ft_calloc(data->mapinfo.line_count \
 			+ 1, sizeof(char *));
 	if (!(data->mapinfo.file))
+	{
+		err_msg(NULL, ERR_MALLOC, 0);
 		return ;
+	}
 	data->mapinfo.fd = open(path, O_RDONLY);
 	if (data->mapinfo.fd < 0)
 		err_msg(path, strerror(errno), FAILURE);

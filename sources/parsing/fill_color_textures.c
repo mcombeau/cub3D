@@ -64,7 +64,10 @@ static int	*set_rgb_colors(char *line)
 	}
 	rgb = malloc(sizeof(int) * 3);
 	if (!rgb)
+	{
+		err_msg(NULL, ERR_MALLOC, 0);
 		return (0);
+	}
 	return (copy_into_rgb_array(rgb_to_convert, rgb));
 }
 
