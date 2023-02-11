@@ -1,15 +1,11 @@
-.PHONY: all bonus clean fclean re
+.PHONY: all re clean fclean
 
-#Program name
-NAME	:= cub3D
+# Program file name
+NAME	= cub3D
 
-# Mode
-BONUS = 0
-
-# Compiler
-CC		:= gcc
-CFLAGS	:= -Werror -Wextra -Wall
-CFLAGS	+= -MMD -g3 #-fsanitize=address
+# Compiler and compilation flags
+CC		= gcc
+CFLAGS	= -Werror -Wextra -Wall -g3 #-fsanitize=address
 
 # Minilibx
 MLX_PATH	= minilibx-linux/
@@ -21,90 +17,87 @@ LIBFT_PATH	= libft/
 LIBFT_NAME	= libft.a
 LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 
+# Sources
+SRC_PATH = ./sources/
+SRC		= 	main.c \
+			error.c \
+			init/init_data.c \
+			init/init_mlx.c \
+			init/init_textures.c \
+			parsing/check_args.c \
+			parsing/parse_data.c \
+			parsing/get_file_data.c \
+			parsing/create_game_map.c \
+			parsing/check_textures.c \
+			parsing/check_map.c \
+			parsing/check_map_borders.c \
+			parsing/fill_color_textures.c \
+			parsing/parsing_utils.c \
+			movement/input_handler.c \
+			movement/player_dir.c \
+			movement/player_pos.c \
+			movement/player_move.c \
+			movement/player_rotate.c \
+			render/raycasting.c \
+			render/render.c \
+			render/texture.c \
+			render/image_utils.c \
+			render/minimap_render.c \
+			render/minimap_image.c \
+			exit/exit.c \
+			exit/free_data.c \
+			debug/debug.c
+SRCS	= $(addprefix $(SRC_PATH), $(SRC))
+
+# Objects
+OBJ_PATH	= ./objects/
+OBJ			= $(SRC:.c=.o)
+OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
+
 # Includes
 INC			=	-I ./includes/\
 				-I ./libft/\
 				-I ./minilibx-linux/
 
-# Sources
-SRC_PATH	=	sources/
-SRC			= 	main.c 							\
-				error.c							\
-				init/init_data.c				\
-				init/init_mlx.c					\
-				init/init_textures.c			\
-			  	parsing/check_args.c			\
-				parsing/parse_data.c			\
-				parsing/get_file_data.c			\
-				parsing/create_game_map.c		\
-				parsing/check_textures.c		\
-				parsing/check_map.c 			\
-				parsing/check_map_borders.c		\
-				parsing/fill_color_textures.c	\
-				parsing/parsing_utils.c			\
-			  	movement/input_handler.c		\
-				movement/player_dir.c			\
-				movement/player_pos.c			\
-				movement/player_move.c			\
-				movement/player_rotate.c		\
-				render/raycasting.c				\
-				render/render.c					\
-				render/texture.c				\
-				render/image_utils.c			\
-				render/minimap_render.c			\
-				render/minimap_image.c			\
-			  	exit/exit.c 					\
-				exit/free_data.c				\
-				debug/debug.c
-SRCS		= $(addprefix $(SRC_PATH), $(SRC))
+# Main rule
+all: $(OBJ_PATH) $(MLX) $(LIBFT) $(NAME)
 
-# Objects
-OBJ_PATH	= objects/
-OBJ			= $(SRC:.c=.o)
-OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
-
-all: $(MLX) $(LIBFT) $(NAME)
-
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	$(CC) $(CFLAGS) -DBONUS=$(BONUS) -c $< -o $@ $(INC)
-
-$(OBJS): $(OBJ_PATH)
-
+# Objects directory rule
 $(OBJ_PATH):
-	@mkdir $(OBJ_PATH)
-	@mkdir $(OBJ_PATH)/init
-	@mkdir $(OBJ_PATH)/input
-	@mkdir $(OBJ_PATH)/parsing
-	@mkdir $(OBJ_PATH)/render
-	@mkdir $(OBJ_PATH)/movement
-	@mkdir $(OBJ_PATH)/debug
-	@mkdir $(OBJ_PATH)/exit
+	mkdir -p $(OBJ_PATH)
+	mkdir -p $(OBJ_PATH)/init
+	mkdir -p $(OBJ_PATH)/parsing
+	mkdir -p $(OBJ_PATH)/movement
+	mkdir -p $(OBJ_PATH)/render
+	mkdir -p $(OBJ_PATH)/debug
+	mkdir -p $(OBJ_PATH)/exit
 
-$(MLX):
-	@echo "Making MiniLibX..."
-	@make -sC $(MLX_PATH)
+# Objects rule
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
-$(LIBFT):
-	@echo "Making libft..."
-	@make -sC $(LIBFT_PATH)
-
+# Project file rule
 $(NAME): $(OBJS)
-	@echo "Compiling cub3d..."
-	$(CC) $(CFLAGS) -DBONUS=$(BONUS) -o $(NAME) $(OBJS) $(MLX) $(LIBFT) $(INC)  -lXext -lX11 -lm
-	@echo "cub3d ready."
+	$(CC) $(CFLAGS) $(OBJS) -o $@ $(INC) $(LIBFT) $(MLX) -lXext -lX11 -lm
 
-bonus:
-	make all BONUS=1
+# Libft rule
+$(LIBFT):
+	make -sC $(LIBFT_PATH)
 
+# MLX rule
+$(MLX):
+	make -sC $(MLX_PATH)
+
+# Clean up build files rule
 clean:
-	@echo "Removing .o object files..."
-	@rm -rf $(OBJ_PATH)
-	@make clean -C $(MLX_PATH)
-	@make clean -C $(LIBFT_PATH)
+	rm -rf $(OBJ_PATH)
+	make -C $(LIBFT_PATH) clean
+	make -C $(MLX_PATH) clean
 
+# Remove program executable
 fclean: clean
-	@echo "Removing cub3d..."
-	@rm -f $(NAME)
-	@rm -f $(LIBFT_PATH)$(LIBFT_NAME)
+	rm -f $(NAME)
+	make -C $(LIBFT_PATH) fclean
 
+# Clean + remove executable
 re: fclean all
