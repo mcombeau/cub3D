@@ -6,7 +6,7 @@
 /*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:47:42 by alexa             #+#    #+#             */
-/*   Updated: 2023/02/10 14:26:30 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/11 11:43:57 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 # include "colors.h"
 # include "libft.h"
 # include "mlx.h"
+# include <errno.h>
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <unistd.h>
@@ -66,15 +68,32 @@
 # define MMAP_COLOR_SPACE 0x404040
 
 // ERROR MESSAGES
-# define ERR_WRONG_FILE "Is not an existing .cub file\n"
-# define ERR_MISSING_INFO "The .cub file is missing some info.\n"
-# define ERR_INVALID_INFO "The infos of this map are invalid.\n"
-# define ERR_WRONG_NB_ARG "Correct usage is ./cub3d <map.cub>\n"
-# define ERR_DIRECTION "At least one direction is missing or the input is wrong"
-# define ERR_FLOOR_CEILING "The floor or ceiling info is wrong or missing."
-# define ERR_INVALID_MAP "Map description is either wrong or incomplete."
-# define ERR_INV_LETTER "There is an invalid letter in the map."
-# define ERR_NUM_PLAYER "There is more than one player in the map"
+# define ERR_USAGE "usage: ./cub3d <path/to/map.cub>"
+
+# define ERR_FILE_NOT_CUB "Not a .cub file"
+# define ERR_FILE_NOT_XPM "Not an .xpm file"
+# define ERR_FILE_IS_DIR "Is a directory"
+# define ERR_INVALID_INFO "The infos of this map are invalid"
+# define ERR_FLOOR_CEILING "Invalid floor/ceiling RGB color(s)"
+# define ERR_COLOR_FLOOR "Invalid floor RGB color"
+# define ERR_COLOR_CEILING "Invalid ceiling RGB color"
+# define ERR_INVALID_MAP "Map description is either wrong or incomplete"
+# define ERR_INV_LETTER "Invalid character in map"
+# define ERR_NUM_PLAYER "Map has more than one player"
+# define ERR_TEX_RGB_VAL "Invalid RGB value (min: 0, max: 255)"
+# define ERR_TEX_MISSING "Missing texture(s)"
+# define ERR_TEX_INVALID "Invalid texture(s)"
+# define ERR_COLOR_MISSING "Missing color(s)"
+# define ERR_MAP_MISSING "Missing map"
+# define ERR_MAP_TOO_SMALL "Map is not at least 3 lines high"
+# define ERR_MAP_NO_WALLS "Map is not surrounded by walls"
+# define ERR_MAP_LAST "Map is not the last element in file"
+# define ERR_PLAYER_POS "Invalid player position"
+# define ERR_PLAYER_DIR "Map has no player position (expected N, S, E or W)"
+# define ERR_MALLOC "Could not allocate memory"
+# define ERR_MLX_START "Could not start mlx"
+# define ERR_MLX_WIN "Could not create mlx window"
+# define ERR_MLX_IMG "Could not create mlx image"
 
 enum e_output
 {
@@ -219,7 +238,7 @@ void	init_textures(t_data *data);
 void	init_texinfo(t_texinfo *textures);
 
 /* parsing/check_args.c */
-int		check_args(char *arg);
+int		check_file(char *arg, bool cub);
 
 /* parsing/parse_data.c */
 void	parse_data(char *path, t_data *data);
@@ -244,7 +263,6 @@ int		check_map_sides(t_mapinfo *map, char **map_tab);
 
 /* parsing/parsing_utils.c */
 int		is_a_white_space(char c);
-int		print_error(char *str);
 size_t	find_biggest_len(t_mapinfo *map, int i);
 
 /* render/render.c */
@@ -284,17 +302,15 @@ int		rotate_player(t_data *data, double rotdir);
 
 /* exit/exit.c */
 void	clean_exit(t_data *data, int code);
-int		msg(char *format, char *detail, int errno);
-int		quit_cub3d(t_data *data);
-
-/* exit/exit.c */
-void	clean_exit(t_data *data, int code);
-int		msg(char *format, char *detail, int errno);
 int		quit_cub3d(t_data *data);
 
 /* exit/free_data.c */
 void	free_tab(void **tab);
 int		free_data(t_data *data);
+
+/* error.c */
+int		err_msg(char *detail, char *str, int code);
+int		err_msg_val(int detail, char *str, int code);
 
 /* debug/debug.c */
 void	debug_display_data(t_data *data);

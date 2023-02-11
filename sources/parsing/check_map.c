@@ -29,9 +29,9 @@ static int	check_map_elements(t_data *data, char **map_tab)
 			|| data->map[i][j] == '\v' || data->map[i][j] == '\f')
 				j++;
 			if (!(ft_strchr("10NSEW", map_tab[i][j])))
-				return (print_error(ERR_INV_LETTER));
+				return (err_msg(data->mapinfo.path, ERR_INV_LETTER, FAILURE));
 			if (ft_strchr("NSEW", map_tab[i][j]) && data->player.dir != '0')
-				return (print_error(ERR_NUM_PLAYER));
+				return (err_msg(data->mapinfo.path, ERR_NUM_PLAYER, FAILURE));
 			if (ft_strchr("NSEW", map_tab[i][j]) && data->player.dir == '0')
 				data->player.dir = map_tab[i][j];
 			j++;
@@ -64,7 +64,7 @@ static int	check_player_position(t_data *data, char **map_tab)
 	int	j;
 
 	if (data->player.dir == '0')
-		return (print_error("The map should have a player_direction"));
+		return (err_msg(data->mapinfo.path, ERR_PLAYER_DIR, FAILURE));
 	i = 0;
 	while (map_tab[i])
 	{
@@ -82,7 +82,7 @@ static int	check_player_position(t_data *data, char **map_tab)
 		i++;
 	}
 	if (check_position_is_valid(data, map_tab) == FAILURE)
-		return (print_error("Player position is invalid"));
+		return (err_msg(data->mapinfo.path, ERR_PLAYER_POS, FAILURE));
 	return (SUCCESS);
 }
 
@@ -110,15 +110,17 @@ static int	check_map_is_at_the_end(t_mapinfo *map)
 
 int	check_map_validity(t_data *data, char **map_tab)
 {
+	if (!data->map)
+		return (err_msg(NULL, ERR_MAP_MISSING, FAILURE));
+	if (check_map_sides(&data->mapinfo, map_tab) == FAILURE)
+		return (err_msg(data->mapinfo.path, ERR_MAP_NO_WALLS, FAILURE));
 	if (data->mapinfo.height < 3)
-		return (print_error("The map should be at least 3 lines long."));
+		return (err_msg(data->mapinfo.path, ERR_MAP_TOO_SMALL, FAILURE));
 	if (check_map_elements(data, map_tab) == FAILURE)
 		return (FAILURE);
-	if (check_map_sides(&data->mapinfo, map_tab) == FAILURE)
-		return (print_error("The map must be surrounded by walls"));
 	if (check_player_position(data, map_tab) == FAILURE)
 		return (FAILURE);
 	if (check_map_is_at_the_end(&data->mapinfo) == FAILURE)
-		return (print_error("The map description is not the last element"));
+		return (err_msg(data->mapinfo.path, ERR_MAP_LAST, FAILURE));
 	return (SUCCESS);
 }

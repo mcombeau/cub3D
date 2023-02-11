@@ -6,7 +6,7 @@
 /*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:31:47 by alexa             #+#    #+#             */
-/*   Updated: 2023/02/09 22:31:49 by alexa            ###   ########.fr       */
+/*   Updated: 2023/02/11 11:27:46 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,6 @@ int	is_a_white_space(char c)
 		return (FAILURE);
 	else
 		return (SUCCESS);
-}
-
-int	print_error(char *str)
-{
-	ft_putstr_fd("Error\n", 2);
-	if (str)
-	{
-		ft_putstr_fd(str, 2);
-		ft_putstr_fd("\n", 2);
-	}
-	return (FAILURE);
 }
 
 size_t	find_biggest_len(t_mapinfo *map, int i)

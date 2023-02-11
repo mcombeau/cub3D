@@ -6,7 +6,7 @@
 /*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:33:02 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/09 11:33:04 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/11 11:28:38 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,6 @@ void	clean_exit(t_data *data, int code)
 	}
 	free_data(data);
 	exit(code);
-}
-
-int	msg(char *format, char *detail, int errno)
-{
-	printf(format, detail);
-	return (errno);
 }
 
 int	quit_cub3d(t_data *data)

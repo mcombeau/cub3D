@@ -6,7 +6,7 @@
 /*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:30:33 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/09 16:55:12 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/11 11:38:30 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	init_texture_pixels(t_data *data)
 	data->texture_pixels = ft_calloc(data->win_height + 1,
 			sizeof * data->texture_pixels);
 	if (!data->texture_pixels)
-		clean_exit(data, msg("cub3d: %s\n", "malloc error.", 1));
+		clean_exit(data, err_msg(NULL, ERR_MALLOC, 1));
 	i = 0;
 	while (i < data->win_height)
 	{
 		data->texture_pixels[i] = ft_calloc(data->win_width + 1,
 				sizeof * data->texture_pixels);
 		if (!data->texture_pixels[i])
-			clean_exit(data, msg("cub3d: %s\n", "malloc error.", 1));
+			clean_exit(data, err_msg(NULL, ERR_MALLOC, 1));
 		i++;
 	}
 }

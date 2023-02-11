@@ -67,20 +67,20 @@ static int	ignore_whitespaces_get_info(t_data *data, char **map, int i, int j)
 			&& !ft_isdigit(map[i][j]))
 		{
 			if (fill_direction_textures(&data->texinfo, map[i], j) == ERR)
-				return (print_error(ERR_DIRECTION));
+				return (err_msg(data->mapinfo.path, ERR_TEX_INVALID, FAILURE));
 			return (BREAK);
 		}	
 		else
 		{
 			if (fill_color_textures(&data->texinfo, map[i], j) == ERR)
-				return (print_error(ERR_FLOOR_CEILING));
+				return (FAILURE);
 			return (BREAK);
 		}	
 	}
 	else if (ft_isdigit(map[i][j]))
 	{
 		if (create_map(data, map, i) == FAILURE)
-			return (print_error(ERR_INVALID_MAP));
+			return (err_msg(data->mapinfo.path, ERR_INVALID_MAP, FAILURE));
 		return (SUCCESS);
 	}
 	return (CONTINUE);

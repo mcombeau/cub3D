@@ -71,20 +71,20 @@ static int	*set_rgb_colors(char *line)
 int	fill_color_textures(t_texinfo *textures, char *line, int j)
 {
 	if (line[j + 1] && ft_isprint(line[j + 1]))
-		return (ERR);
+		return (err_msg(NULL, ERR_FLOOR_CEILING, ERR));
 	if (!textures->ceiling && line[j] == 'C')
 	{
 		textures->ceiling = set_rgb_colors(line + j + 1);
 		if (textures->ceiling == 0)
-			return (ERR);
+			return (err_msg(NULL, ERR_COLOR_CEILING, ERR));
 	}
 	else if (!textures->floor && line[j] == 'F')
 	{
 		textures->floor = set_rgb_colors(line + j + 1);
 		if (textures->floor == 0)
-			return (ERR);
+			return (err_msg(NULL, ERR_COLOR_FLOOR, ERR));
 	}
 	else
-		return (ERR);
+		return (err_msg(NULL, ERR_FLOOR_CEILING, ERR));
 	return (SUCCESS);
 }

@@ -20,42 +20,36 @@ static int	check_valid_rgb(int *rgb)
 	while (i < 3)
 	{
 		if (rgb[i] < 0 || rgb[i] > 255)
-		{
-			ft_putstr_fd("Error\nThe following number is invalid : ", 2);
-			ft_putnbr_fd(rgb[i], 2);
-			ft_putchar_fd('\n', 2);
-			ft_putstr_fd("RGB has a min val of 0 and a max value of 255.\n", 2);
-			return (FAILURE);
-		}
+			return (err_msg_val(rgb[i], ERR_TEX_RGB_VAL, FAILURE));
 		i++;
 	}
 	return (SUCCESS);
 }
 
-static int	check_valid_path(char *path)
-{
-	int	fd;
-	int	len;
+// static int	check_valid_path(char *path)
+// {
+// 	int	fd;
+// 	int	len;
 
-	fd = open(path, O_RDWR);
-	len = ft_strlen(path);
-	if ((path[len - 4] != '.' || path[len - 3] != 'x' || path[len - 2] != 'p'
-			|| path[len - 1] != 'm'))
-	{
-		close(fd);
-		return (FAILURE);
-	}
-	if (fd == -1)
-	{
-		close(fd);
-		ft_putstr_fd("Error\nThe following path is invalid : ", 2);
-		ft_putstr_fd(path, 2);
-		ft_putchar_fd('\n', 2);
-		return (FAILURE);
-	}
-	close(fd);
-	return (SUCCESS);
-}
+// 	fd = open(path, O_RDWR);
+// 	len = ft_strlen(path);
+// 	if ((path[len - 4] != '.' || path[len - 3] != 'x' || path[len - 2] != 'p'
+// 			|| path[len - 1] != 'm'))
+// 	{
+// 		close(fd);
+// 		return (err_msg(path, ERR_FILE_NOT_XPM, FAILURE));
+// 	}
+// 	if (fd == -1)
+// 	{
+// 		close(fd);
+// 		ft_putstr_fd("Error\nThe following path is invalid : ", 2);
+// 		ft_putstr_fd(path, 2);
+// 		ft_putchar_fd('\n', 2);
+// 		return (FAILURE);
+// 	}
+// 	close(fd);
+// 	return (SUCCESS);
+// }
 
 static unsigned long	convert_rgb_to_hex(int *rgb_tab)
 {
@@ -74,12 +68,14 @@ static unsigned long	convert_rgb_to_hex(int *rgb_tab)
 int	check_textures_validity(t_texinfo *textures)
 {
 	if (!textures->north || !textures->south || !textures->west
-		|| !textures->east || !textures->floor || !textures->ceiling)
-		return (FAILURE);
-	if (check_valid_path(textures->north) == FAILURE
-		|| check_valid_path(textures->south) == FAILURE
-		|| check_valid_path(textures->west) == FAILURE
-		|| check_valid_path(textures->east) == FAILURE
+		|| !textures->east)
+		return (err_msg(NULL, ERR_TEX_MISSING, FAILURE));
+	if (!textures->floor || !textures->ceiling)
+		return (err_msg(NULL, ERR_COLOR_MISSING, FAILURE));
+	if (check_file(textures->north, false) == FAILURE
+		|| check_file(textures->south, false) == FAILURE
+		|| check_file(textures->west, false) == FAILURE
+		|| check_file(textures->east, false) == FAILURE
 		|| check_valid_rgb(textures->floor) == FAILURE
 		|| check_valid_rgb(textures->ceiling) == FAILURE)
 		return (FAILURE);

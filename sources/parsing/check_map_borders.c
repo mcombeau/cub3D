@@ -14,6 +14,8 @@
 
 static int	check_top_or_bottom(char **map_tab, int i, int j)
 {
+	if (!map_tab || !map_tab[i] || !map_tab[i][j])
+		return (FAILURE);
 	while (map_tab[i][j] == ' ' || map_tab[i][j] == '\t'
 	|| map_tab[i][j] == '\r' || map_tab[i][j] == '\v'
 	|| map_tab[i][j] == '\f')

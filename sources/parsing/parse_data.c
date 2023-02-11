@@ -74,7 +74,7 @@ void	parse_data(char *path, t_data *data)
 		return ;
 	data->mapinfo.fd = open(path, O_RDONLY);
 	if (data->mapinfo.fd < 0)
-		printf("Error: Couldn't open the file\n");
+		err_msg(path, strerror(errno), FAILURE);
 	else
 	{
 		fill_tab(row, column, i, data);
