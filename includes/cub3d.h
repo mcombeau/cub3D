@@ -6,7 +6,7 @@
 /*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:47:42 by alexa             #+#    #+#             */
-/*   Updated: 2023/02/11 11:43:57 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/11 17:47:35 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@
 #  define BONUS 1
 # endif
 
+/* # define WIN_WIDTH 960 */
+/* # define WIN_HEIGHT 720 */
 # define WIN_WIDTH 640
 # define WIN_HEIGHT 480
 

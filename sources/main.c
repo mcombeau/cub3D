@@ -54,9 +54,9 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (err_msg("Usage", ERR_USAGE, 1));
 	init_data(&data);
+	init_mlx(&data);
 	if (parse_args(&data, av) != 0)
 		return (1);
-	init_mlx(&data);
 	init_textures(&data);
 	print_controls();
 	render_images(&data);
