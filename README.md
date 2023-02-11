@@ -52,9 +52,9 @@ To run the program:
 The program takes a map file as an argument. Maps are available in the `maps` directory. There are good maps which the program should run smoothly with, and bad maps which the program should reject.
 For example:
 
-- `./cub3d maps/good/simple_map.cub` should run.
+- `./cub3d maps/good/library.cub` should run.
 
-- `./cub3d maps/bad/wrong_filetype.buc` should print an error and abort.
+- `./cub3d maps/bad/filetype_wrong.buc` should print an error and abort.
 
 ## Controls
 
