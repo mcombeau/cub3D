@@ -71,23 +71,23 @@ static int	*set_rgb_colors(char *line)
 	return (copy_into_rgb_array(rgb_to_convert, rgb));
 }
 
-int	fill_color_textures(t_texinfo *textures, char *line, int j)
+int	fill_color_textures(t_data *data, t_texinfo *textures, char *line, int j)
 {
 	if (line[j + 1] && ft_isprint(line[j + 1]))
-		return (err_msg(NULL, ERR_FLOOR_CEILING, ERR));
+		return (err_msg(data->mapinfo.path, ERR_FLOOR_CEILING, ERR));
 	if (!textures->ceiling && line[j] == 'C')
 	{
 		textures->ceiling = set_rgb_colors(line + j + 1);
 		if (textures->ceiling == 0)
-			return (err_msg(NULL, ERR_COLOR_CEILING, ERR));
+			return (err_msg(data->mapinfo.path, ERR_COLOR_CEILING, ERR));
 	}
 	else if (!textures->floor && line[j] == 'F')
 	{
 		textures->floor = set_rgb_colors(line + j + 1);
 		if (textures->floor == 0)
-			return (err_msg(NULL, ERR_COLOR_FLOOR, ERR));
+			return (err_msg(data->mapinfo.path, ERR_COLOR_FLOOR, ERR));
 	}
 	else
-		return (err_msg(NULL, ERR_FLOOR_CEILING, ERR));
+		return (err_msg(data->mapinfo.path, ERR_FLOOR_CEILING, ERR));
 	return (SUCCESS);
 }

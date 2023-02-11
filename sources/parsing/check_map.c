@@ -111,7 +111,7 @@ static int	check_map_is_at_the_end(t_mapinfo *map)
 int	check_map_validity(t_data *data, char **map_tab)
 {
 	if (!data->map)
-		return (err_msg(NULL, ERR_MAP_MISSING, FAILURE));
+		return (err_msg(data->mapinfo.path, ERR_MAP_MISSING, FAILURE));
 	if (check_map_sides(&data->mapinfo, map_tab) == FAILURE)
 		return (err_msg(data->mapinfo.path, ERR_MAP_NO_WALLS, FAILURE));
 	if (data->mapinfo.height < 3)

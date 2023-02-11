@@ -40,13 +40,13 @@ static unsigned long	convert_rgb_to_hex(int *rgb_tab)
 	return (result);
 }
 
-int	check_textures_validity(t_texinfo *textures)
+int	check_textures_validity(t_data *data, t_texinfo *textures)
 {
 	if (!textures->north || !textures->south || !textures->west
 		|| !textures->east)
-		return (err_msg(NULL, ERR_TEX_MISSING, FAILURE));
+		return (err_msg(data->mapinfo.path, ERR_TEX_MISSING, FAILURE));
 	if (!textures->floor || !textures->ceiling)
-		return (err_msg(NULL, ERR_COLOR_MISSING, FAILURE));
+		return (err_msg(data->mapinfo.path, ERR_COLOR_MISSING, FAILURE));
 	if (check_file(textures->north, false) == FAILURE
 		|| check_file(textures->south, false) == FAILURE
 		|| check_file(textures->west, false) == FAILURE

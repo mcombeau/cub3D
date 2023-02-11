@@ -248,13 +248,14 @@ void	parse_data(char *path, t_data *data);
 int		get_file_data(t_data *data, char **map);
 
 /* parsing/fill_color_textures.c */
-int		fill_color_textures(t_texinfo *textures, char *line, int j);
+int		fill_color_textures(t_data *data, t_texinfo *textures,
+			char *line, int j);
 
 /* parsing/create_game_map.c */
 int		create_map(t_data *data, char **map, int i);
 
 /* parsing/check_textures.c */
-int		check_textures_validity(t_texinfo *textures);
+int		check_textures_validity(t_data *data, t_texinfo *textures);
 
 /* parsing/check_map.c */
 int		check_map_validity(t_data *data, char **map_tab);
