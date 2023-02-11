@@ -6,7 +6,7 @@
 /*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:44:18 by alexa             #+#    #+#             */
-/*   Updated: 2023/02/11 17:54:47 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/11 18:01:02 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	main(int ac, char **av)
 	init_data(&data);
 	if (parse_args(&data, av) != 0)
 		return (1);
-	init_textures(&data);
 	init_mlx(&data);
+	init_textures(&data);
 	print_controls();
 	render_images(&data);
 	listen_for_input(&data);
