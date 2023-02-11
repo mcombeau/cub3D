@@ -73,7 +73,6 @@
 # define ERR_FILE_NOT_CUB "Not a .cub file"
 # define ERR_FILE_NOT_XPM "Not an .xpm file"
 # define ERR_FILE_IS_DIR "Is a directory"
-# define ERR_INVALID_INFO "The infos of this map are invalid"
 # define ERR_FLOOR_CEILING "Invalid floor/ceiling RGB color(s)"
 # define ERR_COLOR_FLOOR "Invalid floor RGB color"
 # define ERR_COLOR_CEILING "Invalid ceiling RGB color"

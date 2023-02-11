@@ -21,7 +21,7 @@ static int	get_number_of_lines(char *path)
 	line_count = 0;
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		printf("Error: Couldn't open the file\n");
+		err_msg(path, strerror(errno), errno);
 	else
 	{
 		line = get_next_line(fd);
@@ -31,8 +31,8 @@ static int	get_number_of_lines(char *path)
 			free(line);
 			line = get_next_line(fd);
 		}
+		close(fd);
 	}
-	close(fd);
 	return (line_count);
 }
 

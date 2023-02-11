@@ -26,31 +26,6 @@ static int	check_valid_rgb(int *rgb)
 	return (SUCCESS);
 }
 
-// static int	check_valid_path(char *path)
-// {
-// 	int	fd;
-// 	int	len;
-
-// 	fd = open(path, O_RDWR);
-// 	len = ft_strlen(path);
-// 	if ((path[len - 4] != '.' || path[len - 3] != 'x' || path[len - 2] != 'p'
-// 			|| path[len - 1] != 'm'))
-// 	{
-// 		close(fd);
-// 		return (err_msg(path, ERR_FILE_NOT_XPM, FAILURE));
-// 	}
-// 	if (fd == -1)
-// 	{
-// 		close(fd);
-// 		ft_putstr_fd("Error\nThe following path is invalid : ", 2);
-// 		ft_putstr_fd(path, 2);
-// 		ft_putchar_fd('\n', 2);
-// 		return (FAILURE);
-// 	}
-// 	close(fd);
-// 	return (SUCCESS);
-// }
-
 static unsigned long	convert_rgb_to_hex(int *rgb_tab)
 {
 	unsigned long	result;

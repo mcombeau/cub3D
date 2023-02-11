@@ -25,8 +25,10 @@ static bool	is_dir(char *arg)
 	ret = false;
 	fd = open(arg, O_DIRECTORY);
 	if (fd >= 0)
+	{
+		close (fd);
 		ret = true;
-	close (fd);
+	}
 	return (ret);
 }
 
