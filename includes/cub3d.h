@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:47:42 by alexa             #+#    #+#             */
-/*   Updated: 2023/02/11 18:01:31 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/12 14:41:18 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@
 #  define O_DIRECTORY 00200000
 # endif
 
-# define MOVESPEED 0.025
-# define ROTSPEED 0.03
+# define MOVESPEED 0.0125
+# define ROTSPEED 0.015
 
 # define DIST_EDGE_MOUSE_WRAP 20
 
