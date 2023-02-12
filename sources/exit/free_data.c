@@ -6,7 +6,7 @@
 /*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:33:30 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/09 11:33:31 by mcombeau         ###   ########.fr       */
+/*   Updated: 2023/02/12 13:41:14 by mcombeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	free_data(t_data *data)
 {
 	if (data->textures)
 		free_tab((void **)data->textures);
+	if (data->texture_pixels)
+		free_tab((void **)data->texture_pixels);
 	free_texinfo(&data->texinfo);
 	free_map(data);
 	return (FAILURE);
