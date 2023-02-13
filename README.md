@@ -8,7 +8,7 @@ Cub3D is a 42 school team project to create a dynamic view inside a 3D maze. Usi
 
 ## Status
 
-Work in progress.
+Validated 12/02/2023. Grade: 115%.
 
 ## Clone
 
