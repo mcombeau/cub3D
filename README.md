@@ -6,6 +6,8 @@
 
 Cub3D is a 42 school team project to create a dynamic view inside a 3D maze. Using the [MiniLibX library](https://github.com/42Paris/minilibx-linux), we must implement raycasting in the style of the famous [Wolfenstein 3D](http://users.atw.hu/wolf3d/) game, the first true FPS in videogame history.
 
+> This project has been archived in the state it was in at the time of evaluation.
+
 ## Status
 
 Validated 12/02/2023. Grade: 115%.
